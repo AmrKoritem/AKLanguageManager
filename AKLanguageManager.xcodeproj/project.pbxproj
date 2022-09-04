@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00532023366737FCD8FA55C0 /* Pods_AKLanguageManager_AKLanguageManagerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDED7F2FC74370BC22E3F71B /* Pods_AKLanguageManager_AKLanguageManagerTests.framework */; };
+		0B479F185AA146FE63EF613B /* Pods_AKLanguageManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2228D014A590DE102910C3C8 /* Pods_AKLanguageManager.framework */; };
 		1D87DAD928C40C7E00838580 /* AKLanguageManager.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DAD828C40C7E00838580 /* AKLanguageManager.docc */; };
 		1D87DADF28C40C7E00838580 /* AKLanguageManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D87DAD428C40C7E00838580 /* AKLanguageManager.framework */; };
 		1D87DAE428C40C7E00838580 /* AKLanguageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DAE328C40C7E00838580 /* AKLanguageManagerTests.swift */; };
@@ -24,11 +26,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0709192ADF1F3C149994BACE /* Pods-AKLanguageManager-AKLanguageManagerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AKLanguageManager-AKLanguageManagerTests.debug.xcconfig"; path = "Target Support Files/Pods-AKLanguageManager-AKLanguageManagerTests/Pods-AKLanguageManager-AKLanguageManagerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1D87DAD428C40C7E00838580 /* AKLanguageManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AKLanguageManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D87DAD728C40C7E00838580 /* AKLanguageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKLanguageManager.h; sourceTree = "<group>"; };
 		1D87DAD828C40C7E00838580 /* AKLanguageManager.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = AKLanguageManager.docc; sourceTree = "<group>"; };
 		1D87DADE28C40C7E00838580 /* AKLanguageManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AKLanguageManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D87DAE328C40C7E00838580 /* AKLanguageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AKLanguageManagerTests.swift; sourceTree = "<group>"; };
+		2228D014A590DE102910C3C8 /* Pods_AKLanguageManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AKLanguageManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		774E890E500B46C5170AA8D3 /* Pods-AKLanguageManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AKLanguageManager.debug.xcconfig"; path = "Target Support Files/Pods-AKLanguageManager/Pods-AKLanguageManager.debug.xcconfig"; sourceTree = "<group>"; };
+		CDED7F2FC74370BC22E3F71B /* Pods_AKLanguageManager_AKLanguageManagerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AKLanguageManager_AKLanguageManagerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1B6BFAE0A8EA6BD9B760163 /* Pods-AKLanguageManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AKLanguageManager.release.xcconfig"; path = "Target Support Files/Pods-AKLanguageManager/Pods-AKLanguageManager.release.xcconfig"; sourceTree = "<group>"; };
+		D6D75ADCB7CC72D23587A987 /* Pods-AKLanguageManager-AKLanguageManagerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AKLanguageManager-AKLanguageManagerTests.release.xcconfig"; path = "Target Support Files/Pods-AKLanguageManager-AKLanguageManagerTests/Pods-AKLanguageManager-AKLanguageManagerTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B479F185AA146FE63EF613B /* Pods_AKLanguageManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +53,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D87DADF28C40C7E00838580 /* AKLanguageManager.framework in Frameworks */,
+				00532023366737FCD8FA55C0 /* Pods_AKLanguageManager_AKLanguageManagerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +66,8 @@
 				1D87DAD628C40C7E00838580 /* AKLanguageManager */,
 				1D87DAE228C40C7E00838580 /* AKLanguageManagerTests */,
 				1D87DAD528C40C7E00838580 /* Products */,
+				74DBBC22DB198A1511E76A62 /* Pods */,
+				B65734CC42A1AD11850F3ACE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,6 +97,26 @@
 			path = AKLanguageManagerTests;
 			sourceTree = "<group>";
 		};
+		74DBBC22DB198A1511E76A62 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				774E890E500B46C5170AA8D3 /* Pods-AKLanguageManager.debug.xcconfig */,
+				D1B6BFAE0A8EA6BD9B760163 /* Pods-AKLanguageManager.release.xcconfig */,
+				0709192ADF1F3C149994BACE /* Pods-AKLanguageManager-AKLanguageManagerTests.debug.xcconfig */,
+				D6D75ADCB7CC72D23587A987 /* Pods-AKLanguageManager-AKLanguageManagerTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B65734CC42A1AD11850F3ACE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2228D014A590DE102910C3C8 /* Pods_AKLanguageManager.framework */,
+				CDED7F2FC74370BC22E3F71B /* Pods_AKLanguageManager_AKLanguageManagerTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -103,6 +135,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D87DAE828C40C7E00838580 /* Build configuration list for PBXNativeTarget "AKLanguageManager" */;
 			buildPhases = (
+				70EB1B291E1ED58CE2FC8E96 /* [CP] Check Pods Manifest.lock */,
 				1D87DACF28C40C7E00838580 /* Headers */,
 				1D87DAD028C40C7E00838580 /* Sources */,
 				1D87DAD128C40C7E00838580 /* Frameworks */,
@@ -121,6 +154,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D87DAEB28C40C7E00838580 /* Build configuration list for PBXNativeTarget "AKLanguageManagerTests" */;
 			buildPhases = (
+				69529D7AA1BC2C76C467D66F /* [CP] Check Pods Manifest.lock */,
 				1D87DADA28C40C7E00838580 /* Sources */,
 				1D87DADB28C40C7E00838580 /* Frameworks */,
 				1D87DADC28C40C7E00838580 /* Resources */,
@@ -188,6 +222,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		69529D7AA1BC2C76C467D66F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AKLanguageManager-AKLanguageManagerTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		70EB1B291E1ED58CE2FC8E96 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AKLanguageManager-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D87DAD028C40C7E00838580 /* Sources */ = {
@@ -339,6 +420,7 @@
 		};
 		1D87DAE928C40C7E00838580 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 774E890E500B46C5170AA8D3 /* Pods-AKLanguageManager.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -350,6 +432,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -367,6 +450,7 @@
 		};
 		1D87DAEA28C40C7E00838580 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1B6BFAE0A8EA6BD9B760163 /* Pods-AKLanguageManager.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -378,6 +462,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -395,6 +480,7 @@
 		};
 		1D87DAEC28C40C7E00838580 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0709192ADF1F3C149994BACE /* Pods-AKLanguageManager-AKLanguageManagerTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -411,6 +497,7 @@
 		};
 		1D87DAED28C40C7E00838580 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6D75ADCB7CC72D23587A987 /* Pods-AKLanguageManager-AKLanguageManagerTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
