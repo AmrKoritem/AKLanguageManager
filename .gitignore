@@ -48,3 +48,6 @@ Pods/*
 
 ## Carthage/Checkouts
 Carthage/Build
+
+## ExampleApps
+Example-Swift-AKLM/Pods/*

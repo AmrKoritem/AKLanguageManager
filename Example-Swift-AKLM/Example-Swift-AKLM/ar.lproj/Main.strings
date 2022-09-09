@@ -1,0 +1,15 @@
+
+/* Class = "UITextField"; placeholder = "TextField"; ObjectID = "2mC-7c-bdG"; */
+"2mC-7c-bdG.placeholder" = "خانة نص";
+
+/* Class = "UIButton"; normalTitle = "Go To Settings"; ObjectID = "5e4-dm-rkR"; */
+"5e4-dm-rkR.normalTitle" = "اذهب إلى الإعدادات";
+
+/* Class = "UIButton"; normalTitle = "Change To Arabic"; ObjectID = "Gts-Hz-lwf"; */
+"Gts-Hz-lwf.normalTitle" = "تغيير إلى الإنجليزية";
+
+/* Class = "UIButton"; normalTitle = "Change To Arabic"; ObjectID = "nnc-fN-upd"; */
+"nnc-fN-upd.normalTitle" = "تغيير إلى الإنجليزية";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "rij-Dn-bL7"; */
+"rij-Dn-bL7.text" = "عنوان";
