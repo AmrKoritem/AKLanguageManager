@@ -14,7 +14,7 @@ s.source = { :git => "https://github.com/AmrKoritem/AKLanguageManager.git",
              :tag => "#{s.version}" }
 
 s.framework = "UIKit"
-s.source_files = "AKLanguageManager/**/*.{swift}"
+s.source_files = "AKLanguageManager/Source/**/*.{swift}"
 s.swift_version = "5.0"
 
 end
