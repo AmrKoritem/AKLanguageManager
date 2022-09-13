@@ -42,6 +42,7 @@ xcuserdata/
 
 ## CocoaPods
 Pods/*
+Podfile.lock
 
 ## Bundler
 .bundle
