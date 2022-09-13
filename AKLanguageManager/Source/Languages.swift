@@ -1,7 +1,8 @@
 //
 //  Languages.swift
+//  AKLanguageManager
 //
-//  Created by Amr Koritem on 8/27/22.
+//  Created by Amr Koritem on 13/09/2022.
 //
 
 import UIKit
