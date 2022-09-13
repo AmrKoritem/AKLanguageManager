@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		00532023366737FCD8FA55C0 /* Pods_AKLanguageManager_AKLanguageManagerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDED7F2FC74370BC22E3F71B /* Pods_AKLanguageManager_AKLanguageManagerTests.framework */; };
 		0B479F185AA146FE63EF613B /* Pods_AKLanguageManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2228D014A590DE102910C3C8 /* Pods_AKLanguageManager.framework */; };
+		1D4074F828D0153B000A1DF0 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4074F728D0153B000A1DF0 /* Localizable.swift */; };
+		1D4074FA28D01699000A1DF0 /* UIView+Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4074F928D01699000A1DF0 /* UIView+Localizable.swift */; };
+		1D4074FC28D0181B000A1DF0 /* Localized+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4074FB28D0181B000A1DF0 /* Localized+Utilities.swift */; };
 		1D87DAD928C40C7E00838580 /* AKLanguageManager.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DAD828C40C7E00838580 /* AKLanguageManager.docc */; };
 		1D87DADF28C40C7E00838580 /* AKLanguageManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D87DAD428C40C7E00838580 /* AKLanguageManager.framework */; };
 		1D87DAE428C40C7E00838580 /* AKLanguageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DAE328C40C7E00838580 /* AKLanguageManagerTests.swift */; };
@@ -19,7 +22,6 @@
 		1DD5803928CAF0CB00DCD270 /* UIButton+Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD5803328CAF0CB00DCD270 /* UIButton+Direction.swift */; };
 		1DD5803A28CAF0CB00DCD270 /* UIView+Swizzling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD5803428CAF0CB00DCD270 /* UIView+Swizzling.swift */; };
 		1DD5803B28CAF0CB00DCD270 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD5803528CAF0CB00DCD270 /* Storage.swift */; };
-		1DD5803C28CAF0CB00DCD270 /* String+Localiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD5803628CAF0CB00DCD270 /* String+Localiz.swift */; };
 		1DD5803E28CAF0D500DCD270 /* AKLanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD5803D28CAF0D500DCD270 /* AKLanguageManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +37,9 @@
 
 /* Begin PBXFileReference section */
 		0709192ADF1F3C149994BACE /* Pods-AKLanguageManager-AKLanguageManagerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AKLanguageManager-AKLanguageManagerTests.debug.xcconfig"; path = "Target Support Files/Pods-AKLanguageManager-AKLanguageManagerTests/Pods-AKLanguageManager-AKLanguageManagerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1D4074F728D0153B000A1DF0 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
+		1D4074F928D01699000A1DF0 /* UIView+Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Localizable.swift"; sourceTree = "<group>"; };
+		1D4074FB28D0181B000A1DF0 /* Localized+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Localized+Utilities.swift"; sourceTree = "<group>"; };
 		1D87DAD428C40C7E00838580 /* AKLanguageManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AKLanguageManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D87DAD728C40C7E00838580 /* AKLanguageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKLanguageManager.h; sourceTree = "<group>"; };
 		1D87DAD828C40C7E00838580 /* AKLanguageManager.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = AKLanguageManager.docc; sourceTree = "<group>"; };
@@ -46,7 +51,6 @@
 		1DD5803328CAF0CB00DCD270 /* UIButton+Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Direction.swift"; sourceTree = "<group>"; };
 		1DD5803428CAF0CB00DCD270 /* UIView+Swizzling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Swizzling.swift"; sourceTree = "<group>"; };
 		1DD5803528CAF0CB00DCD270 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
-		1DD5803628CAF0CB00DCD270 /* String+Localiz.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Localiz.swift"; sourceTree = "<group>"; };
 		1DD5803D28CAF0D500DCD270 /* AKLanguageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKLanguageManager.swift; sourceTree = "<group>"; };
 		2228D014A590DE102910C3C8 /* Pods_AKLanguageManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AKLanguageManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		774E890E500B46C5170AA8D3 /* Pods-AKLanguageManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AKLanguageManager.debug.xcconfig"; path = "Target Support Files/Pods-AKLanguageManager/Pods-AKLanguageManager.debug.xcconfig"; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				1DD5803528CAF0CB00DCD270 /* Storage.swift */,
+				1D4074F728D0153B000A1DF0 /* Localizable.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -136,11 +141,12 @@
 		1DD5803F28CAF0E000DCD270 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				1DD5803628CAF0CB00DCD270 /* String+Localiz.swift */,
+				1DD5803428CAF0CB00DCD270 /* UIView+Swizzling.swift */,
+				1D4074F928D01699000A1DF0 /* UIView+Localizable.swift */,
+				1D4074FB28D0181B000A1DF0 /* Localized+Utilities.swift */,
 				1DD5803328CAF0CB00DCD270 /* UIButton+Direction.swift */,
 				1DD5803228CAF0CB00DCD270 /* UIImageView+Direction.swift */,
 				1DD5803128CAF0CB00DCD270 /* UIView+Direction.swift */,
-				1DD5803428CAF0CB00DCD270 /* UIView+Swizzling.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -324,9 +330,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DD5803928CAF0CB00DCD270 /* UIButton+Direction.swift in Sources */,
+				1D4074FA28D01699000A1DF0 /* UIView+Localizable.swift in Sources */,
 				1DD5803028CAF0B400DCD270 /* Languages.swift in Sources */,
-				1DD5803C28CAF0CB00DCD270 /* String+Localiz.swift in Sources */,
+				1D4074F828D0153B000A1DF0 /* Localizable.swift in Sources */,
 				1DD5803828CAF0CB00DCD270 /* UIImageView+Direction.swift in Sources */,
+				1D4074FC28D0181B000A1DF0 /* Localized+Utilities.swift in Sources */,
 				1DD5803728CAF0CB00DCD270 /* UIView+Direction.swift in Sources */,
 				1DD5803B28CAF0CB00DCD270 /* Storage.swift in Sources */,
 				1DD5803E28CAF0D500DCD270 /* AKLanguageManager.swift in Sources */,

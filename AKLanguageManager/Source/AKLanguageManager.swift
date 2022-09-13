@@ -1,7 +1,8 @@
 //
 //  AKLanguageManager.swift
+//  AKLanguageManager
 //
-//  Created by Amr Koritem on 8/27/22.
+//  Created by Amr Koritem on 13/09/2022.
 //  Copyright © 2017 Amr Koritem. All rights reserved.
 //  GitHub: https://github.com/AmrKoritem/AKLanguageManager.git
 //  The MIT License (MIT)
@@ -37,6 +38,8 @@ public class AKLanguageManager {
     // MARK: - Properties
     /// The singleton LanguageManager instance.
     public static let shared = AKLanguageManager()
+    /// Determines if numbers should be localized when localizing strings
+    public var shouldLocalizeNumbers: Bool = true
     /// Current app language.
     /// *Note, This property just to get the current lanuage,
     /// To set the language use:
@@ -86,9 +89,22 @@ public class AKLanguageManager {
         return Languages(rawValue: deviceLanguage)
     }
 
+    /// The diriction of the selected language.
+    public var isRightToLeft: Bool {
+        selectedLanguage.isRightToLeft
+    }
+
+    /// The app locale to use it in dates and currency.
+    public var locale: Locale {
+        selectedLanguage.locale
+    }
+
     // MARK: - Internal Properties
     /// Storage dependency
     var storage: StorageProtocol = Storage.shared
+
+    // MARK: - Initializer
+    private init() {}
 
     // MARK: - Public Methods
     /// Set the current language of the app
