@@ -1,27 +1,34 @@
 //
 //  Storage.swift
-//  LanguageManager-iOS
 //
-//  Created by abedalkareem omreyh on 10/11/2020.
+//  Created by Amr Koritem on 8/27/22.
 //
 
 import Foundation
 
-class Storage {
+protocol StorageProtocol {
+    func string(forKey key: Languages.Keys) -> String?
+    func set(_ value: String, forKey: Languages.Keys)
+}
 
-  // MARK: - Private properties
+class Storage: StorageProtocol {
+    static let shared = Storage()
 
-  private var defaults: UserDefaults {
-    UserDefaults.standard
-  }
+    private init() {}
 
-  // MARK: - Methods
+    func string(forKey key: Languages.Keys) -> String? {
+        UserDefaults.standard.string(forKey: key.rawValue)
+    }
 
-  func string(forKey key: DefaultsKeys) -> String? {
-    defaults.string(forKey: key.rawValue)
-  }
+    func set(_ value: String, forKey: Languages.Keys) {
+        UserDefaults.standard.set(value, forKey: forKey.rawValue)
+    }
+}
 
-  func set(_ value: String, forKey: DefaultsKeys) {
-    defaults.set(value, forKey: forKey.rawValue)
-  }
+/// Storage keys extension
+extension Languages {
+    enum Keys: String {
+        case selectedLanguage = "AKLanguageManager.selectedLanguage"
+        case defaultLanguage = "AKLanguageManager.defaultLanguage"
+    }
 }
