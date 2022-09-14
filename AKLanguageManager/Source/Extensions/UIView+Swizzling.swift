@@ -9,25 +9,9 @@ import UIKit
 
 extension UIView {
     static func localize() {
-        let orginalSelector = #selector(awakeFromNib)
+        let originalSelector = #selector(awakeFromNib)
         let swizzledSelector = #selector(swizzledAwakeFromNib)
-        let orginalMethod = class_getInstanceMethod(self, orginalSelector)
-        let swizzledMethod = class_getInstanceMethod(self, swizzledSelector)
-        let didAddMethod = class_addMethod(
-            self,
-            orginalSelector,
-            method_getImplementation(swizzledMethod!),
-            method_getTypeEncoding(swizzledMethod!))
-
-        guard didAddMethod else {
-            method_exchangeImplementations(orginalMethod!, swizzledMethod!)
-            return
-        }
-        class_replaceMethod(
-            self,
-            swizzledSelector,
-            method_getImplementation(orginalMethod!),
-            method_getTypeEncoding(orginalMethod!))
+        swizzle(originalSelector, with: swizzledSelector, in: self)
     }
 
     @objc

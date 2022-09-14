@@ -46,10 +46,11 @@ public class AKLanguageManager {
     /// `setLanguage(language:, for:, viewControllerFactory:, animation:)`*
     public private(set) var selectedLanguage: Languages {
         get {
-            guard let currentLang = storage.string(forKey: Languages.Keys.selectedLanguage) else {
+            guard let selectedLanguage = storage.string(forKey: Languages.Keys.selectedLanguage),
+                  let language = Languages(rawValue: selectedLanguage) else {
                 fatalError("Did you set the default language for the app?")
             }
-            return Languages(rawValue: currentLang)!
+            return language
         }
         set {
             storage.set(newValue.rawValue, forKey: Languages.Keys.selectedLanguage)
@@ -61,10 +62,11 @@ public class AKLanguageManager {
     /// the first line inside the `application(_:willFinishLaunchingWithOptions:)` method.
     public var defaultLanguage: Languages {
         get {
-            guard let defaultLanguage = storage.string(forKey: Languages.Keys.defaultLanguage) else {
+            guard let defaultLanguage = storage.string(forKey: Languages.Keys.defaultLanguage),
+                  let language = Languages(rawValue: defaultLanguage) else {
                 fatalError("Default language was not set.")
             }
-            return Languages(rawValue: defaultLanguage)!
+            return language
         }
         set {
             let defaultLanguage = storage.string(forKey: Languages.Keys.defaultLanguage)
@@ -75,6 +77,7 @@ public class AKLanguageManager {
                 setLanguage(language: selectedLanguage)
                 return
             }
+            Bundle.localize()
             UIView.localize()
             let language = newValue == .deviceLanguage ? (deviceLanguage ?? .en) : newValue
             storage.set(language.rawValue, forKey: Languages.Keys.defaultLanguage)
@@ -97,6 +100,11 @@ public class AKLanguageManager {
     /// The app locale to use it in dates and currency.
     public var locale: Locale {
         selectedLanguage.locale
+    }
+
+    /// The app bundle.
+    public var bundle: Bundle? {
+        selectedLanguage.bundle
     }
 
     // MARK: - Internal Properties
