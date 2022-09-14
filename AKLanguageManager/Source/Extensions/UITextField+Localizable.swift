@@ -16,15 +16,15 @@ extension UITextField {
 
     public func localizeText() {
         text = text?.localized
-        attributedText = attributedText?.localized()
+        attributedText = attributedText?.localized
     }
 
     public func localizePlaceholder() {
         placeholder = placeholder?.localized
-        attributedPlaceholder = attributedPlaceholder?.localized()
+        attributedPlaceholder = attributedPlaceholder?.localized
     }
 
     public func localizeTextAlignment() {
-        textAlignment = textAlignment.localized()
+        textAlignment = textAlignment.localized
     }
 }

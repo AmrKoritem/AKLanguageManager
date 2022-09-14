@@ -15,10 +15,10 @@ extension UITextView {
 
     public func localizeText() {
         text = text?.localized
-        attributedText = attributedText?.localized()
+        attributedText = attributedText?.localized
     }
 
     public func localizeTextAlignment() {
-        textAlignment = textAlignment.localized()
+        textAlignment = textAlignment.localized
     }
 }

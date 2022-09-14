@@ -70,6 +70,8 @@ public class AKLanguageManager {
         }
         set {
             let defaultLanguage = storage.string(forKey: Languages.Keys.defaultLanguage)
+            Bundle.localize()
+            UIView.localize()
             guard defaultLanguage == nil else {
                 // If the default language has been set before,
                 // that means that the user opened the app before and maybe
@@ -77,8 +79,6 @@ public class AKLanguageManager {
                 setLanguage(language: selectedLanguage)
                 return
             }
-            Bundle.localize()
-            UIView.localize()
             let language = newValue == .deviceLanguage ? (deviceLanguage ?? .en) : newValue
             storage.set(language.rawValue, forKey: Languages.Keys.defaultLanguage)
             storage.set(language.rawValue, forKey: Languages.Keys.selectedLanguage)

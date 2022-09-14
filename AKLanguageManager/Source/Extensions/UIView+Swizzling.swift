@@ -11,7 +11,7 @@ extension UIView {
     static func localize() {
         let originalSelector = #selector(awakeFromNib)
         let swizzledSelector = #selector(swizzledAwakeFromNib)
-        swizzle(originalSelector, with: swizzledSelector, in: self)
+        swizzleInstanceSelector(originalSelector, with: swizzledSelector, in: self)
     }
 
     @objc

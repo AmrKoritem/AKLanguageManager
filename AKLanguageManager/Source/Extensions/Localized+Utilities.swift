@@ -48,7 +48,7 @@ public extension String {
 }
 
 public extension NSAttributedString {
-    func localized() -> NSAttributedString {
+    var localized: NSAttributedString {
         let attributedString = NSMutableAttributedString(attributedString: self)
         attributedString.mutableString.setString(string.localized)
         return attributedString
@@ -56,14 +56,14 @@ public extension NSAttributedString {
 }
 
 public extension UIImage {
-    func directionLocalized() -> UIImage {
+    var directionLocalized: UIImage? {
         guard AKLanguageManager.shared.isRightToLeft else { return self }
         return imageFlippedForRightToLeftLayoutDirection()
     }
 }
 
 public extension NSTextAlignment {
-    func localized() -> NSTextAlignment {
+    var localized: NSTextAlignment {
         guard self == .natural else { return self }
         return AKLanguageManager.shared.isRightToLeft ? .right : .left
     }
