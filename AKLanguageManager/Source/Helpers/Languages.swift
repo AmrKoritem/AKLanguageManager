@@ -26,6 +26,11 @@ public enum Languages: String {
 }
 
 public extension Languages {
+    /// Language bundle.
+    var bundle: Bundle? {
+        let bundlePath = Bundle.main.path(forResource: rawValue, ofType: "lproj") ?? ""
+        return Bundle(path: bundlePath)
+    }
     /// The direction of the language.
     var direction: Locale.LanguageDirection {
         Locale.characterDirection(forLanguage: rawValue)

@@ -5,11 +5,11 @@
 /* Class = "UIButton"; normalTitle = "Go To Settings"; ObjectID = "5e4-dm-rkR"; */
 "5e4-dm-rkR.normalTitle" = "Go To Settings";
 
-/* Class = "UIButton"; normalTitle = "Change To Arabic"; ObjectID = "Gts-Hz-lwf"; */
-"Gts-Hz-lwf.normalTitle" = "Change To Arabic";
+/* Class = "UIButton"; normalTitle = "تغيير إلى العربية"; ObjectID = "Gts-Hz-lwf"; */
+"Gts-Hz-lwf.normalTitle" = "تغيير إلى العربية";
 
-/* Class = "UIButton"; normalTitle = "Change To Arabic"; ObjectID = "nnc-fN-upd"; */
-"nnc-fN-upd.normalTitle" = "Change To Arabic";
+/* Class = "UIButton"; normalTitle = "تغيير إلى العربية"; ObjectID = "nnc-fN-upd"; */
+"nnc-fN-upd.normalTitle" = "تغيير إلى العربية";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "rij-Dn-bL7"; */
 "rij-Dn-bL7.text" = "Label";
