@@ -22,6 +22,6 @@ extension UISegmentedControl {
     }
 
     public func localizeImage(at index: Int) {
-        setImage(imageForSegment(at: index)?.directionLocalized(), forSegmentAt: index)
+        setImage(imageForSegment(at: index)?.directionLocalized, forSegmentAt: index)
     }
 }

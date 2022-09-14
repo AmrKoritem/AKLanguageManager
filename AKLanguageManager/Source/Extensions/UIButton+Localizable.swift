@@ -21,11 +21,11 @@ extension UIButton {
 
     public func localizeTitle(for state: UIControl.State) {
         setTitle(title(for: state)?.localized, for: state)
-        setAttributedTitle(attributedTitle(for: state)?.localized(), for: state)
+        setAttributedTitle(attributedTitle(for: state)?.localized, for: state)
     }
 
     public func localizeImage(for state: UIControl.State) {
-        setImage(imageView?.image?.directionLocalized(), for: state)
+        setImage(image(for: state)?.directionLocalized, for: state)
     }
 }
 

@@ -24,6 +24,6 @@ extension UITabBarItem: Localizable {
     }
 
     public func localizeImage() {
-        image = image?.directionLocalized()
+        image = image?.directionLocalized
     }
 }

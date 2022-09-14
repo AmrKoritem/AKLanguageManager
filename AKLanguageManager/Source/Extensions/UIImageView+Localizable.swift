@@ -9,6 +9,6 @@ import UIKit
 
 extension UIImageView {
     open override func localize() {
-        image = image?.directionLocalized()
+        image = image?.directionLocalized
     }
 }
