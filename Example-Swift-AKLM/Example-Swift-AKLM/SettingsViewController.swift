@@ -9,6 +9,7 @@ import UIKit
 import AKLanguageManager
 
 class SettingsViewController: UIViewController {
+    @IBOutlet weak var fixedImageView: UIImageView!
     // Change Language and set rootViewController to the initial view controller
     @IBAction func changeLanguage() {
         // Choosing a language
@@ -25,5 +26,10 @@ class SettingsViewController: UIViewController {
                 view.alpha = 0
             }
         )
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fixedImageView.shouldLocalizeDirection = false
     }
 }

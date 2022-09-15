@@ -55,9 +55,32 @@ public extension NSAttributedString {
     }
 }
 
-public extension UIImage {
-    var directionLocalized: UIImage? {
+extension UIImage {
+    struct AssociatedKeys {
+        static var isRightToLeft: UInt8 = 0
+    }
+
+    /// Check if the image is flipped in right to left direction.
+    @objc
+    public internal(set) var isRightToLeft: Bool {
+        get {
+            let isRightToLeft = objc_getAssociatedObject(self, &AssociatedKeys.isRightToLeft) as? Bool
+            return isRightToLeft ?? false
+        }
+        set {
+            objc_setAssociatedObject(
+                self,
+                &AssociatedKeys.isRightToLeft,
+                newValue,
+                objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC
+            )
+        }
+    }
+
+    /// Returns a version of the image that's flipped in right to left direction or left to right direction depending on the current language.
+    public var directionLocalized: UIImage? {
         guard AKLanguageManager.shared.isRightToLeft else { return self }
+        isRightToLeft = true
         return imageFlippedForRightToLeftLayoutDirection()
     }
 }

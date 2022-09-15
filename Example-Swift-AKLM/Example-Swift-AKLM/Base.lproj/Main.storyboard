@@ -93,15 +93,26 @@
                                     <action selector="changeLanguage" destination="9i1-6g-suM" eventType="touchUpInside" id="kZM-iH-9s3"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fixed-image" translatesAutoresizingMaskIntoConstraints="NO" id="qxR-Pq-UGq">
+                                <rect key="frame" x="82" y="182.5" width="250" height="225"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldLocalizeDirection" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1TX-2G-0sO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="nnc-fN-upd" firstAttribute="centerX" secondItem="1TX-2G-0sO" secondAttribute="centerX" id="6k9-C3-dU4"/>
+                            <constraint firstItem="nnc-fN-upd" firstAttribute="top" secondItem="qxR-Pq-UGq" secondAttribute="bottom" constant="30" id="7Kt-U8-AgG"/>
                             <constraint firstItem="nnc-fN-upd" firstAttribute="centerY" secondItem="1TX-2G-0sO" secondAttribute="centerY" id="HWa-98-AEl"/>
+                            <constraint firstItem="qxR-Pq-UGq" firstAttribute="centerX" secondItem="1TX-2G-0sO" secondAttribute="centerX" id="pxY-jb-t94"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Gr7-U5-WhS"/>
+                    <connections>
+                        <outlet property="fixedImageView" destination="qxR-Pq-UGq" id="Tar-55-mf5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RgT-S5-hfd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -127,6 +138,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="fixed-image" width="250" height="225"/>
         <image name="image" width="256" height="256"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
