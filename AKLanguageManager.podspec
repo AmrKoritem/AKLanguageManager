@@ -6,7 +6,7 @@ s.name = "AKLanguageManager"
 s.summary = "AKLanguageManager is a language manager for iOS applications."
 s.requires_arc = true
 
-s.version = "0.2.0"
+s.version = "0.2.1"
 s.license = { :type => "MIT", :file => "LICENSE" }
 s.author = { "Amr Koritem" => "amr.koritem92@gmail.com" }
 s.homepage = "https://github.com/AmrKoritem/AKLanguageManager"
