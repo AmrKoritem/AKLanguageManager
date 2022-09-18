@@ -28,8 +28,9 @@
 import UIKit
 
 /// First of all, remember to add the `Localizable.strings` to your project, after adding the `Localizable.strings` file, select it then go to file inspector and below localization press localize, after that go to `PROJECT > Localisation` then add the languages you want to support (Arabic for example), dialog will appear to ask you which resource file you want to localize, select just the `Localizable.strings` file.
-/// If your project is UIKit, then set your default language that your app will run first time in the `AppDelegate.application(_:didFinishLaunchingWithOptions:)` method.
-/// This Manager is not currently compatible with swifui projects.
+/// If your project is UIKit, then set your default language in the `AppDelegate.application(_:didFinishLaunchingWithOptions:)` or `scene(_:willConnectTo:options:)` methods, so that your app will run first time localized with that language.
+/// If the default language wasn't set, you will encounter errors.
+/// This Manager is not currently compatible with swifui code.
 public class AKLanguageManager {
     public typealias Animation = ((UIView) -> Void)
     public typealias ViewControllerFactory = ((String?) -> UIViewController)
@@ -46,11 +47,8 @@ public class AKLanguageManager {
     /// `setLanguage(language:, for:, viewControllerFactory:, animation:)`*
     public private(set) var selectedLanguage: Languages {
         get {
-            guard let selectedLanguage = storage.string(forKey: Languages.Keys.selectedLanguage),
-                  let language = Languages(rawValue: selectedLanguage) else {
-                fatalError("Did you set the default language for the app?")
-            }
-            return language
+            let selectedLanguage = storage.string(forKey: Languages.Keys.selectedLanguage) ?? ""
+            return Languages(rawValue: selectedLanguage) ?? defaultLanguage
         }
         set {
             storage.set(newValue.rawValue, forKey: Languages.Keys.selectedLanguage)
@@ -58,8 +56,6 @@ public class AKLanguageManager {
     }
 
     /// The default language that the app will run with first time.
-    /// You need to set the `defaultLanguage` in the `AppDelegate`, specifically in
-    /// the first line inside the `application(_:willFinishLaunchingWithOptions:)` method.
     public var defaultLanguage: Languages {
         get {
             guard let defaultLanguage = storage.string(forKey: Languages.Keys.defaultLanguage),
@@ -79,7 +75,7 @@ public class AKLanguageManager {
                 setLanguage(language: selectedLanguage)
                 return
             }
-            let language = newValue == .deviceLanguage ? (deviceLanguage ?? .en) : newValue
+            let language = newValue == .deviceLanguage ? deviceLanguage : newValue
             storage.set(language.rawValue, forKey: Languages.Keys.defaultLanguage)
             storage.set(language.rawValue, forKey: Languages.Keys.selectedLanguage)
             setLanguage(language: language)
@@ -87,9 +83,8 @@ public class AKLanguageManager {
     }
 
     /// The device language is deffrent than the app language, to get the app language use `selectedLanguage`.
-    public var deviceLanguage: Languages? {
-        guard let deviceLanguage = Bundle.main.preferredLocalizations.first else { return nil }
-        return Languages(rawValue: deviceLanguage)
+    public var deviceLanguage: Languages {
+        Languages(rawValue: Bundle.main.preferredLocalizations.first ?? "") ?? .en
     }
 
     /// The diriction of the selected language.
