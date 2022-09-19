@@ -32,9 +32,10 @@ import UIKit
 /// If the default language wasn't set, you will encounter errors.
 /// This Manager is not currently compatible with swifui code.
 public class AKLanguageManager {
-    public typealias Animation = ((UIView) -> Void)
-    public typealias ViewControllerFactory = ((String?) -> UIViewController)
     public typealias WindowAndTitle = (UIWindow?, String?)
+    public typealias ViewControllerFactory = (String?) -> UIViewController
+    public typealias Animation = (UIView) -> Void
+    public typealias LocalizationCompletionHandler = () -> Void
     
     // MARK: - Properties
     /// The singleton LanguageManager instance.
@@ -68,7 +69,7 @@ public class AKLanguageManager {
             let defaultLanguage = storage.string(forKey: Languages.Keys.defaultLanguage)
             Bundle.localize()
             UIView.localize()
-            guard defaultLanguage == nil else {
+            guard defaultLanguage?.isEmpty != false else {
                 // If the default language has been set before,
                 // that means that the user opened the app before and maybe
                 // he changed the language so here the `selectedLanguage` is being set.
@@ -106,6 +107,14 @@ public class AKLanguageManager {
     /// Storage dependency
     var storage: StorageProtocol = Storage.shared
 
+    /// Default windows and titles
+    var defaultWindowsAndTitles: [WindowAndTitle] = {
+        guard #available(iOS 13.0, *) else { return [(UIApplication.shared.keyWindow, nil)] }
+        return UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .compactMap({ ($0.windows.first, $0.title) })
+    }()
+
     // MARK: - Initializer
     private init() {}
 
@@ -128,7 +137,8 @@ public class AKLanguageManager {
         language: Languages,
         for windows: [WindowAndTitle]? = nil,
         viewControllerFactory: ViewControllerFactory? = nil,
-        animation: Animation? = nil
+        animation: Animation? = nil,
+        completionHandler: LocalizationCompletionHandler? = nil
     ) {
         changeCurrentLanguageTo(language)
         guard let viewControllerFactory = viewControllerFactory else { return }
@@ -138,7 +148,8 @@ public class AKLanguageManager {
             changeViewController(
                 for: window,
                 rootViewController: viewController,
-                animation: animation)
+                animation: animation,
+                completionHandler: completionHandler)
         }
     }
     
@@ -150,16 +161,14 @@ public class AKLanguageManager {
 
     private func getWindowsToChangeFrom(_ windows: [WindowAndTitle]?) -> [WindowAndTitle]? {
         guard windows == nil else { return windows }
-        guard #available(iOS 13.0, *) else { return [(UIApplication.shared.keyWindow, nil)] }
-        return UIApplication.shared.connectedScenes
-            .compactMap({ $0 as? UIWindowScene })
-            .map({ ($0.windows.first, $0.title) })
+        return defaultWindowsAndTitles
     }
 
     private func changeViewController(
         for window: UIWindow?,
         rootViewController: UIViewController,
-        animation: Animation? = nil
+        animation: Animation? = nil,
+        completionHandler: LocalizationCompletionHandler? = nil
     ) {
         guard let snapshot = window?.snapshotView(afterScreenUpdates: true) else { return }
         rootViewController.view.addSubview(snapshot)
@@ -169,6 +178,7 @@ public class AKLanguageManager {
             animation?(snapshot)
         }) { _ in
             snapshot.removeFromSuperview()
+            completionHandler?()
         }
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 
 protocol StorageProtocol {
     func string(forKey key: Languages.Keys) -> String?
-    func set(_ value: String, forKey: Languages.Keys)
+    func set(_ value: String?, forKey key: Languages.Keys)
 }
 
 class Storage: StorageProtocol {
@@ -21,8 +21,8 @@ class Storage: StorageProtocol {
         UserDefaults.standard.string(forKey: key.rawValue)
     }
 
-    func set(_ value: String, forKey: Languages.Keys) {
-        UserDefaults.standard.set(value, forKey: forKey.rawValue)
+    func set(_ value: String?, forKey key: Languages.Keys) {
+        UserDefaults.standard.set(value, forKey: key.rawValue)
     }
 }
 
