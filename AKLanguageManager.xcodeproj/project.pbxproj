@@ -25,6 +25,10 @@
 		1D87DADF28C40C7E00838580 /* AKLanguageManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D87DAD428C40C7E00838580 /* AKLanguageManager.framework */; };
 		1D87DAE428C40C7E00838580 /* AKLanguageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DAE328C40C7E00838580 /* AKLanguageManagerTests.swift */; };
 		1D87DAE528C40C7E00838580 /* AKLanguageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D87DAD728C40C7E00838580 /* AKLanguageManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1D9A3C4A28DA942500261C65 /* LanguagesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C4928DA942500261C65 /* LanguagesTests.swift */; };
+		1D9A3C4C28DA9C6A00261C65 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C4B28DA9C6A00261C65 /* Global.swift */; };
+		1D9A3C4E28DA9E1000261C65 /* StorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C4D28DA9E1000261C65 /* StorageTests.swift */; };
+		1D9A3C5028DA9EA100261C65 /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C4F28DA9EA100261C65 /* MockUserDefaults.swift */; };
 		1DD325CE28D71A93003D3C0A /* XibFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD325CC28D71A93003D3C0A /* XibFileViewController.swift */; };
 		1DD325D028D71E3B003D3C0A /* XibFileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DD325D228D71E3B003D3C0A /* XibFileViewController.xib */; };
 		1DD325D828D71EF1003D3C0A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DD325DA28D71EF1003D3C0A /* Localizable.strings */; };
@@ -64,6 +68,10 @@
 		1D87DAD828C40C7E00838580 /* AKLanguageManager.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = AKLanguageManager.docc; sourceTree = "<group>"; };
 		1D87DADE28C40C7E00838580 /* AKLanguageManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AKLanguageManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D87DAE328C40C7E00838580 /* AKLanguageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AKLanguageManagerTests.swift; sourceTree = "<group>"; };
+		1D9A3C4928DA942500261C65 /* LanguagesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesTests.swift; sourceTree = "<group>"; };
+		1D9A3C4B28DA9C6A00261C65 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		1D9A3C4D28DA9E1000261C65 /* StorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTests.swift; sourceTree = "<group>"; };
+		1D9A3C4F28DA9EA100261C65 /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
 		1DD325CC28D71A93003D3C0A /* XibFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibFileViewController.swift; sourceTree = "<group>"; };
 		1DD325D128D71E3B003D3C0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/XibFileViewController.xib; sourceTree = "<group>"; };
 		1DD325D428D71E3F003D3C0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/XibFileViewController.strings; sourceTree = "<group>"; };
@@ -136,8 +144,11 @@
 		1D87DAE228C40C7E00838580 /* AKLanguageManagerTests */ = {
 			isa = PBXGroup;
 			children = (
-				1DD325CA28D71A00003D3C0A /* Mocks */,
+				1D9A3C4D28DA9E1000261C65 /* StorageTests.swift */,
+				1D9A3C4928DA942500261C65 /* LanguagesTests.swift */,
 				1D87DAE328C40C7E00838580 /* AKLanguageManagerTests.swift */,
+				1D9A3C4B28DA9C6A00261C65 /* Global.swift */,
+				1DD325CA28D71A00003D3C0A /* Mocks */,
 				1DD325DA28D71EF1003D3C0A /* Localizable.strings */,
 			);
 			path = AKLanguageManagerTests;
@@ -146,6 +157,7 @@
 		1DD325CA28D71A00003D3C0A /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				1D9A3C4F28DA9EA100261C65 /* MockUserDefaults.swift */,
 				1DD325DD28D7C27B003D3C0A /* MockStorage.swift */,
 				1DD325CB28D71A0D003D3C0A /* MockXibFile */,
 			);
@@ -406,7 +418,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DD325DE28D7C27B003D3C0A /* MockStorage.swift in Sources */,
+				1D9A3C4A28DA942500261C65 /* LanguagesTests.swift in Sources */,
 				1DD325CE28D71A93003D3C0A /* XibFileViewController.swift in Sources */,
+				1D9A3C4E28DA9E1000261C65 /* StorageTests.swift in Sources */,
+				1D9A3C4C28DA9C6A00261C65 /* Global.swift in Sources */,
+				1D9A3C5028DA9EA100261C65 /* MockUserDefaults.swift in Sources */,
 				1D87DAE428C40C7E00838580 /* AKLanguageManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

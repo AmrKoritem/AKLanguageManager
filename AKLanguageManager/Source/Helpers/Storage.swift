@@ -7,6 +7,13 @@
 
 import Foundation
 
+protocol UserDefaultsProtocol {
+    func string(forKey defaultName: String) -> String?
+    func set(_ value: Any?, forKey defaultName: String)
+}
+
+extension UserDefaults: UserDefaultsProtocol {}
+
 protocol StorageProtocol {
     func string(forKey key: Languages.Keys) -> String?
     func set(_ value: String?, forKey key: Languages.Keys)
@@ -15,14 +22,16 @@ protocol StorageProtocol {
 class Storage: StorageProtocol {
     static let shared = Storage()
 
+    var userDefaults: UserDefaultsProtocol = UserDefaults.standard
+
     private init() {}
 
     func string(forKey key: Languages.Keys) -> String? {
-        UserDefaults.standard.string(forKey: key.rawValue)
+        userDefaults.string(forKey: key.rawValue)
     }
 
     func set(_ value: String?, forKey key: Languages.Keys) {
-        UserDefaults.standard.set(value, forKey: key.rawValue)
+        userDefaults.set(value, forKey: key.rawValue)
     }
 }
 

@@ -11,6 +11,7 @@ import XCTest
 class AKLanguageManagerTests: XCTestCase {
     let languageManager = AKLanguageManager.shared
     let window = UIWindow(frame: UIScreen.main.bounds)
+    let windowTitle = "test"
 
     var storage: StorageProtocol!
     var testBundle: Bundle!
@@ -26,7 +27,7 @@ class AKLanguageManagerTests: XCTestCase {
         languageManager.defaultLanguage = .en
         XCTAssertEqual(languageManager.defaultLanguage, .en)
         XCTAssertEqual(languageManager.selectedLanguage, .en)
-        selectedLanguageEqualDefaultLanguage()
+        selectedLanguageEqualDefaultLanguageTests()
     }
 
     func testSelectedLanguageSet() {
@@ -35,11 +36,11 @@ class AKLanguageManagerTests: XCTestCase {
         languageManager.setLanguage(language: .ar)
         XCTAssertEqual(languageManager.defaultLanguage, .en)
         XCTAssertEqual(languageManager.selectedLanguage, .ar)
-        selectedLanguageNotEqualDefaultLanguage()
+        selectedLanguageNotEqualDefaultLanguageTests()
 
         languageManager.setLanguage(language: .en)
         XCTAssertEqual(languageManager.selectedLanguage, .en)
-        selectedLanguageEqualDefaultLanguage()
+        selectedLanguageEqualDefaultLanguageTests()
 
         languageManager.defaultLanguage = .ar
         XCTAssertNotEqual(languageManager.defaultLanguage, .ar)
@@ -52,45 +53,18 @@ class AKLanguageManagerTests: XCTestCase {
     }
 
     func testSetLanguageMethodWithDefaultWindows() {
-        let windowTitle = "test"
-        languageManager.defaultLanguage = .en
-        languageManager.defaultWindowsAndTitles = [(window, windowTitle)]
-
-        let firstViewController = makeXibFileViewController()
-        window.makeKeyAndVisible()
-        window.rootViewController = firstViewController
-
-        firstViewController.loadViewIfNeeded()
-        guard firstViewController.isViewLoaded else {
-            return XCTFail("first view controller wasn't loaded")
-        }
-        XCTAssertEqual(firstViewController.explicitLabel.text, "translate")
-
-        let secondViewController = makeXibFileViewController()
-        let expectation = expectation(description: "localization done")
-        languageManager.setLanguage(
-            language: .ar,
-            viewControllerFactory: { title in
-                XCTAssertEqual(title, windowTitle)
-                return secondViewController
-            },
-            completionHandler: {
-                expectation.fulfill()
-            }
-        )
-        wait(for: [expectation], timeout: 5)
-
-        secondViewController.loadView()
-        guard secondViewController.isViewLoaded else {
-            return XCTFail("second view controller wasn't loaded")
-        }
-//        XCTAssertNotEqual(secondViewController.explicitLabel.text, "translate")
-//        XCTAssertEqual(secondViewController.explicitLabel.text, "ترجم")
+        setLanguageMethodTests()
     }
 
     func testSetLanguageMethodWithProvidedWindows() {
-        let windowTitle = "test"
+        setLanguageMethodTests(for: [(window, windowTitle)])
+    }
+
+    func setLanguageMethodTests(for windows: [AKLanguageManager.WindowAndTitle]? = nil) {
         languageManager.defaultLanguage = .en
+        if windows == nil {
+            languageManager.defaultWindowsAndTitles = [(window, windowTitle)]
+        }
 
         let firstViewController = makeXibFileViewController()
         window.makeKeyAndVisible()
@@ -106,9 +80,9 @@ class AKLanguageManagerTests: XCTestCase {
         let expectation = expectation(description: "localization done")
         languageManager.setLanguage(
             language: .ar,
-            for: [(window, windowTitle)],
-            viewControllerFactory: { title in
-                XCTAssertEqual(title, windowTitle)
+            for: windows,
+            viewControllerFactory: { [weak self] title in
+                XCTAssertEqual(title, self?.windowTitle ?? "")
                 return secondViewController
             },
             completionHandler: {
@@ -125,35 +99,17 @@ class AKLanguageManagerTests: XCTestCase {
 //        XCTAssertEqual(secondViewController.explicitLabel.text, "ترجم")
     }
 
-    func selectedLanguageNotEqualDefaultLanguage() {
+    func selectedLanguageNotEqualDefaultLanguageTests() {
         XCTAssertNotEqual(languageManager.selectedLanguage, languageManager.defaultLanguage)
         XCTAssertNotEqual(languageManager.isRightToLeft, languageManager.defaultLanguage.isRightToLeft)
         XCTAssertNotEqual(languageManager.locale, languageManager.defaultLanguage.locale)
         XCTAssertNotEqual(languageManager.bundle, languageManager.defaultLanguage.bundle)
     }
 
-    func selectedLanguageEqualDefaultLanguage() {
+    func selectedLanguageEqualDefaultLanguageTests() {
         XCTAssertEqual(languageManager.selectedLanguage, languageManager.defaultLanguage)
         XCTAssertEqual(languageManager.isRightToLeft, languageManager.defaultLanguage.isRightToLeft)
         XCTAssertEqual(languageManager.locale, languageManager.defaultLanguage.locale)
         XCTAssertEqual(languageManager.bundle, languageManager.defaultLanguage.bundle)
-    }
-
-    func makeXibFileViewController() -> XibFileViewController {
-        let nibName = String("\(XibFileViewController.self)")
-        return XibFileViewController(nibName: nibName, bundle: testBundle)
-    }
-}
-
-extension Bundle {
-    @objc
-    static var test: Bundle {
-        return Bundle(for: AKLanguageManagerTests.self)
-    }
-
-    static func swizzleMainBundleWithTestBundle() {
-        let originalSelector = #selector(getter: main)
-        let swizzledSelector = #selector(getter: test)
-        swizzleClassSelector(originalSelector, with: swizzledSelector, in: self)
     }
 }
