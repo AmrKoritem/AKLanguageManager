@@ -145,9 +145,20 @@ extension UIImage {
 }
 
 public extension NSTextAlignment {
+    /// Returns an `NSTextAlignment` enum suitable for the current language.
+    static var localized: NSTextAlignment {
+        localized(in: AKLanguageManager.shared.selectedLanguage)
+    }
+
+    /// Returns an `NSTextAlignment` enum suitable for the current language.
     var localized: NSTextAlignment {
         guard self == .natural else { return self }
-        return AKLanguageManager.shared.isRightToLeft ? .right : .left
+        return .localized
+    }
+
+    /// Returns an `NSTextAlignment` enum suitable for the designated language.
+    static func localized(in language: Language) -> NSTextAlignment {
+        return language.isRightToLeft ? .right : .left
     }
 }
 
