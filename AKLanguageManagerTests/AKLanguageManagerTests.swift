@@ -19,7 +19,7 @@ class AKLanguageManagerTests: XCTestCase {
     var storage: StorageProtocol!
 
     override func setUp() {
-        Languages.mainBundle = Bundle(for: type(of: self))
+        Language.mainBundle = Bundle(for: type(of: self))
         storage = MockStorage()
         languageManager.storage = storage
     }

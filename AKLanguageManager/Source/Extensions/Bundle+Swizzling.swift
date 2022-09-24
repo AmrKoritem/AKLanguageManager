@@ -17,7 +17,7 @@ extension Bundle {
     @objc
     private func swizzledLocaLizedString(forKey key: String, value: String?, table: String?) -> String {
         guard let bundle = AKLanguageManager.shared.selectedLanguage.bundle else {
-            return Languages.mainBundle.swizzledLocaLizedString(forKey: key, value: value, table: table)
+            return Language.mainBundle.swizzledLocaLizedString(forKey: key, value: value, table: table)
         }
         return bundle.swizzledLocaLizedString(forKey: key, value: value, table: table)
     }

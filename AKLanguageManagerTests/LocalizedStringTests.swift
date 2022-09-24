@@ -1,5 +1,5 @@
 //
-//  LocalizedStringsTests.swift
+//  LocalizedStringTests.swift
 //  AKLanguageManagerTests
 //
 //  Created by Amr Koritem on 21/09/2022.
@@ -8,12 +8,12 @@
 import XCTest
 @testable import AKLanguageManager
 
-class LocalizedStringsTests: XCTestCase {
+class LocalizedStringTests: XCTestCase {
     let languageManager = AKLanguageManager.shared
     var storage: StorageProtocol!
 
     override func setUp() {
-        Languages.mainBundle = Bundle(for: type(of: self))
+        Language.mainBundle = Bundle(for: type(of: self))
         storage = MockStorage()
         languageManager.storage = storage
         languageManager.defaultLanguage = .en

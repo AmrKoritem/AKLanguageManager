@@ -27,8 +27,9 @@
 
 import UIKit
 
-/// First of all, remember to add the `Localizable.strings` to your project, after adding the `Localizable.strings` file, select it then go to file inspector and below localization press localize, after that go to `PROJECT > Localisation` then add the languages you want to support (Arabic for example), dialog will appear to ask you which resource file you want to localize, select just the `Localizable.strings` file.
-/// If your project is UIKit, then set your default language in the `AppDelegate.application(_:didFinishLaunchingWithOptions:)` or `scene(_:willConnectTo:options:)` methods, so that your app will run first time localized with that language.
+/// First of all, remember to add the `Localizable.strings` to your project, after adding the `Localizable.strings` file, select it then go to file inspector and below localization press localize, after that go to `PROJECT > Localisation` then add the languages you want to support (Arabic for example), dialog will appear to ask you which resource file you want to localize, select the `Localizable.strings` file and any other files you wish to localize.
+/// Set your default language before your rootViewController is set. For example: in the `scene(_:willConnectTo:options:)` method if your app supports multiple scenes, or in the `AppDelegate.application(_:didFinishLaunchingWithOptions:)` method if your app doesn't support multiple scenes. Refer to the examples for more elaboration.
+/// The default language is the language your app will be localized in when it runs first time.
 /// If the default language wasn't set, you will encounter errors.
 /// This Manager is not currently compatible with swifui code.
 public class AKLanguageManager {
@@ -46,27 +47,27 @@ public class AKLanguageManager {
     /// *Note, This property just to get the current lanuage,
     /// To set the language use:
     /// `setLanguage(language:, for:, viewControllerFactory:, animation:)`*
-    public private(set) var selectedLanguage: Languages {
+    public private(set) var selectedLanguage: Language {
         get {
-            let selectedLanguage = storage.string(forKey: Languages.Keys.selectedLanguage) ?? ""
-            return Languages(rawValue: selectedLanguage) ?? defaultLanguage
+            let selectedLanguage = storage.string(forKey: Language.Keys.selectedLanguage) ?? ""
+            return Language(rawValue: selectedLanguage) ?? defaultLanguage
         }
         set {
-            storage.set(newValue.rawValue, forKey: Languages.Keys.selectedLanguage)
+            storage.set(newValue.rawValue, forKey: Language.Keys.selectedLanguage)
         }
     }
 
     /// The default language that the app will run with first time.
-    public var defaultLanguage: Languages {
+    public var defaultLanguage: Language {
         get {
-            guard let defaultLanguage = storage.string(forKey: Languages.Keys.defaultLanguage),
-                  let language = Languages(rawValue: defaultLanguage) else {
+            guard let defaultLanguage = storage.string(forKey: Language.Keys.defaultLanguage),
+                  let language = Language(rawValue: defaultLanguage) else {
                 fatalError("Default language was not set.")
             }
             return language
         }
         set {
-            let defaultLanguage = storage.string(forKey: Languages.Keys.defaultLanguage)
+            let defaultLanguage = storage.string(forKey: Language.Keys.defaultLanguage)
             Bundle.localize()
             UIView.localize()
             guard defaultLanguage?.isEmpty != false else {
@@ -77,15 +78,15 @@ public class AKLanguageManager {
                 return
             }
             let language = newValue == .deviceLanguage ? deviceLanguage : newValue
-            storage.set(language.rawValue, forKey: Languages.Keys.defaultLanguage)
-            storage.set(language.rawValue, forKey: Languages.Keys.selectedLanguage)
+            storage.set(language.rawValue, forKey: Language.Keys.defaultLanguage)
+            storage.set(language.rawValue, forKey: Language.Keys.selectedLanguage)
             setLanguage(language: language)
         }
     }
 
     /// The device language is deffrent than the app language, to get the app language use `selectedLanguage`.
-    public var deviceLanguage: Languages {
-        Languages(rawValue: Bundle.main.preferredLocalizations.first ?? "") ?? .en
+    public var deviceLanguage: Language {
+        Language(rawValue: Bundle.main.preferredLocalizations.first ?? "") ?? .en
     }
 
     /// The diriction of the selected language.
@@ -108,7 +109,7 @@ public class AKLanguageManager {
     var storage: StorageProtocol = Storage.shared
 
     /// Default windows and titles
-    var defaultWindowsAndTitles: [WindowAndTitle] = {
+    lazy var defaultWindowsAndTitles: [WindowAndTitle] = {
         guard #available(iOS 13.0, *) else { return [(UIApplication.shared.keyWindow, nil)] }
         return UIApplication.shared.connectedScenes
             .compactMap({ $0 as? UIWindowScene })
@@ -134,7 +135,7 @@ public class AKLanguageManager {
     ///                so you need to animate the view, move it out of the screen, change the alpha,
     ///                or scale it down to zero.
     public func setLanguage(
-        language: Languages,
+        language: Language,
         for windows: [WindowAndTitle]? = nil,
         viewControllerFactory: ViewControllerFactory? = nil,
         animation: Animation? = nil,
@@ -154,7 +155,7 @@ public class AKLanguageManager {
     }
     
     // MARK: - Private Methods
-    private func changeCurrentLanguageTo(_ language: Languages) {
+    private func changeCurrentLanguageTo(_ language: Language) {
         UIView.appearance().semanticContentAttribute = language.semanticContentAttribute
         selectedLanguage = language
     }

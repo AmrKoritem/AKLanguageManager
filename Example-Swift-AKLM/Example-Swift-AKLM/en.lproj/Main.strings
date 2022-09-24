@@ -13,3 +13,6 @@
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "rij-Dn-bL7"; */
 "rij-Dn-bL7.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Switch Image Direction"; ObjectID = "eCy-j5-Xyg"; */
+"eCy-j5-Xyg.normalTitle" = "Switch Image Direction";

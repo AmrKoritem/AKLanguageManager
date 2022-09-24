@@ -1,5 +1,5 @@
 //
-//  Languages.swift
+//  Language.swift
 //  AKLanguageManager
 //
 //  Created by Amr Koritem on 13/09/2022.
@@ -8,7 +8,7 @@
 import UIKit
 
 /// Supported languages.
-public enum Languages: String, CaseIterable, Equatable {
+public enum Language: String, CaseIterable, Equatable {
     case ar, en, nl, ja, ko, vi, ru, sv, fr, es, pt, it, de, da, fi, nb, tr, el, id, ms, th, hi, hu, pl, cs, sk, uk, hr, ca, ro, he, ur, fa, ku, arc, sl, ml, am
     case enGB = "en-GB"
     case enAU = "en-AU"
@@ -25,15 +25,15 @@ public enum Languages: String, CaseIterable, Equatable {
     case deviceLanguage
 }
 
-// For testing purposes
-extension Languages {
+// Capturing the dependency for testing purposes.
+extension Language {
     static var mainBundle = Bundle.main
 }
 
-public extension Languages {
+public extension Language {
     /// Language bundle.
     var bundle: Bundle? {
-        let bundlePath = Languages.mainBundle.path(forResource: rawValue, ofType: "lproj") ?? ""
+        let bundlePath = Language.mainBundle.path(forResource: rawValue, ofType: "lproj") ?? ""
         return Bundle(path: bundlePath)
     }
     /// The direction of the language.
@@ -56,6 +56,13 @@ public extension Languages {
         isRightToLeft ? .forceRightToLeft : .forceLeftToRight
     }
 
+    /// Array containing all other languages excluding `Languages.deviceLanguage`.
+    var otherLanguages: [Language] {
+        var all = Language.allCases
+        all.removeAll { $0 == self || $0 == .deviceLanguage }
+        return all
+    }
+
     /// Double numbers separator used in the language. For example: Dot is used in English as in 12.5.
     var doubleSeparator: String {
         // TODO: - Should work on double numbers representation in other languages as well.
@@ -66,13 +73,6 @@ public extension Languages {
     var doubleRegex: String {
         // TODO: - Should work on double numbers representation in other languages as well.
         self == .ar ? "[٠-٩]{1,},[٠-٩]{1,}" : "[0-9]{1,}.[0-9]{1,}"
-    }
-
-    /// Array containing all other languages excluding `Languages.deviceLanguage`.
-    var otherLanguages: [Languages] {
-        var all = Languages.allCases
-        all.removeAll { $0 == self || $0 == .deviceLanguage }
-        return all
     }
 
     func numberRegex(minNumberOfDigits min: Int = 1, maxNumberOfDigits max: Int? = nil) -> String {

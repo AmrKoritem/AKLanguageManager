@@ -9,11 +9,11 @@ import XCTest
 @testable import AKLanguageManager
 
 class LanguagesTests: XCTestCase {
-    let rtlLanguage = Languages.ar
-    let ltrLanguage = Languages.en
+    let rtlLanguage = Language.ar
+    let ltrLanguage = Language.en
 
     override func setUp() {
-        Languages.mainBundle = Bundle(for: type(of: self))
+        Language.mainBundle = Bundle(for: type(of: self))
     }
 
     func testBundle() {
@@ -35,5 +35,13 @@ class LanguagesTests: XCTestCase {
 
     func testSemanticContentAttribute() {
         XCTAssertNotEqual(rtlLanguage.semanticContentAttribute, ltrLanguage.semanticContentAttribute)
+    }
+
+    func testOtherLanguages() {
+        XCTAssertNotEqual(rtlLanguage.otherLanguages, ltrLanguage.otherLanguages)
+        XCTAssertFalse(rtlLanguage.otherLanguages.contains(rtlLanguage))
+        XCTAssertFalse(rtlLanguage.otherLanguages.contains(.deviceLanguage))
+        XCTAssertFalse(ltrLanguage.otherLanguages.contains(ltrLanguage))
+        XCTAssertFalse(ltrLanguage.otherLanguages.contains(.deviceLanguage))
     }
 }

@@ -25,7 +25,7 @@ public extension String {
 
     /// Localize a formatted string.
     func localized(
-        in language: Languages = AKLanguageManager.shared.selectedLanguage,
+        in language: Language = AKLanguageManager.shared.selectedLanguage,
         with arguments: CVarArg...
     ) -> String {
         let expressionLocalization = String(format: expressionLocalized(in: language) ?? self, arguments)
@@ -33,13 +33,13 @@ public extension String {
     }
 
     /// Localize the entire string to the designated language.
-    func localized(in language: Languages) -> String {
+    func localized(in language: Language) -> String {
         let expressionLocalization = expressionLocalized(in: language) ?? self
         return AKLanguageManager.shared.shouldLocalizeNumbers ? expressionLocalization.numbersLocalized(in: language) : expressionLocalization
     }
 
     /// Localize the expression  to the designated language as stated in the .strings file. If the .strings file doesn't exist, this method returns nil.
-    func expressionLocalized(in language: Languages, tableName: String = "Localizable") -> String? {
+    func expressionLocalized(in language: Language, tableName: String = "Localizable") -> String? {
         guard let bundle = language.bundle,
               let url = bundle.url(forResource: tableName, withExtension: "strings"),
               let stringsDictionary = NSDictionary(contentsOf: url) as? [String: String] else { return nil }
@@ -48,7 +48,7 @@ public extension String {
     }
 
     /// Gets all localizations for the string in all localization files existing in the designated language bundle.
-    func allExpressionLocalizes(in language: Languages) -> [String: String] {
+    func allExpressionLocalizes(in language: Language) -> [String: String] {
         var localizedString: [String: String] = [:]
         guard let bundle = language.bundle,
               let filesURL = bundle.urls(forResourcesWithExtension: "strings", subdirectory: nil) else { return localizedString }
@@ -61,12 +61,12 @@ public extension String {
     }
 
     /// Localize the numbers only to the designated language.
-    func numbersLocalized(in language: Languages) -> String {
+    func numbersLocalized(in language: Language) -> String {
         var localizedString = doublesPreparedForLocalization(in: language)
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.locale = language.locale
-        let regex = "\(Languages.en.numberRegex(minNumberOfDigits: 1))|\(Languages.ar.numberRegex(minNumberOfDigits: 1))"
+        let regex = "\(Language.en.numberRegex(minNumberOfDigits: 1))|\(Language.ar.numberRegex(minNumberOfDigits: 1))"
         let matches = matchesForRegex(regex).uniqued()
         matches.forEach { match in
             guard let nsNumberMatch = formatter.number(from: match),
@@ -76,11 +76,11 @@ public extension String {
         return localizedString
     }
 
-    private func doublesPreparedForLocalization(in language: Languages) -> String {
+    private func doublesPreparedForLocalization(in language: Language) -> String {
         // TODO: - Should work on double numbers representation in other languages as well.
         var preparedString = self
-        let regex = language != .ar ? Languages.ar.doubleRegex : Languages.en.doubleRegex
-        let occurrence = language != .ar ? Languages.ar.doubleSeparator : Languages.en.doubleSeparator
+        let regex = language != .ar ? Language.ar.doubleRegex : Language.en.doubleRegex
+        let occurrence = language != .ar ? Language.ar.doubleSeparator : Language.en.doubleSeparator
         let replacement = language.doubleSeparator
         matchesForRegex(regex).uniqued().forEach { match in
             let modifiedMatch = match.replacingOccurrences(of: occurrence, with: replacement)
@@ -99,7 +99,7 @@ public extension NSAttributedString {
     }
 
     /// Localize the entire string to the designated language while keeping its attributes.
-    func localized(in language: Languages) -> NSAttributedString {
+    func localized(in language: Language) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(attributedString: self)
         attributedString.mutableString.setString(string.localized(in: language))
         return attributedString
@@ -129,10 +129,18 @@ extension UIImage {
     }
 
     /// Returns a version of the image that's flipped in right to left direction or left to right direction depending on the current language.
-    public var directionLocalized: UIImage? {
-        guard AKLanguageManager.shared.isRightToLeft else { return self }
-        isRightToLeft = true
-        return imageFlippedForRightToLeftLayoutDirection()
+    public var directionLocalized: UIImage {
+        let language = AKLanguageManager.shared.selectedLanguage
+        let image = directionLocalized(in: language)
+        let shouldFlipImage = language.isRightToLeft && image.imageOrientation.rawValue < 4
+        return shouldFlipImage ? image.withHorizontallyFlippedOrientation() : image
+    }
+
+    /// Returns a version of the image that's flipped in right to left direction or left to right direction depending on the designated language.
+    public func directionLocalized(in language: Language) -> UIImage {
+        let image = language.isRightToLeft ? withHorizontallyFlippedOrientation() : self
+        image.isRightToLeft = language.isRightToLeft
+        return image
     }
 }
 

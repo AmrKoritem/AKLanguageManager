@@ -15,8 +15,8 @@ protocol UserDefaultsProtocol {
 extension UserDefaults: UserDefaultsProtocol {}
 
 protocol StorageProtocol {
-    func string(forKey key: Languages.Keys) -> String?
-    func set(_ value: String?, forKey key: Languages.Keys)
+    func string(forKey key: Language.Keys) -> String?
+    func set(_ value: String?, forKey key: Language.Keys)
 }
 
 class Storage: StorageProtocol {
@@ -26,17 +26,17 @@ class Storage: StorageProtocol {
 
     private init() {}
 
-    func string(forKey key: Languages.Keys) -> String? {
+    func string(forKey key: Language.Keys) -> String? {
         userDefaults.string(forKey: key.rawValue)
     }
 
-    func set(_ value: String?, forKey key: Languages.Keys) {
+    func set(_ value: String?, forKey key: Language.Keys) {
         userDefaults.set(value, forKey: key.rawValue)
     }
 }
 
 /// Storage keys extension
-extension Languages {
+extension Language {
     enum Keys: String {
         case selectedLanguage = "AKLanguageManager.selectedLanguage"
         case defaultLanguage = "AKLanguageManager.defaultLanguage"
