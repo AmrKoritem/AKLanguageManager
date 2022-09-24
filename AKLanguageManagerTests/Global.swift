@@ -10,7 +10,7 @@ import UIKit
 
 func makeXibFileViewController() -> XibFileViewController {
     let nibName = String("\(XibFileViewController.self)")
-    return XibFileViewController(nibName: nibName, bundle: Bundle.test)
+    return XibFileViewController(nibName: nibName, bundle: Bundle(for: XibFileViewController.self))
 }
 
 extension Bundle {

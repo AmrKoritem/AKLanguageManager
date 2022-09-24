@@ -29,6 +29,8 @@
 		1D9A3C4C28DA9C6A00261C65 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C4B28DA9C6A00261C65 /* Global.swift */; };
 		1D9A3C4E28DA9E1000261C65 /* StorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C4D28DA9E1000261C65 /* StorageTests.swift */; };
 		1D9A3C5028DA9EA100261C65 /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C4F28DA9EA100261C65 /* MockUserDefaults.swift */; };
+		1D9A3C5228DAA35600261C65 /* LocalizedStringsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C5128DAA35600261C65 /* LocalizedStringsTests.swift */; };
+		1D9A3C5528DE81C400261C65 /* OtherLocalizables.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D9A3C5728DE81C400261C65 /* OtherLocalizables.strings */; };
 		1DD325CE28D71A93003D3C0A /* XibFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD325CC28D71A93003D3C0A /* XibFileViewController.swift */; };
 		1DD325D028D71E3B003D3C0A /* XibFileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DD325D228D71E3B003D3C0A /* XibFileViewController.xib */; };
 		1DD325D828D71EF1003D3C0A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DD325DA28D71EF1003D3C0A /* Localizable.strings */; };
@@ -72,6 +74,9 @@
 		1D9A3C4B28DA9C6A00261C65 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		1D9A3C4D28DA9E1000261C65 /* StorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTests.swift; sourceTree = "<group>"; };
 		1D9A3C4F28DA9EA100261C65 /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
+		1D9A3C5128DAA35600261C65 /* LocalizedStringsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringsTests.swift; sourceTree = "<group>"; };
+		1D9A3C5628DE81C400261C65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OtherLocalizables.strings; sourceTree = "<group>"; };
+		1D9A3C5828DE81C600261C65 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/OtherLocalizables.strings; sourceTree = "<group>"; };
 		1DD325CC28D71A93003D3C0A /* XibFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibFileViewController.swift; sourceTree = "<group>"; };
 		1DD325D128D71E3B003D3C0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/XibFileViewController.xib; sourceTree = "<group>"; };
 		1DD325D428D71E3F003D3C0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/XibFileViewController.strings; sourceTree = "<group>"; };
@@ -144,12 +149,14 @@
 		1D87DAE228C40C7E00838580 /* AKLanguageManagerTests */ = {
 			isa = PBXGroup;
 			children = (
+				1D9A3C5128DAA35600261C65 /* LocalizedStringsTests.swift */,
 				1D9A3C4D28DA9E1000261C65 /* StorageTests.swift */,
 				1D9A3C4928DA942500261C65 /* LanguagesTests.swift */,
 				1D87DAE328C40C7E00838580 /* AKLanguageManagerTests.swift */,
 				1D9A3C4B28DA9C6A00261C65 /* Global.swift */,
 				1DD325CA28D71A00003D3C0A /* Mocks */,
 				1DD325DA28D71EF1003D3C0A /* Localizable.strings */,
+				1D9A3C5728DE81C400261C65 /* OtherLocalizables.strings */,
 			);
 			path = AKLanguageManagerTests;
 			sourceTree = "<group>";
@@ -336,6 +343,7 @@
 			files = (
 				1DD325D028D71E3B003D3C0A /* XibFileViewController.xib in Resources */,
 				1DD325D828D71EF1003D3C0A /* Localizable.strings in Resources */,
+				1D9A3C5528DE81C400261C65 /* OtherLocalizables.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +427,7 @@
 			files = (
 				1DD325DE28D7C27B003D3C0A /* MockStorage.swift in Sources */,
 				1D9A3C4A28DA942500261C65 /* LanguagesTests.swift in Sources */,
+				1D9A3C5228DAA35600261C65 /* LocalizedStringsTests.swift in Sources */,
 				1DD325CE28D71A93003D3C0A /* XibFileViewController.swift in Sources */,
 				1D9A3C4E28DA9E1000261C65 /* StorageTests.swift in Sources */,
 				1D9A3C4C28DA9C6A00261C65 /* Global.swift in Sources */,
@@ -438,6 +447,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		1D9A3C5728DE81C400261C65 /* OtherLocalizables.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1D9A3C5628DE81C400261C65 /* en */,
+				1D9A3C5828DE81C600261C65 /* ar */,
+			);
+			name = OtherLocalizables.strings;
+			sourceTree = "<group>";
+		};
 		1DD325D228D71E3B003D3C0A /* XibFileViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

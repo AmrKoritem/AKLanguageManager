@@ -12,13 +12,14 @@ class AKLanguageManagerTests: XCTestCase {
     let languageManager = AKLanguageManager.shared
     let window = UIWindow(frame: UIScreen.main.bounds)
     let windowTitle = "test"
+    var defaultWindowsAndTitles: [AKLanguageManager.WindowAndTitle] {
+        [(window, windowTitle)]
+    }
 
     var storage: StorageProtocol!
-    var testBundle: Bundle!
 
     override func setUp() {
-        Bundle.swizzleMainBundleWithTestBundle()
-        testBundle = Bundle.test
+        Languages.mainBundle = Bundle(for: type(of: self))
         storage = MockStorage()
         languageManager.storage = storage
     }
@@ -52,18 +53,18 @@ class AKLanguageManagerTests: XCTestCase {
         XCTAssertEqual(languageManager.defaultLanguage, languageManager.deviceLanguage)
     }
 
-    func testSetLanguageMethodWithDefaultWindows() {
-        setLanguageMethodTests()
+    func testSetLanguageMethodWithDefaultWindows() throws {
+        try setLanguageMethodTests()
     }
 
-    func testSetLanguageMethodWithProvidedWindows() {
-        setLanguageMethodTests(for: [(window, windowTitle)])
+    func testSetLanguageMethodWithProvidedWindows() throws {
+        try setLanguageMethodTests(for: defaultWindowsAndTitles)
     }
 
-    func setLanguageMethodTests(for windows: [AKLanguageManager.WindowAndTitle]? = nil) {
+    func setLanguageMethodTests(for windows: [AKLanguageManager.WindowAndTitle]? = nil) throws {
         languageManager.defaultLanguage = .en
         if windows == nil {
-            languageManager.defaultWindowsAndTitles = [(window, windowTitle)]
+            languageManager.defaultWindowsAndTitles = defaultWindowsAndTitles
         }
 
         let firstViewController = makeXibFileViewController()
@@ -95,8 +96,9 @@ class AKLanguageManagerTests: XCTestCase {
         guard secondViewController.isViewLoaded else {
             return XCTFail("second view controller wasn't loaded")
         }
-//        XCTAssertNotEqual(secondViewController.explicitLabel.text, "translate")
-//        XCTAssertEqual(secondViewController.explicitLabel.text, "ترجم")
+        XCTAssertNotEqual(secondViewController.explicitLabel.text, "translate")
+        throw XCTSkip("Test case: \"localization precedance of lproj files over String.localized method\" is not fixed yet")
+        XCTAssertEqual(secondViewController.explicitLabel.text, "ترجم")
     }
 
     func selectedLanguageNotEqualDefaultLanguageTests() {

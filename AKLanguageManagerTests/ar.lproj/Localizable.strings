@@ -7,3 +7,8 @@
 */
 
 "translate" = "ترجم";
+"key" = "ليس مفتاحا";
+"latin-number-key" = "01.10 مفتاح";
+"arabic-number-key" = "٠١,١٠ مفتاح";
+"mixed-number-key" = "٠١,١٠ مفتاح 01.10";
+"%d is a number, %.1f is a number, %ld is a number, %@ is a string" = "%d رقم, %.1f رقم, %ld رقم, %@ نص";

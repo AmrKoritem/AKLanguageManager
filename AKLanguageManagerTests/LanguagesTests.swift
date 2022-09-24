@@ -13,7 +13,7 @@ class LanguagesTests: XCTestCase {
     let ltrLanguage = Languages.en
 
     override func setUp() {
-        Bundle.swizzleMainBundleWithTestBundle()
+        Languages.mainBundle = Bundle(for: type(of: self))
     }
 
     func testBundle() {
