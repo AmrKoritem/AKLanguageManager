@@ -27,13 +27,16 @@
 
 import UIKit
 
-/// First of all, remember to add the `Localizable.strings` to your project, after adding the `Localizable.strings` file, select it then go to file inspector and below localization press localize, after that go to `PROJECT > Localisation` then add the languages you want to support (Arabic for example), dialog will appear to ask you which resource file you want to localize, select just the `Localizable.strings` file.
-/// If your project is UIKit, then set your default language that your app will run first time in the `AppDelegate.application(_:didFinishLaunchingWithOptions:)` method.
-/// This Manager is not currently compatible with swifui projects.
+/// First of all, remember to add the `Localizable.strings` to your project, after adding the `Localizable.strings` file, select it then go to file inspector and below localization press localize, after that go to `PROJECT > Localisation` then add the languages you want to support (Arabic for example), dialog will appear to ask you which resource file you want to localize, select the `Localizable.strings` file and any other files you wish to localize.
+/// Set your default language before your rootViewController is set. For example: in the `scene(_:willConnectTo:options:)` method if your app supports multiple scenes, or in the `AppDelegate.application(_:didFinishLaunchingWithOptions:)` method if your app doesn't support multiple scenes. Refer to the examples for more elaboration.
+/// The default language is the language your app will be localized in when it runs first time.
+/// If the default language wasn't set, you will encounter errors.
+/// This Manager is not currently compatible with swifui code.
 public class AKLanguageManager {
-    public typealias Animation = ((UIView) -> Void)
-    public typealias ViewControllerFactory = ((String?) -> UIViewController)
     public typealias WindowAndTitle = (UIWindow?, String?)
+    public typealias ViewControllerFactory = (String?) -> UIViewController
+    public typealias Animation = (UIView) -> Void
+    public typealias LocalizationCompletionHandler = () -> Void
     
     // MARK: - Properties
     /// The singleton LanguageManager instance.
@@ -44,52 +47,46 @@ public class AKLanguageManager {
     /// *Note, This property just to get the current lanuage,
     /// To set the language use:
     /// `setLanguage(language:, for:, viewControllerFactory:, animation:)`*
-    public private(set) var selectedLanguage: Languages {
+    public private(set) var selectedLanguage: Language {
         get {
-            guard let selectedLanguage = storage.string(forKey: Languages.Keys.selectedLanguage),
-                  let language = Languages(rawValue: selectedLanguage) else {
-                fatalError("Did you set the default language for the app?")
-            }
-            return language
+            let selectedLanguage = storage.string(forKey: Language.Keys.selectedLanguage) ?? ""
+            return Language(rawValue: selectedLanguage) ?? defaultLanguage
         }
         set {
-            storage.set(newValue.rawValue, forKey: Languages.Keys.selectedLanguage)
+            storage.set(newValue.rawValue, forKey: Language.Keys.selectedLanguage)
         }
     }
 
     /// The default language that the app will run with first time.
-    /// You need to set the `defaultLanguage` in the `AppDelegate`, specifically in
-    /// the first line inside the `application(_:willFinishLaunchingWithOptions:)` method.
-    public var defaultLanguage: Languages {
+    public var defaultLanguage: Language {
         get {
-            guard let defaultLanguage = storage.string(forKey: Languages.Keys.defaultLanguage),
-                  let language = Languages(rawValue: defaultLanguage) else {
+            guard let defaultLanguage = storage.string(forKey: Language.Keys.defaultLanguage),
+                  let language = Language(rawValue: defaultLanguage) else {
                 fatalError("Default language was not set.")
             }
             return language
         }
         set {
-            let defaultLanguage = storage.string(forKey: Languages.Keys.defaultLanguage)
+            let defaultLanguage = storage.string(forKey: Language.Keys.defaultLanguage)
             Bundle.localize()
             UIView.localize()
-            guard defaultLanguage == nil else {
+            guard defaultLanguage?.isEmpty != false else {
                 // If the default language has been set before,
                 // that means that the user opened the app before and maybe
                 // he changed the language so here the `selectedLanguage` is being set.
                 setLanguage(language: selectedLanguage)
                 return
             }
-            let language = newValue == .deviceLanguage ? (deviceLanguage ?? .en) : newValue
-            storage.set(language.rawValue, forKey: Languages.Keys.defaultLanguage)
-            storage.set(language.rawValue, forKey: Languages.Keys.selectedLanguage)
+            let language = newValue == .deviceLanguage ? deviceLanguage : newValue
+            storage.set(language.rawValue, forKey: Language.Keys.defaultLanguage)
+            storage.set(language.rawValue, forKey: Language.Keys.selectedLanguage)
             setLanguage(language: language)
         }
     }
 
     /// The device language is deffrent than the app language, to get the app language use `selectedLanguage`.
-    public var deviceLanguage: Languages? {
-        guard let deviceLanguage = Bundle.main.preferredLocalizations.first else { return nil }
-        return Languages(rawValue: deviceLanguage)
+    public var deviceLanguage: Language {
+        Language(rawValue: Bundle.main.preferredLocalizations.first ?? "") ?? .en
     }
 
     /// The diriction of the selected language.
@@ -111,6 +108,14 @@ public class AKLanguageManager {
     /// Storage dependency
     var storage: StorageProtocol = Storage.shared
 
+    /// Default windows and titles
+    lazy var defaultWindowsAndTitles: [WindowAndTitle] = {
+        guard #available(iOS 13.0, *) else { return [(UIApplication.shared.keyWindow, nil)] }
+        return UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .compactMap({ ($0.windows.first, $0.title) })
+    }()
+
     // MARK: - Initializer
     private init() {}
 
@@ -130,10 +135,11 @@ public class AKLanguageManager {
     ///                so you need to animate the view, move it out of the screen, change the alpha,
     ///                or scale it down to zero.
     public func setLanguage(
-        language: Languages,
+        language: Language,
         for windows: [WindowAndTitle]? = nil,
         viewControllerFactory: ViewControllerFactory? = nil,
-        animation: Animation? = nil
+        animation: Animation? = nil,
+        completionHandler: LocalizationCompletionHandler? = nil
     ) {
         changeCurrentLanguageTo(language)
         guard let viewControllerFactory = viewControllerFactory else { return }
@@ -143,28 +149,27 @@ public class AKLanguageManager {
             changeViewController(
                 for: window,
                 rootViewController: viewController,
-                animation: animation)
+                animation: animation,
+                completionHandler: completionHandler)
         }
     }
     
     // MARK: - Private Methods
-    private func changeCurrentLanguageTo(_ language: Languages) {
+    private func changeCurrentLanguageTo(_ language: Language) {
         UIView.appearance().semanticContentAttribute = language.semanticContentAttribute
         selectedLanguage = language
     }
 
     private func getWindowsToChangeFrom(_ windows: [WindowAndTitle]?) -> [WindowAndTitle]? {
         guard windows == nil else { return windows }
-        guard #available(iOS 13.0, *) else { return [(UIApplication.shared.keyWindow, nil)] }
-        return UIApplication.shared.connectedScenes
-            .compactMap({ $0 as? UIWindowScene })
-            .map({ ($0.windows.first, $0.title) })
+        return defaultWindowsAndTitles
     }
 
     private func changeViewController(
         for window: UIWindow?,
         rootViewController: UIViewController,
-        animation: Animation? = nil
+        animation: Animation? = nil,
+        completionHandler: LocalizationCompletionHandler? = nil
     ) {
         guard let snapshot = window?.snapshotView(afterScreenUpdates: true) else { return }
         rootViewController.view.addSubview(snapshot)
@@ -174,6 +179,7 @@ public class AKLanguageManager {
             animation?(snapshot)
         }) { _ in
             snapshot.removeFromSuperview()
+            completionHandler?()
         }
     }
 }

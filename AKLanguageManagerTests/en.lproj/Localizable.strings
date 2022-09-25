@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  AKLanguageManager
+
+  Created by Amr Koritem on 18/09/2022.
+  
+*/
+
+"translate" = "translate";
+"key" = "not key";
+"latin-number-key" = "01.10 key";
+"arabic-number-key" = "٠١,١٠ key";
+"mixed-number-key" = "٠١,١٠ key 01.10";
+"%d is a number, %.1f is a number, %ld is a number, %@ is a string" = "%d is a number, %.1f is a number, %ld is a number, %@ is a string";

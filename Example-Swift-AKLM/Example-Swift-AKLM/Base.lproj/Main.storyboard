@@ -29,8 +29,16 @@
                                     <constraint firstAttribute="height" constant="100" id="Vaj-WX-oGb"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCy-j5-Xyg">
+                                <rect key="frame" x="120.5" y="363" width="173" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Switch Image Direction"/>
+                                <connections>
+                                    <action selector="switchImageDirection" destination="BYZ-38-t0r" eventType="touchUpInside" id="AwD-2T-1oA"/>
+                                </connections>
+                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="TextField" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2mC-7c-bdG">
-                                <rect key="frame" x="16" y="387" width="382" height="40"/>
+                                <rect key="frame" x="16" y="424" width="382" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="2PE-Kk-hrw"/>
                                 </constraints>
@@ -59,12 +67,14 @@
                         <constraints>
                             <constraint firstItem="NZb-f0-lL8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="1pl-cJ-L0x"/>
                             <constraint firstItem="5e4-dm-rkR" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="5Be-qk-7vs"/>
+                            <constraint firstItem="2mC-7c-bdG" firstAttribute="top" secondItem="eCy-j5-Xyg" secondAttribute="bottom" constant="30" id="8TY-50-Rww"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2mC-7c-bdG" secondAttribute="trailing" constant="16" id="9Q1-9u-2t4"/>
                             <constraint firstItem="rij-Dn-bL7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="BbY-pr-1JC"/>
+                            <constraint firstItem="eCy-j5-Xyg" firstAttribute="top" secondItem="NZb-f0-lL8" secondAttribute="bottom" constant="40" id="Scx-Kd-59E"/>
                             <constraint firstItem="2mC-7c-bdG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="UdX-6v-Z8V"/>
-                            <constraint firstItem="2mC-7c-bdG" firstAttribute="top" secondItem="NZb-f0-lL8" secondAttribute="bottom" constant="64" id="eHi-i0-1Ax"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rij-Dn-bL7" secondAttribute="trailing" constant="20" id="fw0-vu-GUG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Gts-Hz-lwf" secondAttribute="bottom" constant="30" id="g8u-rj-jqJ"/>
+                            <constraint firstItem="eCy-j5-Xyg" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="i8W-NV-vMQ"/>
                             <constraint firstItem="rij-Dn-bL7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="jlR-DY-dfb"/>
                             <constraint firstItem="Gts-Hz-lwf" firstAttribute="top" secondItem="5e4-dm-rkR" secondAttribute="bottom" constant="20" id="ksI-A5-Pah"/>
                             <constraint firstItem="Gts-Hz-lwf" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="sWd-dd-boT"/>
@@ -72,6 +82,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="iby-Qh-iXx"/>
+                    <connections>
+                        <outlet property="imageView" destination="NZb-f0-lL8" id="HKf-IT-ERJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

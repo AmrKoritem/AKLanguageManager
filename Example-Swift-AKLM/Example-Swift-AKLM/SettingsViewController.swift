@@ -13,7 +13,7 @@ class SettingsViewController: UIViewController {
     // Change Language and set rootViewController to the initial view controller
     @IBAction func changeLanguage() {
         // Choosing a language
-        let newLanguage = AKLanguageManager.shared.selectedLanguage == .en ? Languages.ar : Languages.en
+        let newLanguage = AKLanguageManager.shared.selectedLanguage == .en ? Language.ar : Language.en
         AKLanguageManager.shared.setLanguage(
             language: newLanguage,
             viewControllerFactory: { [unowned self] _ in

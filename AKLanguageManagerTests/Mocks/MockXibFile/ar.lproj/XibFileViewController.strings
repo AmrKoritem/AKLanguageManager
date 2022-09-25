@@ -1,0 +1,6 @@
+
+/* Class = "UILabel"; text = "explicitly localized"; ObjectID = "9gt-GT-WlD"; */
+"9gt-GT-WlD.text" = "مترجم صراحة";
+
+/* Class = "UILabel"; text = "implicitly localized"; ObjectID = "sCT-Ck-B3z"; */
+"sCT-Ck-B3z.text" = "مترجم ضمنيا";

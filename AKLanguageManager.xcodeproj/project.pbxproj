@@ -25,7 +25,20 @@
 		1D87DADF28C40C7E00838580 /* AKLanguageManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D87DAD428C40C7E00838580 /* AKLanguageManager.framework */; };
 		1D87DAE428C40C7E00838580 /* AKLanguageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DAE328C40C7E00838580 /* AKLanguageManagerTests.swift */; };
 		1D87DAE528C40C7E00838580 /* AKLanguageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D87DAD728C40C7E00838580 /* AKLanguageManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1DD5803028CAF0B400DCD270 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD5802D28CAF0B400DCD270 /* Languages.swift */; };
+		1D9A3C4A28DA942500261C65 /* LanguagesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C4928DA942500261C65 /* LanguagesTests.swift */; };
+		1D9A3C4C28DA9C6A00261C65 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C4B28DA9C6A00261C65 /* Global.swift */; };
+		1D9A3C4E28DA9E1000261C65 /* StorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C4D28DA9E1000261C65 /* StorageTests.swift */; };
+		1D9A3C5028DA9EA100261C65 /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C4F28DA9EA100261C65 /* MockUserDefaults.swift */; };
+		1D9A3C5228DAA35600261C65 /* LocalizedStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C5128DAA35600261C65 /* LocalizedStringTests.swift */; };
+		1D9A3C5528DE81C400261C65 /* OtherLocalizables.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D9A3C5728DE81C400261C65 /* OtherLocalizables.strings */; };
+		1D9A3C5A28DE8ECC00261C65 /* LocalizedUtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C5928DE8ECC00261C65 /* LocalizedUtilitiesTests.swift */; };
+		1D9A3C5C28DF38FB00261C65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D9A3C5B28DF38FB00261C65 /* Assets.xcassets */; };
+		1D9A3C5E28DF506900261C65 /* LocalizedUIViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C5D28DF506900261C65 /* LocalizedUIViewTests.swift */; };
+		1DD325CE28D71A93003D3C0A /* XibFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD325CC28D71A93003D3C0A /* XibFileViewController.swift */; };
+		1DD325D028D71E3B003D3C0A /* XibFileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DD325D228D71E3B003D3C0A /* XibFileViewController.xib */; };
+		1DD325D828D71EF1003D3C0A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DD325DA28D71EF1003D3C0A /* Localizable.strings */; };
+		1DD325DE28D7C27B003D3C0A /* MockStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD325DD28D7C27B003D3C0A /* MockStorage.swift */; };
+		1DD5803028CAF0B400DCD270 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD5802D28CAF0B400DCD270 /* Language.swift */; };
 		1DD5803A28CAF0CB00DCD270 /* UIView+Swizzling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD5803428CAF0CB00DCD270 /* UIView+Swizzling.swift */; };
 		1DD5803B28CAF0CB00DCD270 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD5803528CAF0CB00DCD270 /* Storage.swift */; };
 		1DD5803E28CAF0D500DCD270 /* AKLanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD5803D28CAF0D500DCD270 /* AKLanguageManager.swift */; };
@@ -60,7 +73,24 @@
 		1D87DAD828C40C7E00838580 /* AKLanguageManager.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = AKLanguageManager.docc; sourceTree = "<group>"; };
 		1D87DADE28C40C7E00838580 /* AKLanguageManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AKLanguageManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D87DAE328C40C7E00838580 /* AKLanguageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AKLanguageManagerTests.swift; sourceTree = "<group>"; };
-		1DD5802D28CAF0B400DCD270 /* Languages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
+		1D9A3C4928DA942500261C65 /* LanguagesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesTests.swift; sourceTree = "<group>"; };
+		1D9A3C4B28DA9C6A00261C65 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		1D9A3C4D28DA9E1000261C65 /* StorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTests.swift; sourceTree = "<group>"; };
+		1D9A3C4F28DA9EA100261C65 /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
+		1D9A3C5128DAA35600261C65 /* LocalizedStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringTests.swift; sourceTree = "<group>"; };
+		1D9A3C5628DE81C400261C65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OtherLocalizables.strings; sourceTree = "<group>"; };
+		1D9A3C5828DE81C600261C65 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/OtherLocalizables.strings; sourceTree = "<group>"; };
+		1D9A3C5928DE8ECC00261C65 /* LocalizedUtilitiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedUtilitiesTests.swift; sourceTree = "<group>"; };
+		1D9A3C5B28DF38FB00261C65 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1D9A3C5D28DF506900261C65 /* LocalizedUIViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedUIViewTests.swift; sourceTree = "<group>"; };
+		1DD325CC28D71A93003D3C0A /* XibFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibFileViewController.swift; sourceTree = "<group>"; };
+		1DD325D128D71E3B003D3C0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/XibFileViewController.xib; sourceTree = "<group>"; };
+		1DD325D428D71E3F003D3C0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/XibFileViewController.strings; sourceTree = "<group>"; };
+		1DD325D528D71E4C003D3C0A /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/XibFileViewController.strings; sourceTree = "<group>"; };
+		1DD325D928D71EF1003D3C0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1DD325DB28D71EF3003D3C0A /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1DD325DD28D7C27B003D3C0A /* MockStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStorage.swift; sourceTree = "<group>"; };
+		1DD5802D28CAF0B400DCD270 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		1DD5803428CAF0CB00DCD270 /* UIView+Swizzling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Swizzling.swift"; sourceTree = "<group>"; };
 		1DD5803528CAF0CB00DCD270 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		1DD5803D28CAF0D500DCD270 /* AKLanguageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKLanguageManager.swift; sourceTree = "<group>"; };
@@ -125,9 +155,38 @@
 		1D87DAE228C40C7E00838580 /* AKLanguageManagerTests */ = {
 			isa = PBXGroup;
 			children = (
+				1D9A3C5D28DF506900261C65 /* LocalizedUIViewTests.swift */,
+				1D9A3C5928DE8ECC00261C65 /* LocalizedUtilitiesTests.swift */,
+				1D9A3C5128DAA35600261C65 /* LocalizedStringTests.swift */,
+				1D9A3C4D28DA9E1000261C65 /* StorageTests.swift */,
+				1D9A3C4928DA942500261C65 /* LanguagesTests.swift */,
 				1D87DAE328C40C7E00838580 /* AKLanguageManagerTests.swift */,
+				1D9A3C4B28DA9C6A00261C65 /* Global.swift */,
+				1DD325CA28D71A00003D3C0A /* Mocks */,
+				1DD325DA28D71EF1003D3C0A /* Localizable.strings */,
+				1D9A3C5728DE81C400261C65 /* OtherLocalizables.strings */,
+				1D9A3C5B28DF38FB00261C65 /* Assets.xcassets */,
 			);
 			path = AKLanguageManagerTests;
+			sourceTree = "<group>";
+		};
+		1DD325CA28D71A00003D3C0A /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				1D9A3C4F28DA9EA100261C65 /* MockUserDefaults.swift */,
+				1DD325DD28D7C27B003D3C0A /* MockStorage.swift */,
+				1DD325CB28D71A0D003D3C0A /* MockXibFile */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		1DD325CB28D71A0D003D3C0A /* MockXibFile */ = {
+			isa = PBXGroup;
+			children = (
+				1DD325CC28D71A93003D3C0A /* XibFileViewController.swift */,
+				1DD325D228D71E3B003D3C0A /* XibFileViewController.xib */,
+			);
+			path = MockXibFile;
 			sourceTree = "<group>";
 		};
 		1DD5802128CAEFC900DCD270 /* Source */ = {
@@ -143,7 +202,7 @@
 		1DD5802328CAEFEF00DCD270 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				1DD5802D28CAF0B400DCD270 /* Languages.swift */,
+				1DD5802D28CAF0B400DCD270 /* Language.swift */,
 				1DD5803528CAF0CB00DCD270 /* Storage.swift */,
 				1D4074F728D0153B000A1DF0 /* Localizable.swift */,
 			);
@@ -266,6 +325,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
 			);
 			mainGroup = 1D87DACA28C40C7D00838580;
 			productRefGroup = 1D87DAD528C40C7E00838580 /* Products */;
@@ -290,6 +350,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DD325D028D71E3B003D3C0A /* XibFileViewController.xib in Resources */,
+				1DD325D828D71EF1003D3C0A /* Localizable.strings in Resources */,
+				1D9A3C5C28DF38FB00261C65 /* Assets.xcassets in Resources */,
+				1D9A3C5528DE81C400261C65 /* OtherLocalizables.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,7 +413,7 @@
 			files = (
 				1D4074FA28D01699000A1DF0 /* UIView+Localizable.swift in Sources */,
 				1D2CC63128D0D5640000DFEF /* UIImageView+Localizable.swift in Sources */,
-				1DD5803028CAF0B400DCD270 /* Languages.swift in Sources */,
+				1DD5803028CAF0B400DCD270 /* Language.swift in Sources */,
 				1D40750628D01BEF000A1DF0 /* UITabBar+Localizable.swift in Sources */,
 				1D4074F828D0153B000A1DF0 /* Localizable.swift in Sources */,
 				1D40750228D01B63000A1DF0 /* UITextView+Localizable.swift in Sources */,
@@ -371,6 +435,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DD325DE28D7C27B003D3C0A /* MockStorage.swift in Sources */,
+				1D9A3C4A28DA942500261C65 /* LanguagesTests.swift in Sources */,
+				1D9A3C5228DAA35600261C65 /* LocalizedStringTests.swift in Sources */,
+				1DD325CE28D71A93003D3C0A /* XibFileViewController.swift in Sources */,
+				1D9A3C5E28DF506900261C65 /* LocalizedUIViewTests.swift in Sources */,
+				1D9A3C4E28DA9E1000261C65 /* StorageTests.swift in Sources */,
+				1D9A3C5A28DE8ECC00261C65 /* LocalizedUtilitiesTests.swift in Sources */,
+				1D9A3C4C28DA9C6A00261C65 /* Global.swift in Sources */,
+				1D9A3C5028DA9EA100261C65 /* MockUserDefaults.swift in Sources */,
 				1D87DAE428C40C7E00838580 /* AKLanguageManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,11 +458,43 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		1D9A3C5728DE81C400261C65 /* OtherLocalizables.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1D9A3C5628DE81C400261C65 /* en */,
+				1D9A3C5828DE81C600261C65 /* ar */,
+			);
+			name = OtherLocalizables.strings;
+			sourceTree = "<group>";
+		};
+		1DD325D228D71E3B003D3C0A /* XibFileViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1DD325D128D71E3B003D3C0A /* Base */,
+				1DD325D428D71E3F003D3C0A /* en */,
+				1DD325D528D71E4C003D3C0A /* ar */,
+			);
+			name = XibFileViewController.xib;
+			sourceTree = "<group>";
+		};
+		1DD325DA28D71EF1003D3C0A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1DD325D928D71EF1003D3C0A /* en */,
+				1DD325DB28D71EF3003D3C0A /* ar */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		1D87DAE628C40C7E00838580 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -453,6 +558,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -510,6 +616,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 774E890E500B46C5170AA8D3 /* Pods-AKLanguageManager.debug.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -540,6 +647,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1B6BFAE0A8EA6BD9B760163 /* Pods-AKLanguageManager.release.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -578,6 +686,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amr.koritem.AKLanguageManagerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -596,6 +705,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amr.koritem.AKLanguageManagerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

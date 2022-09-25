@@ -148,7 +148,7 @@
 		1DD5808728CB036300DCD270 /* Example-Swift-AKLM */ = {
 			isa = PBXGroup;
 			children = (
-				1DD580B828CB064400DCD270 /* Support Files */,
+				1DD580B828CB064400DCD270 /* SupportFiles */,
 				1DD5808C28CB036300DCD270 /* MainViewController.swift */,
 				1DD580B928CB098400DCD270 /* SettingsViewController.swift */,
 				1DD5808E28CB036300DCD270 /* Main.storyboard */,
@@ -175,7 +175,7 @@
 			path = "Example-Swift-AKLMUITests";
 			sourceTree = "<group>";
 		};
-		1DD580B828CB064400DCD270 /* Support Files */ = {
+		1DD580B828CB064400DCD270 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
 				1DD5808828CB036300DCD270 /* AppDelegate.swift */,
@@ -183,7 +183,7 @@
 				1DD5809328CB036600DCD270 /* LaunchScreen.storyboard */,
 				1DD5809628CB036600DCD270 /* Info.plist */,
 			);
-			path = "Support Files";
+			path = SupportFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -625,7 +625,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S84559HK9V;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Example-Swift-AKLM/Support Files/Info.plist";
+				INFOPLIST_FILE = "Example-Swift-AKLM/SupportFiles/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -655,7 +655,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S84559HK9V;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Example-Swift-AKLM/Support Files/Info.plist";
+				INFOPLIST_FILE = "Example-Swift-AKLM/SupportFiles/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
