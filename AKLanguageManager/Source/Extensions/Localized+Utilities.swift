@@ -23,7 +23,12 @@ public extension String {
         numbersLocalized(in: AKLanguageManager.shared.selectedLanguage)
     }
 
-    /// Localize a formatted string.
+    /// Localize a formatted string in the designated language.
+    /// - Parameters:
+    ///    - language: The language according to which the string will be localized.
+    ///    - arguments: The arguments needed to format the string.
+    /// - Returns:
+    ///    - The formtted string localized.
     func localized(
         in language: Language = AKLanguageManager.shared.selectedLanguage,
         with arguments: CVarArg...
@@ -38,7 +43,12 @@ public extension String {
         return AKLanguageManager.shared.shouldLocalizeNumbers ? expressionLocalization.numbersLocalized(in: language) : expressionLocalization
     }
 
-    /// Localize the expression  to the designated language as stated in the .strings file. If the .strings file doesn't exist, this method returns nil.
+    /// Localize the expression  to the designated language as stated in the `.strings` file.
+    /// - Parameters:
+    ///    - language: The language according to which the string will be localized.
+    ///    - tableName: The name of the `.strings` file where the localization of the string key is to be found.
+    /// - Returns:
+    ///    - If the `.strings` file doesn't exist, this method returns nil. Otherwise it returns the value found.
     func expressionLocalized(in language: Language, tableName: String = "Localizable") -> String? {
         guard let bundle = language.bundle,
               let url = bundle.url(forResource: tableName, withExtension: "strings"),

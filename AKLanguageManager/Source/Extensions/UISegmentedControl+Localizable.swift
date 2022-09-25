@@ -46,11 +46,12 @@ extension UISegmentedControl {
     }
 
     public func localizeTitle(at index: Int) {
-        setTitle(titleForSegment(at: index)?.localized, forSegmentAt: index)
+        guard let title = titleForSegment(at: index) else { return }
+        setTitle(title.localized, forSegmentAt: index)
     }
 
     public func localizeImage(at index: Int) {
-        guard shouldLocalizeImageDirection else { return }
-        setImage(imageForSegment(at: index)?.directionLocalized, forSegmentAt: index)
+        guard let image = imageForSegment(at: index), shouldLocalizeImageDirection else { return }
+        setImage(image.directionLocalized, forSegmentAt: index)
     }
 }
