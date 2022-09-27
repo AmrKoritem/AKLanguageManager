@@ -5,9 +5,6 @@
 /* Class = "UIButton"; normalTitle = "Go To Settings"; ObjectID = "5e4-dm-rkR"; */
 "5e4-dm-rkR.normalTitle" = "اذهب إلى الإعدادات";
 
-/* Class = "UIButton"; normalTitle = "تغيير إلى العربية"; ObjectID = "Gts-Hz-lwf"; */
-"Gts-Hz-lwf.normalTitle" = "Change to English";
-
 /* Class = "UIButton"; normalTitle = "تغيير إلى العربية"; ObjectID = "nnc-fN-upd"; */
 "nnc-fN-upd.normalTitle" = "Change to English";
 
@@ -16,3 +13,15 @@
 
 /* Class = "UIButton"; normalTitle = "Switch Image Direction"; ObjectID = "eCy-j5-Xyg"; */
 "eCy-j5-Xyg.normalTitle" = "غير اتجاه الصورة";
+
+/* Class = "UITabBarItem"; title = "Second"; ObjectID = "4gv-gb-ewz"; */
+"4gv-gb-ewz.title" = "ثانى";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "7I8-iW-CYY"; */
+"7I8-iW-CYY.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "Change Arrow Direction"; ObjectID = "GZv-1K-OYj"; */
+"GZv-1K-OYj.normalTitle" = "غير اتجاه السهم";
+
+/* Class = "UIButton"; normalTitle = "Change Segment Image Direction"; ObjectID = "dlG-Dh-Woa"; */
+"dlG-Dh-Woa.normalTitle" = "غير اتجاه صورة التبويب";

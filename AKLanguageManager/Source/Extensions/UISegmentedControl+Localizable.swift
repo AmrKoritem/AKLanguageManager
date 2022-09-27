@@ -9,30 +9,25 @@ import UIKit
 
 extension UISegmentedControl {
     struct AssociatedKeys {
-        static var shouldLocalizeImageDirection: UInt8 = 0
+        static var shouldLocalizeImagesDirection: UInt8 = 0
     }
 
     /// Determines if the image should be horizontally flipped according to localization direction.
     @objc
-    public var shouldLocalizeImageDirection: Bool {
+    public var shouldLocalizeImagesDirection: Bool {
         get {
-            let shouldLocalizeDirection = objc_getAssociatedObject(self, &AssociatedKeys.shouldLocalizeImageDirection) as? Bool
+            let shouldLocalizeDirection = objc_getAssociatedObject(self, &AssociatedKeys.shouldLocalizeImagesDirection) as? Bool
             return shouldLocalizeDirection ?? true
         }
         set {
             objc_setAssociatedObject(
                 self,
-                &AssociatedKeys.shouldLocalizeImageDirection,
+                &AssociatedKeys.shouldLocalizeImagesDirection,
                 newValue,
                 objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC
             )
-            (0 ..< numberOfSegments).forEach { index in
-                let image = imageForSegment(at: index)
-                guard image?.isRightToLeft == true, !newValue else { return }
-                let flippedImage = image?.imageFlippedForRightToLeftLayoutDirection()
-                flippedImage?.isRightToLeft = false
-                setImage(flippedImage, forSegmentAt: index)
-            }
+            guard !newValue else { return }
+            resetImagesHorizontalDirection()
         }
     }
 
@@ -51,7 +46,29 @@ extension UISegmentedControl {
     }
 
     public func localizeImage(at index: Int) {
-        guard let image = imageForSegment(at: index), shouldLocalizeImageDirection else { return }
+        guard let image = imageForSegment(at: index), shouldLocalizeImagesDirection else { return }
         setImage(image.directionLocalized, forSegmentAt: index)
+    }
+
+    /// Reverts the image direction of the item at the specified index.
+    public func revertImageHorizontalDirection(at index: Int) {
+        guard let image = imageForSegment(at: index) else { return }
+        setImage(image.horizontalDirectionReverted, forSegmentAt: index)
+    }
+
+    /// Reverts the images direction.
+    public func revertImagesHorizontalDirection() {
+        (0 ..< numberOfSegments).forEach { [weak self] in
+            guard let image = self?.imageForSegment(at: $0) else { return }
+            self?.setImage(image.horizontalDirectionReverted, forSegmentAt: $0)
+        }
+    }
+
+    /// Resets the images direction.
+    public func resetImagesHorizontalDirection() {
+        (0 ..< numberOfSegments).forEach { [weak self] in
+            guard let image = self?.imageForSegment(at: $0) else { return }
+            self?.setImage(image.horizontalDirectionChanged(to: .leftToRight), forSegmentAt: $0)
+        }
     }
 }

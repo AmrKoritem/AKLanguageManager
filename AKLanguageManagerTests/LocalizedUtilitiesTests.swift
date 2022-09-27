@@ -22,17 +22,17 @@ class LocalizedUtilitiesTests: XCTestCase {
     func testUIImageLocalized() {
         let image = UIImage(named: "image", in: Language.mainBundle, compatibleWith: nil)
         XCTAssertTrue(image?.isRightToLeft == false)
-        XCTAssertTrue(image?.directionLocalized.isRightToLeft == false)
+        XCTAssertTrue(image?.directionLocalized?.isRightToLeft == false)
         languageManager.setLanguage(language: .ar)
         XCTAssertTrue(image?.isRightToLeft == false)
-        XCTAssertTrue(image?.directionLocalized.isRightToLeft == true)
+        XCTAssertTrue(image?.directionLocalized?.isRightToLeft == true)
     }
 
     func testUIImageLocalizedIn() {
         let image = UIImage(named: "image", in: Language.mainBundle, compatibleWith: nil)
         XCTAssertTrue(image?.isRightToLeft == false)
-        XCTAssertTrue(image?.directionLocalized(in: .ar).isRightToLeft == true)
-        XCTAssertTrue(image?.directionLocalized(in: .en).isRightToLeft == false)
+        XCTAssertTrue(image?.directionLocalized(in: .ar)?.isRightToLeft == true)
+        XCTAssertTrue(image?.directionLocalized(in: .en)?.isRightToLeft == false)
     }
 
     func testNSTextAlignmentLocalized() {

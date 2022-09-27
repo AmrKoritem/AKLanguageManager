@@ -26,14 +26,18 @@ extension UIImageView {
                 newValue,
                 objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC
             )
-            guard image?.isRightToLeft == true, !newValue else { return }
-            image = image?.imageFlippedForRightToLeftLayoutDirection()
-            image?.isRightToLeft = false
+            guard !newValue else { return }
+            image = image?.horizontalDirectionChanged(to: .leftToRight)
         }
     }
 
     open override func localize() {
         guard shouldLocalizeDirection else { return }
         image = image?.directionLocalized
+    }
+
+    /// Reverts the image direction.
+    public func revertImageHorizontalDirection() {
+        image = image?.horizontalDirectionReverted
     }
 }

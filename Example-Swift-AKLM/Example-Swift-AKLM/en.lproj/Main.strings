@@ -16,3 +16,15 @@
 
 /* Class = "UIButton"; normalTitle = "Switch Image Direction"; ObjectID = "eCy-j5-Xyg"; */
 "eCy-j5-Xyg.normalTitle" = "Switch Image Direction";
+
+/* Class = "UITabBarItem"; title = "Second"; ObjectID = "4gv-gb-ewz"; */
+"4gv-gb-ewz.title" = "Second";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "7I8-iW-CYY"; */
+"7I8-iW-CYY.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "Change Arrow Direction"; ObjectID = "GZv-1K-OYj"; */
+"GZv-1K-OYj.normalTitle" = "Change Arrow Direction";
+
+/* Class = "UIButton"; normalTitle = "Change Segment Image Direction"; ObjectID = "dlG-Dh-Woa"; */
+"dlG-Dh-Woa.normalTitle" = "Change Segment Image Direction";

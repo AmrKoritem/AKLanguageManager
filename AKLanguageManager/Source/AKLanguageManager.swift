@@ -86,7 +86,7 @@ public class AKLanguageManager {
 
     /// The device language is deffrent than the app language, to get the app language use `selectedLanguage`.
     public var deviceLanguage: Language {
-        Language(rawValue: Bundle.main.preferredLocalizations.first ?? "") ?? .en
+        Language(rawValue: Language.mainBundle.preferredLocalizations.first ?? "") ?? .en
     }
 
     /// The diriction of the selected language.

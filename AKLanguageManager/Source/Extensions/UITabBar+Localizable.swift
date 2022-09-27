@@ -36,6 +36,18 @@ extension UITabBar {
             $0.localize()
         }
     }
+
+    /// Reverts the image direction of the item at the specified index.
+    public func revertImageHorizontalDirection(at index: Int) {
+        items?[safe: index]?.revertImageHorizontalDirection()
+    }
+
+    /// Reverts the images direction.
+    public func revertImagesHorizontalDirection() {
+        items?.forEach {
+            $0.revertImageHorizontalDirection()
+        }
+    }
 }
 
 extension UITabBarItem: Localizable {
@@ -57,9 +69,8 @@ extension UITabBarItem: Localizable {
                 newValue,
                 objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC
             )
-            guard image?.isRightToLeft == true, !newValue else { return }
-            image = image?.imageFlippedForRightToLeftLayoutDirection()
-            image?.isRightToLeft = false
+            guard !newValue else { return }
+            resetImageHorizontalDirection()
         }
     }
 
@@ -75,5 +86,36 @@ extension UITabBarItem: Localizable {
     public func localizeImage() {
         guard shouldLocalizeImageDirection else { return }
         image = image?.directionLocalized
+    }
+
+    /// Reverts the image direction.
+    public func revertImageHorizontalDirection() {
+        image = image?.horizontalDirectionReverted
+    }
+
+    /// Resets the image direction.
+    public func resetImageHorizontalDirection() {
+        image = image?.horizontalDirectionChanged(to: .leftToRight)
+    }
+}
+
+// MARK: - Helper methods
+extension Collection {
+    /// Returns the element at the specified index if it is within bounds, otherwise nil.
+    subscript(safe index: Index) -> Element? {
+        indices.contains(index) ? self[index] : nil
+    }
+}
+
+extension MutableCollection {
+    /// Returns the element at the specified index if it is within bounds, otherwise nil.
+    subscript(safe index: Index) -> Element? {
+        get {
+            indices.contains(index) ? self[index] : nil
+        }
+        set {
+            guard let newValue = newValue, indices.contains(index) else { return }
+            self[index] = newValue
+        }
     }
 }

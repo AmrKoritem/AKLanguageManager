@@ -44,4 +44,20 @@ class LanguagesTests: XCTestCase {
         XCTAssertFalse(ltrLanguage.otherLanguages.contains(ltrLanguage))
         XCTAssertFalse(ltrLanguage.otherLanguages.contains(.deviceLanguage))
     }
+
+    func testRTLLanguages() {
+        XCTAssertTrue(Language.allRightToLeft.contains(rtlLanguage))
+        XCTAssertFalse(Language.allRightToLeft.contains(.deviceLanguage))
+    }
+
+    func testLTRLanguages() {
+        XCTAssertTrue(Language.allLeftToRight.contains(ltrLanguage))
+        XCTAssertFalse(Language.allLeftToRight.contains(.deviceLanguage))
+    }
+
+    func testAllLanguages() {
+        XCTAssertTrue(Language.all.contains(rtlLanguage))
+        XCTAssertTrue(Language.all.contains(ltrLanguage))
+        XCTAssertFalse(Language.all.contains(.deviceLanguage))
+    }
 }

@@ -22,174 +22,181 @@ class LocalizedUIViewTests: XCTestCase {
     }
 
     func testUIView() {
-        let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 50)))
-        let label = makeUILabel()
-        let imageView = makeUIImageView()
-        view.addSubview(label)
-        view.addSubview(imageView)
+        languageManager.setLanguage(language: rtlLanguage)
+        let (view, label, imageView) = makeUIView()
         view.localize()
-        XCTAssertEqual(label.text, "not key")
-        XCTAssertTrue(imageView.image?.isRightToLeft == false)
+        XCTAssertEqual(label.text, "ليس مفتاحا")
+        XCTAssertTrue(imageView.image?.isRightToLeft == true)
     }
 
     func testUILabel() {
-        let label1 = makeUILabel()
-        label1.localize()
-        XCTAssertEqual(label1.text, "not key")
-        XCTAssertEqual(label1.textAlignment, .left)
         languageManager.setLanguage(language: rtlLanguage)
-        let label2 = makeUILabel()
-        label2.localize()
-        XCTAssertEqual(label2.text, "ليس مفتاحا")
-        XCTAssertEqual(label2.textAlignment, .right)
+        let label = makeUILabel()
+        label.localize()
+        XCTAssertEqual(label.text, "ليس مفتاحا")
+        XCTAssertEqual(label.textAlignment, .right)
     }
 
     func testUITextView() {
-        let textView1 = makeUITextView()
-        textView1.localize()
-        XCTAssertEqual(textView1.text, "not key")
-        XCTAssertEqual(textView1.textAlignment, .left)
         languageManager.setLanguage(language: rtlLanguage)
-        let textView2 = makeUITextView()
-        textView2.localize()
-        XCTAssertEqual(textView2.text, "ليس مفتاحا")
-        XCTAssertEqual(textView2.textAlignment, .right)
+        let textView = makeUITextView()
+        textView.localize()
+        XCTAssertEqual(textView.text, "ليس مفتاحا")
+        XCTAssertEqual(textView.textAlignment, .right)
     }
 
     func testUITextField() {
-        let textField1 = makeUITextField()
-        textField1.localize()
-        XCTAssertEqual(textField1.text, "not key")
-        XCTAssertEqual(textField1.textAlignment, .left)
         languageManager.setLanguage(language: rtlLanguage)
-        let textField2 = makeUITextField()
-        textField2.localize()
-        XCTAssertEqual(textField2.text, "ليس مفتاحا")
-        XCTAssertEqual(textField2.textAlignment, .right)
+        let textField = makeUITextField()
+        textField.localize()
+        XCTAssertEqual(textField.text, "ليس مفتاحا")
+        XCTAssertEqual(textField.textAlignment, .right)
     }
 
     func testUITabBar() {
-        let tabBar1 = makeUITabBar()
-        tabBar1.localize()
-        XCTAssertEqual(tabBar1.items?.first?.title, "not key")
-        XCTAssertTrue(tabBar1.items?.first?.image?.isRightToLeft == false)
         languageManager.setLanguage(language: rtlLanguage)
+        let tabBar = makeUITabBar()
+        tabBar.localize()
+        XCTAssertEqual(tabBar.items?.first?.title, "ليس مفتاحا")
+        XCTAssertTrue(tabBar.items?.first?.image?.isRightToLeft == true)
+        XCTAssertEqual(tabBar.items?.last?.title, "ترجم")
+        XCTAssertTrue(tabBar.items?.last?.image?.isRightToLeft == true)
+    }
+
+    func testUITabBarShouldLocalizeImagesDirection() {
+        languageManager.setLanguage(language: rtlLanguage)
+        let tabBar1 = makeUITabBar()
+        tabBar1.shouldLocalizeImagesDirection = false
+        tabBar1.localize()
+        XCTAssertEqual(tabBar1.items?.first?.title, "ليس مفتاحا")
+        XCTAssertTrue(tabBar1.items?.first?.image?.isRightToLeft == false)
+        XCTAssertEqual(tabBar1.items?.last?.title, "ترجم")
+        XCTAssertTrue(tabBar1.items?.last?.image?.isRightToLeft == false)
         let tabBar2 = makeUITabBar()
         tabBar2.localize()
+        tabBar2.shouldLocalizeImagesDirection = false
         XCTAssertEqual(tabBar2.items?.first?.title, "ليس مفتاحا")
-        XCTAssertTrue(tabBar2.items?.first?.image?.isRightToLeft == true)
-        let tabBar3 = makeUITabBar()
-        tabBar3.shouldLocalizeImagesDirection = false
-        tabBar3.localize()
-        XCTAssertEqual(tabBar3.items?.first?.title, "ليس مفتاحا")
-        XCTAssertTrue(tabBar3.items?.first?.image?.isRightToLeft == false)
-        let tabBar4 = makeUITabBar()
-        tabBar4.localize()
-        tabBar4.shouldLocalizeImagesDirection = false
-        XCTAssertEqual(tabBar4.items?.first?.title, "ليس مفتاحا")
-        XCTAssertTrue(tabBar4.items?.first?.image?.isRightToLeft == false)
+        XCTAssertTrue(tabBar2.items?.first?.image?.isRightToLeft == false)
+        XCTAssertEqual(tabBar2.items?.last?.title, "ترجم")
+        XCTAssertTrue(tabBar2.items?.last?.image?.isRightToLeft == false)
+    }
+
+    func testUITabBarRevertImagesHorizontalDirection() {
+        languageManager.setLanguage(language: rtlLanguage)
+        let tabBar = makeUITabBar()
+        tabBar.localize()
+        XCTAssertTrue(tabBar.items?.first?.image?.isRightToLeft == true)
+        XCTAssertTrue(tabBar.items?.last?.image?.isRightToLeft == true)
+        tabBar.revertImagesHorizontalDirection()
+        XCTAssertTrue(tabBar.items?.first?.image?.isRightToLeft == false)
+        XCTAssertTrue(tabBar.items?.last?.image?.isRightToLeft == false)
+        tabBar.revertImageHorizontalDirection(at: 0)
+        XCTAssertTrue(tabBar.items?.first?.image?.isRightToLeft == true)
+        XCTAssertTrue(tabBar.items?.last?.image?.isRightToLeft == false)
     }
 
     func testUIButton() {
-        let button1 = makeUIButton()
-        button1.localize()
-        XCTAssertEqual(button1.title(for: .normal), "not key")
-        XCTAssertEqual(button1.title(for: .disabled), "01.10 key")
-        XCTAssertTrue(button1.image(for: .normal)?.isRightToLeft == false)
         languageManager.setLanguage(language: rtlLanguage)
+        let button = makeUIButton()
+        button.localize()
+        XCTAssertEqual(button.title(for: .normal), "ليس مفتاحا")
+        XCTAssertEqual(button.title(for: .disabled), "٠١,١٠ مفتاح")
+        XCTAssertTrue(button.image(for: .normal)?.isRightToLeft == true)
+    }
+
+    func testUIButtonShouldLocalizeImageDirection() {
+        languageManager.setLanguage(language: rtlLanguage)
+        let button1 = makeUIButton()
+        button1.shouldLocalizeImageDirection = false
+        button1.localize()
+        XCTAssertEqual(button1.title(for: .normal), "ليس مفتاحا")
+        XCTAssertEqual(button1.title(for: .disabled), "٠١,١٠ مفتاح")
+        XCTAssertTrue(button1.image(for: .normal)?.isRightToLeft == false)
         let button2 = makeUIButton()
         button2.localize()
+        button2.shouldLocalizeImageDirection = false
         XCTAssertEqual(button2.title(for: .normal), "ليس مفتاحا")
         XCTAssertEqual(button2.title(for: .disabled), "٠١,١٠ مفتاح")
-        XCTAssertTrue(button2.image(for: .normal)?.isRightToLeft == true)
-        let button3 = makeUIButton()
-        button3.shouldLocalizeImageDirection = false
-        button3.localize()
-        XCTAssertTrue(button3.image(for: .normal)?.isRightToLeft == false)
-        let button4 = makeUIButton()
-        button4.localize()
-        button4.shouldLocalizeImageDirection = false
-        XCTAssertTrue(button4.image(for: .normal)?.isRightToLeft == false)
+        XCTAssertTrue(button2.image(for: .normal)?.isRightToLeft == false)
+    }
+
+    func testUIButtonRevertImagesHorizontalDirection() {
+        languageManager.setLanguage(language: rtlLanguage)
+        let button = makeUIButton()
+        button.localize()
+        XCTAssertTrue(button.image(for: .normal)?.isRightToLeft == true)
+        button.revertImagesHorizontalDirection()
+        XCTAssertTrue(button.image(for: .normal)?.isRightToLeft == false)
+        button.revertImagesHorizontalDirection()
+        XCTAssertTrue(button.image(for: .normal)?.isRightToLeft == true)
     }
 
     func testUISegmentedControl() {
+        languageManager.setLanguage(language: rtlLanguage)
         let segmentedControl = makeUISegmentedControl()
         segmentedControl.localize()
-        XCTAssertEqual(segmentedControl.titleForSegment(at: 0), "not key")
-        XCTAssertNotNil(segmentedControl.imageForSegment(at: 1))
+        XCTAssertEqual(segmentedControl.titleForSegment(at: 0), "ليس مفتاحا")
+        XCTAssertTrue(segmentedControl.imageForSegment(at: 1)?.isRightToLeft == true)
+        XCTAssertEqual(segmentedControl.titleForSegment(at: 2), "ليس مفتاحا")
+    }
+
+    func testUISegmentedControlShouldLocalizeImagesDirection() {
+        languageManager.setLanguage(language: rtlLanguage)
+        let segmentedControl1 = makeUISegmentedControl()
+        segmentedControl1.shouldLocalizeImagesDirection = false
+        segmentedControl1.localize()
+        XCTAssertEqual(segmentedControl1.titleForSegment(at: 0), "ليس مفتاحا")
+        XCTAssertTrue(segmentedControl1.imageForSegment(at: 1)?.isRightToLeft == false)
+        XCTAssertEqual(segmentedControl1.titleForSegment(at: 2), "ليس مفتاحا")
+        let segmentedControl2 = makeUISegmentedControl()
+        segmentedControl2.localize()
+        segmentedControl2.shouldLocalizeImagesDirection = false
+        XCTAssertEqual(segmentedControl2.titleForSegment(at: 0), "ليس مفتاحا")
+        XCTAssertTrue(segmentedControl2.imageForSegment(at: 1)?.isRightToLeft == false)
+        XCTAssertEqual(segmentedControl2.titleForSegment(at: 2), "ليس مفتاحا")
+    }
+
+    func testUISegmentedControlRevertImagesHorizontalDirection() {
+        languageManager.setLanguage(language: rtlLanguage)
+        let segmentedControl1 = makeUISegmentedControl()
+        segmentedControl1.localize()
+        XCTAssertTrue(segmentedControl1.imageForSegment(at: 1)?.isRightToLeft == true)
+        segmentedControl1.revertImagesHorizontalDirection()
+        XCTAssertTrue(segmentedControl1.imageForSegment(at: 1)?.isRightToLeft == false)
+        segmentedControl1.revertImageHorizontalDirection(at: 1)
+        XCTAssertTrue(segmentedControl1.imageForSegment(at: 1)?.isRightToLeft == true)
     }
 
     func testUIImageView() {
+        let imageView = makeUIImageView()
+        imageView.localize()
+        XCTAssertTrue(imageView.image?.isRightToLeft == false)
+        languageManager.setLanguage(language: rtlLanguage)
+        imageView.localize()
+        XCTAssertTrue(imageView.image?.isRightToLeft == true)
+    }
+
+    func testUIImageViewShouldLocalizeDirection() {
+        languageManager.setLanguage(language: rtlLanguage)
         let imageView1 = makeUIImageView()
+        imageView1.shouldLocalizeDirection = false
         imageView1.localize()
         XCTAssertTrue(imageView1.image?.isRightToLeft == false)
-        languageManager.setLanguage(language: rtlLanguage)
-        imageView1.localize()
-        XCTAssertTrue(imageView1.image?.isRightToLeft == true)
         let imageView2 = makeUIImageView()
-        imageView2.shouldLocalizeDirection = false
         imageView2.localize()
+        imageView2.shouldLocalizeDirection = false
         XCTAssertTrue(imageView2.image?.isRightToLeft == false)
-        let imageView3 = makeUIImageView()
-        imageView3.localize()
-        imageView3.shouldLocalizeDirection = false
-        XCTAssertTrue(imageView3.image?.isRightToLeft == false)
     }
 
-    func makeUILabel() -> UILabel {
-        let label = UILabel()
-        label.text = "key"
-        label.textAlignment = .natural
-        label.sizeToFit()
-        return label
-    }
-
-    func makeUITextView() -> UITextView {
-        let textView = UITextView(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 50)))
-        textView.text = "key"
-        textView.textAlignment = .natural
-        return textView
-    }
-
-    func makeUITextField() -> UITextField {
-        let textField = UITextField(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 50)))
-        textField.text = "key"
-        textField.textAlignment = .natural
-        return textField
-    }
-
-    func makeUITabBar() -> UITabBar {
-        let tabBarController = UITabBarController()
-        let firstViewController = UIViewController()
-        firstViewController.tabBarItem.title = "key"
-        firstViewController.tabBarItem.image = UIImage(named: "image", in: Language.mainBundle, compatibleWith: nil)
-        let secondViewController = UIViewController()
-        secondViewController.tabBarItem.title = "translate"
-        secondViewController.tabBarItem.image = UIImage(named: "image", in: Language.mainBundle, compatibleWith: nil)
-        tabBarController.viewControllers = [firstViewController, secondViewController]
-        return tabBarController.tabBar
-    }
-
-    func makeUIButton() -> UIButton {
-        let image = UIImage(named: "image", in: Language.mainBundle, compatibleWith: nil)
-        let button = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 50)))
-        button.setTitle("key", for: .normal)
-        button.setTitle("latin-number-key", for: .disabled)
-        button.setImage(image, for: .normal)
-        return button
-    }
-
-    func makeUISegmentedControl() -> UISegmentedControl {
-        let items = ["key", "translate", "key"]
-        let image = UIImage(named: "image", in: Language.mainBundle, compatibleWith: nil)
-        let segmentedControl = UISegmentedControl(items: items)
-        segmentedControl.setImage(image, forSegmentAt: 1)
-        return segmentedControl
-    }
-
-    func makeUIImageView() -> UIImageView {
-        let image = UIImage(named: "image", in: Language.mainBundle, compatibleWith: nil)
-        return UIImageView(image: image)
+    func testUIImageViewHorizontalDirectionReverted() {
+        languageManager.setLanguage(language: rtlLanguage)
+        let imageView = makeUIImageView()
+        imageView.localize()
+        XCTAssertTrue(imageView.image?.isRightToLeft == true)
+        imageView.revertImageHorizontalDirection()
+        XCTAssertTrue(imageView.image?.isRightToLeft == false)
+        imageView.revertImageHorizontalDirection()
+        XCTAssertTrue(imageView.image?.isRightToLeft == true)
     }
 }
 

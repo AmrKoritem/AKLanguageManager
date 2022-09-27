@@ -31,6 +31,18 @@ extension Language {
 }
 
 public extension Language {
+    /// Array containing all left to right languages excluding `Languages.deviceLanguage`.
+    static var allLeftToRight: [Language] {
+        all.filter { $0.direction == .leftToRight }
+    }
+    /// Array containing all right to left languages excluding `Languages.deviceLanguage`.
+    static var allRightToLeft: [Language] {
+        all.filter { $0.direction == .rightToLeft }
+    }
+    /// Array containing all supported languages excluding `Languages.deviceLanguage`.
+    static var all: [Language] {
+        allCases.filter { $0 != .deviceLanguage }
+    }
     /// Language bundle.
     var bundle: Bundle? {
         let bundlePath = Language.mainBundle.path(forResource: rawValue, ofType: "lproj") ?? ""
@@ -58,9 +70,7 @@ public extension Language {
 
     /// Array containing all other languages excluding `Languages.deviceLanguage`.
     var otherLanguages: [Language] {
-        var all = Language.allCases
-        all.removeAll { $0 == self || $0 == .deviceLanguage }
-        return all
+        Language.all.filter { $0 != self }
     }
 
     /// Double numbers separator used in the language. For example: Dot is used in English as in 12.5.
@@ -72,13 +82,19 @@ public extension Language {
     /// Double numbers regex.
     var doubleRegex: String {
         // TODO: - Should work on double numbers representation in other languages as well.
-        self == .ar ? "[٠-٩]{1,},[٠-٩]{1,}" : "[0-9]{1,}.[0-9]{1,}"
+        "\(singleDigitRegex){1,}\(doubleSeparator)\(singleDigitRegex){1,}"
+    }
+
+    /// Single digit regex.
+    var singleDigitRegex: String {
+        // TODO: - Should work on double numbers representation in other languages as well.
+        self == .ar ? "[٠-٩]" : "[0-9]"
     }
 
     func numberRegex(minNumberOfDigits min: Int = 1, maxNumberOfDigits max: Int? = nil) -> String {
         // TODO: - Should work on numbers representation in other languages as well.
         let maxString = max != nil ? ",\(max!)" : ""
         let numberOfDigits = "{\(min)\(maxString)}"
-        return self == .ar ? "[٠-٩]\(numberOfDigits)" : "[0-9]\(numberOfDigits)"
+        return "\(singleDigitRegex)\(numberOfDigits)"
     }
 }
