@@ -44,9 +44,7 @@ extension UITabBar {
 
     /// Reverts the images direction.
     public func revertImagesHorizontalDirection() {
-        items?.forEach {
-            $0.revertImageHorizontalDirection()
-        }
+        items?.forEach { $0.revertImageHorizontalDirection() }
     }
 }
 
@@ -86,16 +84,22 @@ extension UITabBarItem: Localizable {
     public func localizeImage() {
         guard shouldLocalizeImageDirection else { return }
         image = image?.directionLocalized
+        selectedImage = selectedImage?.directionLocalized
+        landscapeImagePhone = landscapeImagePhone?.directionLocalized
     }
 
     /// Reverts the image direction.
     public func revertImageHorizontalDirection() {
         image = image?.horizontalDirectionReverted
+        selectedImage = selectedImage?.horizontalDirectionReverted
+        landscapeImagePhone = landscapeImagePhone?.horizontalDirectionReverted
     }
 
     /// Resets the image direction.
     public func resetImageHorizontalDirection() {
         image = image?.horizontalDirectionChanged(to: .leftToRight)
+        selectedImage = selectedImage?.horizontalDirectionChanged(to: .leftToRight)
+        landscapeImagePhone = landscapeImagePhone?.horizontalDirectionChanged(to: .leftToRight)
     }
 }
 

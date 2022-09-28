@@ -49,9 +49,13 @@ func makeUITabBar() -> UITabBar {
     let firstViewController = UIViewController()
     firstViewController.tabBarItem.title = "key"
     firstViewController.tabBarItem.image = UIImage(named: "image", in: Language.mainBundle, compatibleWith: nil)
+    firstViewController.tabBarItem.selectedImage = UIImage(named: "image", in: Language.mainBundle, compatibleWith: nil)
+    firstViewController.tabBarItem.landscapeImagePhone = UIImage(named: "image", in: Language.mainBundle, compatibleWith: nil)
     let secondViewController = UIViewController()
     secondViewController.tabBarItem.title = "translate"
     secondViewController.tabBarItem.image = UIImage(named: "image", in: Language.mainBundle, compatibleWith: nil)
+    secondViewController.tabBarItem.selectedImage = UIImage(named: "image", in: Language.mainBundle, compatibleWith: nil)
+    secondViewController.tabBarItem.landscapeImagePhone = UIImage(named: "image", in: Language.mainBundle, compatibleWith: nil)
     tabBarController.viewControllers = [firstViewController, secondViewController]
     return tabBarController.tabBar
 }
