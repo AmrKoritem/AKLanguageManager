@@ -11,7 +11,7 @@ extension Bundle {
     static func localize() {
         let originalSelector = #selector(localizedString(forKey:value:table:))
         let swizzledSelector = #selector(swizzledLocaLizedString(forKey:value:table:))
-        swizzleInstanceSelector(originalSelector, with: swizzledSelector, in: self)
+        Swizzle.instance.selector(originalSelector, with: swizzledSelector, in: self)
     }
 
     @objc

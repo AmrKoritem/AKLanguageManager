@@ -1,0 +1,25 @@
+{
+  "name": "AKLanguageManager",
+  "platforms": {
+    "ios": "13.0"
+  },
+  "summary": "AKLanguageManager is a language manager for iOS applications.",
+  "requires_arc": true,
+  "version": "0.1.0",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Amr Koritem": "amr.koritem92@gmail.com"
+  },
+  "homepage": "https://github.com/AmrKoritem/AKLanguageManager",
+  "source": {
+    "git": "https://github.com/AmrKoritem/AKLanguageManager.git",
+    "tag": "0.1.0"
+  },
+  "frameworks": "UIKit",
+  "source_files": "AKLanguageManager/Source/**/*.{swift}",
+  "swift_versions": "5.0",
+  "swift_version": "5.0"
+}

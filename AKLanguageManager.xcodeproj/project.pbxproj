@@ -20,7 +20,6 @@
 		1D40750628D01BEF000A1DF0 /* UITabBar+Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D40750528D01BEF000A1DF0 /* UITabBar+Localizable.swift */; };
 		1D40750828D01C53000A1DF0 /* UIButton+Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D40750728D01C53000A1DF0 /* UIButton+Localizable.swift */; };
 		1D40750A28D01D08000A1DF0 /* UISegmentedControl+Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D40750928D01D08000A1DF0 /* UISegmentedControl+Localizable.swift */; };
-		1D77C4D328D1F44900130778 /* Swizzling+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D77C4D228D1F44900130778 /* Swizzling+Methods.swift */; };
 		1D87DAD928C40C7E00838580 /* AKLanguageManager.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DAD828C40C7E00838580 /* AKLanguageManager.docc */; };
 		1D87DADF28C40C7E00838580 /* AKLanguageManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D87DAD428C40C7E00838580 /* AKLanguageManager.framework */; };
 		1D87DAE428C40C7E00838580 /* AKLanguageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DAE328C40C7E00838580 /* AKLanguageManagerTests.swift */; };
@@ -34,6 +33,7 @@
 		1D9A3C5A28DE8ECC00261C65 /* LocalizedUtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C5928DE8ECC00261C65 /* LocalizedUtilitiesTests.swift */; };
 		1D9A3C5C28DF38FB00261C65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D9A3C5B28DF38FB00261C65 /* Assets.xcassets */; };
 		1D9A3C5E28DF506900261C65 /* LocalizedUIViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9A3C5D28DF506900261C65 /* LocalizedUIViewTests.swift */; };
+		1DB2181D28E58181009BF6ED /* Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB2181C28E58181009BF6ED /* Swizzle.swift */; };
 		1DD325CE28D71A93003D3C0A /* XibFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD325CC28D71A93003D3C0A /* XibFileViewController.swift */; };
 		1DD325D028D71E3B003D3C0A /* XibFileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DD325D228D71E3B003D3C0A /* XibFileViewController.xib */; };
 		1DD325D828D71EF1003D3C0A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DD325DA28D71EF1003D3C0A /* Localizable.strings */; };
@@ -67,7 +67,6 @@
 		1D40750528D01BEF000A1DF0 /* UITabBar+Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+Localizable.swift"; sourceTree = "<group>"; };
 		1D40750728D01C53000A1DF0 /* UIButton+Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Localizable.swift"; sourceTree = "<group>"; };
 		1D40750928D01D08000A1DF0 /* UISegmentedControl+Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+Localizable.swift"; sourceTree = "<group>"; };
-		1D77C4D228D1F44900130778 /* Swizzling+Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swizzling+Methods.swift"; sourceTree = "<group>"; };
 		1D87DAD428C40C7E00838580 /* AKLanguageManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AKLanguageManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D87DAD728C40C7E00838580 /* AKLanguageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKLanguageManager.h; sourceTree = "<group>"; };
 		1D87DAD828C40C7E00838580 /* AKLanguageManager.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = AKLanguageManager.docc; sourceTree = "<group>"; };
@@ -83,6 +82,7 @@
 		1D9A3C5928DE8ECC00261C65 /* LocalizedUtilitiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedUtilitiesTests.swift; sourceTree = "<group>"; };
 		1D9A3C5B28DF38FB00261C65 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1D9A3C5D28DF506900261C65 /* LocalizedUIViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedUIViewTests.swift; sourceTree = "<group>"; };
+		1DB2181C28E58181009BF6ED /* Swizzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swizzle.swift; sourceTree = "<group>"; };
 		1DD325CC28D71A93003D3C0A /* XibFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibFileViewController.swift; sourceTree = "<group>"; };
 		1DD325D128D71E3B003D3C0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/XibFileViewController.xib; sourceTree = "<group>"; };
 		1DD325D428D71E3F003D3C0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/XibFileViewController.strings; sourceTree = "<group>"; };
@@ -205,6 +205,7 @@
 				1DD5802D28CAF0B400DCD270 /* Language.swift */,
 				1DD5803528CAF0CB00DCD270 /* Storage.swift */,
 				1D4074F728D0153B000A1DF0 /* Localizable.swift */,
+				1DB2181C28E58181009BF6ED /* Swizzle.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -223,7 +224,6 @@
 				1D40750928D01D08000A1DF0 /* UISegmentedControl+Localizable.swift */,
 				1D2CC63028D0D5640000DFEF /* UIImageView+Localizable.swift */,
 				1D4074FB28D0181B000A1DF0 /* Localized+Utilities.swift */,
-				1D77C4D228D1F44900130778 /* Swizzling+Methods.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -418,7 +418,6 @@
 				1D4074F828D0153B000A1DF0 /* Localizable.swift in Sources */,
 				1D40750228D01B63000A1DF0 /* UITextView+Localizable.swift in Sources */,
 				1D40750028D01B07000A1DF0 /* UILabel+Localizable.swift in Sources */,
-				1D77C4D328D1F44900130778 /* Swizzling+Methods.swift in Sources */,
 				1D4074FC28D0181B000A1DF0 /* Localized+Utilities.swift in Sources */,
 				1D4074FE28D01A6C000A1DF0 /* Bundle+Swizzling.swift in Sources */,
 				1D40750828D01C53000A1DF0 /* UIButton+Localizable.swift in Sources */,
@@ -428,6 +427,7 @@
 				1D87DAD928C40C7E00838580 /* AKLanguageManager.docc in Sources */,
 				1D40750A28D01D08000A1DF0 /* UISegmentedControl+Localizable.swift in Sources */,
 				1DD5803A28CAF0CB00DCD270 /* UIView+Swizzling.swift in Sources */,
+				1DB2181D28E58181009BF6ED /* Swizzle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

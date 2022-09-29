@@ -1,0 +1,16 @@
+PODS:
+  - AKLanguageManager (0.1.0)
+
+DEPENDENCIES:
+  - AKLanguageManager (from `../`)
+
+EXTERNAL SOURCES:
+  AKLanguageManager:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  AKLanguageManager: f774509a823f80d53409d9f21af549e41a53265b
+
+PODFILE CHECKSUM: 087b69813a68cde09855bdb9ee52868fc36190cc
+
+COCOAPODS: 1.11.3
