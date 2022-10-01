@@ -23,6 +23,10 @@ public enum Language: String, CaseIterable, Equatable {
     case es419 = "es-419"
     case ptPT = "pt-PT"
     case deviceLanguage
+
+    public init?(locale: Locale) {
+        self.init(rawValue: locale.identifier)
+    }
 }
 
 // Capturing the dependency for testing purposes.
