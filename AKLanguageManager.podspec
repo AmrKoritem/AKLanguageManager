@@ -6,7 +6,7 @@ s.name = "AKLanguageManager"
 s.summary = "AKLanguageManager is a language manager for iOS applications."
 s.requires_arc = true
 
-s.version = "0.3.0"
+s.version = "0.4.0"
 s.license = { :type => "MIT", :file => "LICENSE" }
 s.author = { "Amr Koritem" => "amr.koritem92@gmail.com" }
 s.homepage = "https://github.com/AmrKoritem/AKLanguageManager"
@@ -14,7 +14,7 @@ s.source = { :git => "https://github.com/AmrKoritem/AKLanguageManager.git",
              :tag => "#{s.version}" }
 
 s.framework = "UIKit"
-s.source_files = "AKLanguageManager/Source/**/*.{swift}"
+s.source_files = "Sources/AKLanguageManager/**/*.{swift}"
 s.swift_version = "5.0"
 
 end
