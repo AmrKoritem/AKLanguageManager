@@ -10,34 +10,34 @@ build/
 ## Profile
 profile
 
-## xcode user’s preferences
+## Xcode user’s preferences
 *.pbxuser
 
-## xcode user’s prespective
+## Xcode user’s prespective
 *.perspectivev3
 
-## layout information and breakpoints
+## Layout information and breakpoints
 *.mode1v3
 *.mode2v3
 
-## binary file to store an app
+## Binary file to store an app
 *.ipa
 *.hmap
 
-## debug symbols file
+## Debug Symbols File
 *.dSYM
 *.dSYM.zip
 
-##user data
+## User Data
 xcuserdata/
 
-## user state
+## User State
 *.xcuserstate
 
 ## user checkouts
 *.xccheckout
 
-## xcode deprecated files
+## Xcode Deprecated Files
 *.moved-aside
 
 ## CocoaPods
@@ -50,5 +50,13 @@ Podfile.lock
 ## Carthage/Checkouts
 Carthage/Build
 
+## Swift Package Manager
+/.build
+/Packages
+/*.xcodeproj
+.swiftpm/config/registries.json
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+.netrc
+
 ## ExampleApps
-Example-Swift-AKLM/Pods/*
+Example/Pods/*

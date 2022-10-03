@@ -1,6 +1,0 @@
-framework module AKLanguageManager {
-  umbrella header "AKLanguageManager-umbrella.h"
-
-  export *
-  module * { export * }
-}
