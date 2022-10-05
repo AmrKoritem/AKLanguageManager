@@ -104,7 +104,7 @@ public extension String {
     }
 }
 
-// MARK: - Helper methods
+// MARK: - Helper apis
 extension NSRange {
     func toStringIndexRange(string: String) -> Range<String.Index>? {
         guard let range = Range.init(self) else { return nil }

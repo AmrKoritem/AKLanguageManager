@@ -5,7 +5,7 @@
 //  Created by Amr Koritem on 13/09/2022.
 //
 
-import UIKit
+import SwiftUI
 
 /// Supported languages.
 public enum Language: String, CaseIterable, Equatable {
@@ -55,6 +55,10 @@ public extension Language {
     /// The direction of the language.
     var direction: Locale.LanguageDirection {
         Locale.characterDirection(forLanguage: rawValue)
+    }
+    /// The layout direction of the language.
+    var layoutDirection: LayoutDirection {
+        direction == .rightToLeft ? .rightToLeft : .leftToRight
     }
 
     /// The locale object associated to the language. Can be used in dates and currency.

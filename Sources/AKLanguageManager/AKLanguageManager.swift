@@ -27,22 +27,52 @@
 
 import UIKit
 
+// MARK: - Type aliases
+public typealias WindowAndTitle = (UIWindow?, String?)
+public typealias ViewControllerFactory = (String?) -> UIViewController
+public typealias Animation = (UIView) -> Void
+public typealias LocalizationCompletionHandler = () -> Void
+
+// MARK: - AKLanguageManagerProtocol
+/// Protocol that can be used in your app for unit testing purposes.
+public protocol AKLanguageManagerProtocol {
+    var shouldLocalizeNumbers: Bool { get set }
+    var observedLocalizer: ObservedLocalizer? { get }
+    var selectedLanguage: Language { get }
+    var defaultLanguage: Language { get }
+    var deviceLanguage: Language { get }
+    var isRightToLeft: Bool { get }
+    var locale: Locale { get }
+    var bundle: Bundle? { get }
+    func configureWith(defaultLanguage language: Language, observedLocalizer: ObservedLocalizer?)
+    func setLanguage(
+        language: Language,
+        for windows: [WindowAndTitle]?,
+        viewControllerFactory: ViewControllerFactory?,
+        animation: Animation?,
+        completionHandler: LocalizationCompletionHandler?
+    )
+}
+
+extension AKLanguageManagerProtocol {
+    func setLanguage(language: Language) {
+        setLanguage(language: language, for: nil, viewControllerFactory: nil, animation: nil, completionHandler: nil)
+    }
+}
+
+// MARK: - AKLanguageManager
 /// First of all, remember to add the `Localizable.strings` to your project, after adding the `Localizable.strings` file, select it then go to file inspector and below localization press localize, after that go to `PROJECT > Localisation` then add the languages you want to support (Arabic for example), dialog will appear to ask you which resource file you want to localize, select the `Localizable.strings` file and any other files you wish to localize.
-/// Set your default language before your rootViewController is set. For example: in the `scene(_:willConnectTo:options:)` method if your app supports multiple scenes, or in the `AppDelegate.application(_:didFinishLaunchingWithOptions:)` method if your app doesn't support multiple scenes. Refer to the examples for more elaboration.
+/// For a UIKit project: set your default language before your rootViewController is set. For example, you can set it in the `AppDelegate.application(_:didFinishLaunchingWithOptions:)` method.
+/// For a UIKit project: if the default language wasn't set, you will encounter errors.
 /// The default language is the language your app will be localized in when it runs first time.
-/// If the default language wasn't set, you will encounter errors.
 /// This Manager is not currently compatible with swifui code.
-public class AKLanguageManager {
-    public typealias WindowAndTitle = (UIWindow?, String?)
-    public typealias ViewControllerFactory = (String?) -> UIViewController
-    public typealias Animation = (UIView) -> Void
-    public typealias LocalizationCompletionHandler = () -> Void
-    
+public class AKLanguageManager: AKLanguageManagerProtocol {
     // MARK: - Properties
     /// The singleton LanguageManager instance.
     public static let shared = AKLanguageManager()
     /// Determines if numbers should be localized when localizing strings
     public var shouldLocalizeNumbers: Bool = true
+    public internal(set) var observedLocalizer: ObservedLocalizer?
     /// Current app language.
     /// *Note, This property just to get the current lanuage,
     /// To set the language use:
@@ -54,11 +84,12 @@ public class AKLanguageManager {
         }
         set {
             storage.set(newValue.rawValue, forKey: Language.Keys.selectedLanguage)
+            observedLocalizer?.selectedLanguage = newValue
         }
     }
 
     /// The default language that the app will run with first time.
-    public var defaultLanguage: Language {
+    public private(set) var defaultLanguage: Language {
         get {
             guard let defaultLanguage = storage.string(forKey: Language.Keys.defaultLanguage),
                   let language = Language(rawValue: defaultLanguage) else {
@@ -105,6 +136,8 @@ public class AKLanguageManager {
     }
 
     // MARK: - Internal Properties
+    /// Determines if the manager configure method was called.
+    var configured = false
     /// Storage dependency
     var storage: StorageProtocol = Storage.shared
 
@@ -120,6 +153,15 @@ public class AKLanguageManager {
     private init() {}
 
     // MARK: - Public Methods
+    public func configureWith(defaultLanguage language: Language, observedLocalizer: ObservedLocalizer? = nil) {
+        // Only one observedLocalizer is allowed.
+        if self.observedLocalizer == nil, let observedLocalizer = observedLocalizer {
+            self.observedLocalizer = observedLocalizer
+        }
+        guard !configured else { return }
+        configured = true
+        defaultLanguage = language
+    }
     /// Set the current language of the app
     /// - Parameters:
     ///   - language: The language that you need the app to run with.
