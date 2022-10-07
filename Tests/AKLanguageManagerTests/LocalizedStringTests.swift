@@ -25,7 +25,7 @@ class LocalizedStringTests: XCTestCase {
 
         languageManager.setLanguage(language: .ar)
         XCTAssertEqual("key".localized, "ليس مفتاحا")
-        XCTAssertEqual("latin-number-key".localized, "٠١,١٠ مفتاح")
+        XCTAssertEqual("latin-number-key".localized, "٠١٫١٠ مفتاح")
         XCTAssertEqual("latin-number-key".localized(in: .en), "01.10 key")
 
         languageManager.shouldLocalizeNumbers = false
@@ -52,10 +52,10 @@ class LocalizedStringTests: XCTestCase {
         languageManager.setLanguage(language: .ar)
         XCTAssertNotEqual("latin-number-key".numbersLocalized, "٠١,١٠ key")
         XCTAssertEqual("latin-number-key".numbersLocalized, "latin-number-key")
-        XCTAssertEqual("01.10 key".numbersLocalized, "٠١,١٠ key")
-        XCTAssertEqual("٠١,١٠ key 01.10".numbersLocalized, "٠١,١٠ key ٠١,١٠")
-        XCTAssertEqual("٠١,١٠ key".numbersLocalized(in: .en), "01.10 key")
-        XCTAssertEqual("٠١,١٠ key 01.10".numbersLocalized(in: .en), "01.10 key 01.10")
+        XCTAssertEqual("01.10 key".numbersLocalized, "٠١٫١٠ key")
+        XCTAssertEqual("٠١٫١٠ key 01.10".numbersLocalized, "٠١٫١٠ key ٠١٫١٠")
+        XCTAssertEqual("٠١٫١٠ key".numbersLocalized(in: .en), "01.10 key")
+        XCTAssertEqual("٠١٫١٠ key 01.10".numbersLocalized(in: .en), "01.10 key 01.10")
     }
 
     func testLocalizedWithArguments() {
@@ -65,7 +65,7 @@ class LocalizedStringTests: XCTestCase {
         languageManager.setLanguage(language: .ar)
         XCTAssertEqual(
             "%d is a number, %.1f is a number, %ld is a number, %@ is a string".localized(with: 1, 1.1, 1, "test"),
-            "١ رقم, ١,١ رقم, ١ رقم, test نص")
+            "١ رقم, ١٫١ رقم, ١ رقم, test نص")
         XCTAssertEqual(
             "%d is a number, %.1f is a number, %ld is a number, %@ is a string".localized(in: .en, with: 1, 1.1, 1, "test"),
             "1 is a number, 1.1 is a number, 1 is a number, test is a string")
@@ -84,7 +84,7 @@ class LocalizedStringTests: XCTestCase {
         XCTAssertEqual(attributedString.localized.string, "01.10 key")
 
         languageManager.setLanguage(language: .ar)
-        XCTAssertEqual(attributedString.localized.string, "٠١,١٠ مفتاح")
+        XCTAssertEqual(attributedString.localized.string, "٠١٫١٠ مفتاح")
         XCTAssertEqual(attributedString.localized.attributes.count, 1)
         XCTAssertEqual(
             attributedString.localized.forgroundColorAttribute,

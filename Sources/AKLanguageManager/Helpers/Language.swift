@@ -71,7 +71,7 @@ public extension Language {
         direction == .rightToLeft
     }
 
-    /// The semantic attribute of a language.
+    /// The semantic attribute of the language.
     var semanticContentAttribute: UISemanticContentAttribute {
         isRightToLeft ? .forceRightToLeft : .forceLeftToRight
     }
@@ -81,26 +81,41 @@ public extension Language {
         Language.all.filter { $0 != self }
     }
 
-    /// Double numbers separator used in the language. For example: Dot is used in English as in 12.5.
-    var doubleSeparator: String {
-        // TODO: - Should work on double numbers representation in other languages as well.
-        self == .ar ? "," : "."
+    /// Double numbers decimal separator used in the language. For example: `.` is used in English as in 12.5.
+    var decimalSeparator: String? {
+        locale.decimalSeparator
     }
 
     /// Double numbers regex.
-    var doubleRegex: String {
-        // TODO: - Should work on double numbers representation in other languages as well.
-        "\(singleDigitRegex){1,}\(doubleSeparator)\(singleDigitRegex){1,}"
+    var doubleRegex: String? {
+        guard let decimalSeparator = decimalSeparator,
+              let numberRegex = numberRegex(minNumberOfDigits: 0) else { return nil }
+        return "\(numberRegex)\(decimalSeparator)\(numberRegex)"
     }
 
     /// Single digit regex.
-    var singleDigitRegex: String {
-        // TODO: - Should work on double numbers representation in other languages as well.
-        self == .ar ? "[٠-٩]" : "[0-9]"
+    var singleDigitRegex: String? {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = locale
+        guard let nsZero = formatter.number(from: "\(Int.zero)"),
+              let zero = formatter.string(from: nsZero),
+              let nsNine = formatter.number(from: "9"),
+              let nine = formatter.string(from: nsNine) else { return nil }
+        return "[\(zero)-\(nine)]"
     }
 
-    func numberRegex(minNumberOfDigits min: Int = 1, maxNumberOfDigits max: Int? = nil) -> String {
-        // TODO: - Should work on numbers representation in other languages as well.
+    /// Number regex.
+    /// - Parameters:
+    ///   - minNumberOfDigits: The minimum amount of digits.
+    ///   - maxNumberOfDigits: The maximum amount of digits.
+    /// - Returns:
+    ///     The number regex of the language.
+    ///     If either parameters is zero, then the regex returned will allow maximum possible number of digits.
+    ///     If the regex can't be retrieved, then nil is returned.
+    func numberRegex(minNumberOfDigits min: Int = 1, maxNumberOfDigits max: Int? = nil) -> String? {
+        guard let singleDigitRegex = singleDigitRegex else { return nil }
+        guard min != .zero, max != .zero else { return "\(singleDigitRegex){1,}" }
         let maxString = max != nil ? ",\(max!)" : ""
         let numberOfDigits = "{\(min)\(maxString)}"
         return "\(singleDigitRegex)\(numberOfDigits)"

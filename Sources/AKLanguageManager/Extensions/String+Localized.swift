@@ -77,7 +77,14 @@ public extension String {
     /// - Returns:
     ///   - The string with all its numbers localized in the designated language.
     func numbersLocalized(in language: Language, style numberStyle: NumberFormatter.Style = .decimal) -> String {
-        let regex = "\(Language.en.numberRegex(minNumberOfDigits: 1))|\(Language.ar.numberRegex(minNumberOfDigits: 1))"
+        let regex = Language.all.enumerated().compactMap { index, language in
+            var regex = ""
+            guard let numberRegex = language.numberRegex() else { return regex }
+            regex.append(numberRegex)
+            guard index != Language.all.count - 1 else { return regex }
+            regex.append("|")
+            return regex
+        }.joined()
         var localizedString = doublesPreparedForLocalization(in: language)
         let formatter = NumberFormatter()
         formatter.numberStyle = numberStyle
@@ -92,10 +99,10 @@ public extension String {
 
     private func doublesPreparedForLocalization(in language: Language) -> String {
         // TODO: - Should work on double numbers representation in other languages as well.
+        guard let regex = language != .ar ? Language.ar.doubleRegex : Language.en.doubleRegex,
+              let occurrence = language != .ar ? Language.ar.decimalSeparator : Language.en.decimalSeparator,
+              let replacement = language.decimalSeparator else { return self }
         var preparedString = self
-        let regex = language != .ar ? Language.ar.doubleRegex : Language.en.doubleRegex
-        let occurrence = language != .ar ? Language.ar.doubleSeparator : Language.en.doubleSeparator
-        let replacement = language.doubleSeparator
         matchesForRegex(regex).uniqued().forEach { match in
             let modifiedMatch = match.replacingOccurrences(of: occurrence, with: replacement)
             preparedString = preparedString.replacingOccurrences(of: match, with: modifiedMatch)
