@@ -5,6 +5,7 @@
 //  Created by Amr Koritem on 13/09/2022.
 //
 
+import UIKit
 
 extension Bundle {
     static func localize() {

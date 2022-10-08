@@ -111,11 +111,11 @@ public extension Language {
     ///   - maxNumberOfDigits: The maximum amount of digits.
     /// - Returns:
     ///     The number regex of the language.
-    ///     If either parameters is zero, then the regex returned will allow maximum possible number of digits.
+    ///     If `maxNumberOfDigits` is zero, then the regex returned will allow maximum possible number of digits.
     ///     If the regex can't be retrieved, then nil is returned.
     func numberRegex(minNumberOfDigits min: Int = 1, maxNumberOfDigits max: Int? = nil) -> String? {
         guard let singleDigitRegex = singleDigitRegex else { return nil }
-        guard min != .zero, max != .zero else { return "\(singleDigitRegex){1,}" }
+        guard max != .zero else { return "\(singleDigitRegex){\(min),}" }
         let maxString = max != nil ? ",\(max!)" : ""
         let numberOfDigits = "{\(min)\(maxString)}"
         return "\(singleDigitRegex)\(numberOfDigits)"

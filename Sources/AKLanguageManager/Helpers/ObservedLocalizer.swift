@@ -7,14 +7,9 @@
 
 import SwiftUI
 
-public class ObservedLocalizer: ObservableObject {
+public final class ObservedLocalizer: ObservableObject {
     /// The language manager.
     weak var languageManager = AKLanguageManager.shared
-
-    /// A unique id used to refresh the view.
-    var uuid: String {
-        UUID().uuidString
-    }
 
     /// The layout direction of the selected language.
     public var layoutDirection: LayoutDirection {

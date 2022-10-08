@@ -19,10 +19,6 @@ class ObservedLocalizerTests: XCTestCase {
         observedLocalizer.languageManager?.configureWith(defaultLanguage: .en)
     }
 
-    func testUUID() {
-        XCTAssertNotEqual(observedLocalizer.uuid, observedLocalizer.uuid)
-    }
-
     func testLayoutDirection() {
         XCTAssertEqual(observedLocalizer.layoutDirection, AKLanguageManager.shared.selectedLanguage.layoutDirection)
     }

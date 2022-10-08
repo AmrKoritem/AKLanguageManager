@@ -66,7 +66,7 @@ extension AKLanguageManagerProtocol {
 /// For a UIKit project: if the default language wasn't set, you will encounter errors.
 /// The default language is the language your app will be localized in when it runs first time.
 /// This Manager supports swifui via through its `observedLocalizer`.
-public class AKLanguageManager: AKLanguageManagerProtocol {
+public final class AKLanguageManager: AKLanguageManagerProtocol {
     // MARK: - Properties
     /// The singleton LanguageManager instance.
     public static let shared = AKLanguageManager()
@@ -143,12 +143,9 @@ public class AKLanguageManager: AKLanguageManagerProtocol {
     var storage: StorageProtocol = Storage.shared
 
     /// Default windows and titles
-    lazy var defaultWindowsAndTitles: [WindowAndTitle] = {
-        guard #available(iOS 13.0, *) else { return [(UIApplication.shared.keyWindow, nil)] }
-        return UIApplication.shared.connectedScenes
-            .compactMap({ $0 as? UIWindowScene })
-            .compactMap({ ($0.windows.first, $0.title) })
-    }()
+    lazy var defaultWindowsAndTitles: [WindowAndTitle] = UIApplication.shared.connectedScenes
+        .compactMap({ $0 as? UIWindowScene })
+        .compactMap({ ($0.windows.first, $0.title) })
 
     // MARK: - Initializer
     private init() {}
