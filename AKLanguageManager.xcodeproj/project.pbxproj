@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		00532023366737FCD8FA55C0 /* Pods_AKLanguageManager_AKLanguageManagerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDED7F2FC74370BC22E3F71B /* Pods_AKLanguageManager_AKLanguageManagerTests.framework */; };
 		0B479F185AA146FE63EF613B /* Pods_AKLanguageManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2228D014A590DE102910C3C8 /* Pods_AKLanguageManager.framework */; };
+		1D2A6C8628F0FD34000EE30D /* View+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A6C8528F0FD34000EE30D /* View+Localized.swift */; };
+		1D2A6C8828F0FD6E000EE30D /* Image+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A6C8728F0FD6E000EE30D /* Image+Localized.swift */; };
+		1D2A6C8A28F10D8F000EE30D /* ObservedLocalizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A6C8928F10D8F000EE30D /* ObservedLocalizerTests.swift */; };
+		1D2A6C8C28F1105F000EE30D /* LocalizedViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A6C8B28F1105F000EE30D /* LocalizedViewTests.swift */; };
 		1D2CC63128D0D5640000DFEF /* UIImageView+Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2CC63028D0D5640000DFEF /* UIImageView+Localizable.swift */; };
 		1D4074F828D0153B000A1DF0 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4074F728D0153B000A1DF0 /* Localizable.swift */; };
 		1D4074FA28D01699000A1DF0 /* UIView+Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4074F928D01699000A1DF0 /* UIView+Localizable.swift */; };
@@ -65,6 +69,10 @@
 
 /* Begin PBXFileReference section */
 		0709192ADF1F3C149994BACE /* Pods-AKLanguageManager-AKLanguageManagerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AKLanguageManager-AKLanguageManagerTests.debug.xcconfig"; path = "Target Support Files/Pods-AKLanguageManager-AKLanguageManagerTests/Pods-AKLanguageManager-AKLanguageManagerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1D2A6C8528F0FD34000EE30D /* View+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Localized.swift"; sourceTree = "<group>"; };
+		1D2A6C8728F0FD6E000EE30D /* Image+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Localized.swift"; sourceTree = "<group>"; };
+		1D2A6C8928F10D8F000EE30D /* ObservedLocalizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservedLocalizerTests.swift; sourceTree = "<group>"; };
+		1D2A6C8B28F1105F000EE30D /* LocalizedViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedViewTests.swift; sourceTree = "<group>"; };
 		1D2CC63028D0D5640000DFEF /* UIImageView+Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Localizable.swift"; sourceTree = "<group>"; };
 		1D4074F728D0153B000A1DF0 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		1D4074F928D01699000A1DF0 /* UIView+Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Localizable.swift"; sourceTree = "<group>"; };
@@ -149,6 +157,8 @@
 				1D9A3C5D28DF506900261C65 /* LocalizedUIViewTests.swift */,
 				1D9A3C5928DE8ECC00261C65 /* LocalizedUtilitiesTests.swift */,
 				1D9A3C5128DAA35600261C65 /* LocalizedStringTests.swift */,
+				1D2A6C8928F10D8F000EE30D /* ObservedLocalizerTests.swift */,
+				1D2A6C8B28F1105F000EE30D /* LocalizedViewTests.swift */,
 				1D70F06528EA677600364114 /* Helpers */,
 				1D05A85728EA6F5C00E622DB /* Resources */,
 			);
@@ -267,6 +277,8 @@
 				1D98A9BE28E8CB29007AFCD1 /* NSNumber+Localized.swift */,
 				1D98A9B428E8C4D2007AFCD1 /* UIImage+Localized.swift */,
 				1D98A9B628E8C50C007AFCD1 /* NSTextAlignment+Localized.swift */,
+				1D2A6C8528F0FD34000EE30D /* View+Localized.swift */,
+				1D2A6C8728F0FD6E000EE30D /* Image+Localized.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -456,12 +468,14 @@
 			files = (
 				1D4074FA28D01699000A1DF0 /* UIView+Localizable.swift in Sources */,
 				1D4EE68828EBAE9A00EC3885 /* ObservedLocalizer.swift in Sources */,
+				1D2A6C8828F0FD6E000EE30D /* Image+Localized.swift in Sources */,
 				1D2CC63128D0D5640000DFEF /* UIImageView+Localizable.swift in Sources */,
 				1D98A9BD28E8CA43007AFCD1 /* Double+Localized.swift in Sources */,
 				1DD5803028CAF0B400DCD270 /* Language.swift in Sources */,
 				1D98A9B928E8C543007AFCD1 /* NSAttributedString+Localized.swift in Sources */,
 				1D40750628D01BEF000A1DF0 /* UITabBar+Localizable.swift in Sources */,
 				1D4074F828D0153B000A1DF0 /* Localizable.swift in Sources */,
+				1D2A6C8628F0FD34000EE30D /* View+Localized.swift in Sources */,
 				1D98A9BB28E8C65C007AFCD1 /* Int+Localized.swift in Sources */,
 				1D40750228D01B63000A1DF0 /* UITextView+Localizable.swift in Sources */,
 				1D40750028D01B07000A1DF0 /* UILabel+Localizable.swift in Sources */,
@@ -491,8 +505,10 @@
 				1D9A3C5228DAA35600261C65 /* LocalizedStringTests.swift in Sources */,
 				1DD325CE28D71A93003D3C0A /* XibFileViewController.swift in Sources */,
 				1D9A3C5E28DF506900261C65 /* LocalizedUIViewTests.swift in Sources */,
+				1D2A6C8A28F10D8F000EE30D /* ObservedLocalizerTests.swift in Sources */,
 				1D9A3C4E28DA9E1000261C65 /* StorageTests.swift in Sources */,
 				1D9A3C5A28DE8ECC00261C65 /* LocalizedUtilitiesTests.swift in Sources */,
+				1D2A6C8C28F1105F000EE30D /* LocalizedViewTests.swift in Sources */,
 				1D9A3C4C28DA9C6A00261C65 /* MakeUI.swift in Sources */,
 				1D43EC8028EA741E000259A3 /* Bundle.swift in Sources */,
 				1D9A3C5028DA9EA100261C65 /* MockUserDefaults.swift in Sources */,

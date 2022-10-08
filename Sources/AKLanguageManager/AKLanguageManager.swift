@@ -65,7 +65,7 @@ extension AKLanguageManagerProtocol {
 /// For a UIKit project: set your default language before your rootViewController is set. For example, you can set it in the `AppDelegate.application(_:didFinishLaunchingWithOptions:)` method.
 /// For a UIKit project: if the default language wasn't set, you will encounter errors.
 /// The default language is the language your app will be localized in when it runs first time.
-/// This Manager is not currently compatible with swifui code.
+/// This Manager supports swifui via through its `observedLocalizer`.
 public class AKLanguageManager: AKLanguageManagerProtocol {
     // MARK: - Properties
     /// The singleton LanguageManager instance.
@@ -84,6 +84,7 @@ public class AKLanguageManager: AKLanguageManagerProtocol {
         }
         set {
             storage.set(newValue.rawValue, forKey: Language.Keys.selectedLanguage)
+            guard observedLocalizer?.selectedLanguage != newValue else { return }
             observedLocalizer?.selectedLanguage = newValue
         }
     }
@@ -120,7 +121,7 @@ public class AKLanguageManager: AKLanguageManagerProtocol {
         Language(rawValue: Language.mainBundle.preferredLocalizations.first ?? "") ?? .en
     }
 
-    /// The diriction of the selected language.
+    /// The direction of the selected language.
     public var isRightToLeft: Bool {
         selectedLanguage.isRightToLeft
     }
@@ -137,7 +138,7 @@ public class AKLanguageManager: AKLanguageManagerProtocol {
 
     // MARK: - Internal Properties
     /// Determines if the manager configure method was called.
-    var configured = false
+    var isConfigured = false
     /// Storage dependency
     var storage: StorageProtocol = Storage.shared
 
@@ -153,13 +154,14 @@ public class AKLanguageManager: AKLanguageManagerProtocol {
     private init() {}
 
     // MARK: - Public Methods
+    /// Use this method to set your default language in UIKit apps.
     public func configureWith(defaultLanguage language: Language, observedLocalizer: ObservedLocalizer? = nil) {
         // Only one observedLocalizer is allowed.
         if self.observedLocalizer == nil, let observedLocalizer = observedLocalizer {
             self.observedLocalizer = observedLocalizer
         }
-        guard !configured else { return }
-        configured = true
+        guard !isConfigured else { return }
+        isConfigured = true
         defaultLanguage = language
     }
     /// Set the current language of the app

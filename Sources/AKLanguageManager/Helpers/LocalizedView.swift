@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct LocalizedView<Content: View>: View {
-    @ObservedObject private var localizer: ObservedLocalizer
+    @ObservedObject internal var localizer: ObservedLocalizer
 
     private let content: Content
 
@@ -26,19 +26,7 @@ public struct LocalizedView<Content: View>: View {
 
     public var body: some View {
         content
-            .environment(\.locale, languageManager.locale)
-            .environment(\.layoutDirection, localizer.layoutDirection)
-            .id(localizer.uuid)
+            .localized()
             .environmentObject(localizer)
     }
 }
-
-// MARK: - Previews
-struct LocalizedView_Previews: PreviewProvider {
-    static var previews: some View {
-        LocalizedView(.deviceLanguage) {
-            Text("Main")
-        }
-    }
-}
-

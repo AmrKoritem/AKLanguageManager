@@ -5,7 +5,7 @@
 //  Created by Amr Koritem on 21/09/2022.
 //
 
-import UIKit
+import SwiftUI
 @testable import AKLanguageManager
 
 func makeXibFileViewController() -> XibFileViewController {
@@ -80,4 +80,10 @@ func makeUISegmentedControl() -> UISegmentedControl {
 func makeUIImageView() -> UIImageView {
     let image = UIImage(named: "image", in: Language.mainBundle, compatibleWith: nil)
     return UIImageView(image: image)
+}
+
+func makeLocalizedView(defaultLanguage: Language) -> LocalizedView<Text> {
+    LocalizedView(defaultLanguage) {
+        Text("key")
+    }
 }

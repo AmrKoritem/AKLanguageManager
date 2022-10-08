@@ -16,7 +16,8 @@ class LocalizedUtilitiesTests: XCTestCase {
         Language.mainBundle = Bundle.test ?? Bundle(for: type(of: self))
         storage = MockStorage()
         languageManager.storage = storage
-        languageManager.defaultLanguage = .en
+        languageManager.isConfigured = false
+        languageManager.configureWith(defaultLanguage: .en)
     }
 
     func testIntLocalized() {

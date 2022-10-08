@@ -9,7 +9,7 @@ import SwiftUI
 
 public class ObservedLocalizer: ObservableObject {
     /// The language manager.
-    var languageManager: AKLanguageManagerProtocol = AKLanguageManager.shared
+    weak var languageManager = AKLanguageManager.shared
 
     /// A unique id used to refresh the view.
     var uuid: String {
@@ -18,17 +18,27 @@ public class ObservedLocalizer: ObservableObject {
 
     /// The layout direction of the selected language.
     public var layoutDirection: LayoutDirection {
-        languageManager.selectedLanguage.layoutDirection
+        selectedLanguage.layoutDirection
+    }
+
+    /// The locale of the selected language.
+    public var locale: Locale {
+        selectedLanguage.locale
+    }
+
+    /// The direction of the selected language.
+    public var isRightToLeft: Bool {
+        selectedLanguage.isRightToLeft
     }
 
     /// The selected language.
     public var selectedLanguage: Language {
         get {
-            languageManager.selectedLanguage
+            languageManager?.selectedLanguage ?? languageManager?.deviceLanguage ?? .en
         }
         set {
-            guard languageManager.selectedLanguage != newValue else { return }
-            languageManager.setLanguage(language: newValue)
+            guard languageManager?.selectedLanguage != newValue else { return }
+            languageManager?.setLanguage(language: newValue)
             objectWillChange.send()
         }
     }
