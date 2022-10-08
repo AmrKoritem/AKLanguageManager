@@ -8,10 +8,9 @@
 import SwiftUI
 
 public extension View {
-    func localized() -> some View {
-        let defaultLanguage = AKLanguageManager.shared.defaultLanguage
-        return environment(\.locale, AKLanguageManager.shared.observedLocalizer?.locale ?? defaultLanguage.locale)
-            .environment(\.layoutDirection, AKLanguageManager.shared.observedLocalizer?.layoutDirection ?? defaultLanguage.layoutDirection)
+    func localized(in language: Language = AKLanguageManager.shared.selectedLanguage) -> some View {
+        environment(\.locale, language.locale)
+            .environment(\.layoutDirection, language.layoutDirection)
             .id(AKLanguageManager.shared.observedLocalizer?.uuid ?? "")
     }
 }

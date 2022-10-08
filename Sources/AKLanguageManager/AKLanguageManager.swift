@@ -178,6 +178,7 @@ public class AKLanguageManager: AKLanguageManagerProtocol {
     ///   - animation: A closure with the current view to animate to the new view controller,
     ///                so you need to animate the view, move it out of the screen, change the alpha,
     ///                or scale it down to zero.
+    ///   - completionHandler: A closure to be called when localization is done.
     public func setLanguage(
         language: Language,
         for windows: [WindowAndTitle]? = nil,
