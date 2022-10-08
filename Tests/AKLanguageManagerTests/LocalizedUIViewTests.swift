@@ -18,7 +18,8 @@ class LocalizedUIViewTests: XCTestCase {
         Language.mainBundle = Bundle.test ?? Bundle(for: type(of: self))
         storage = MockStorage()
         languageManager.storage = storage
-        languageManager.defaultLanguage = ltrLanguage
+        languageManager.isConfigured = false
+        languageManager.configureWith(defaultLanguage: ltrLanguage)
     }
 
     func testUIView() {
@@ -113,7 +114,7 @@ class LocalizedUIViewTests: XCTestCase {
         let button = makeUIButton()
         button.localize()
         XCTAssertEqual(button.title(for: .normal), "ليس مفتاحا")
-        XCTAssertEqual(button.title(for: .disabled), "٠١,١٠ مفتاح")
+        XCTAssertEqual(button.title(for: .disabled), "٠١٫١٠ مفتاح")
         XCTAssertTrue(button.image(for: .normal)?.isRightToLeft == true)
     }
 
@@ -123,13 +124,13 @@ class LocalizedUIViewTests: XCTestCase {
         button1.shouldLocalizeImageDirection = false
         button1.localize()
         XCTAssertEqual(button1.title(for: .normal), "ليس مفتاحا")
-        XCTAssertEqual(button1.title(for: .disabled), "٠١,١٠ مفتاح")
+        XCTAssertEqual(button1.title(for: .disabled), "٠١٫١٠ مفتاح")
         XCTAssertTrue(button1.image(for: .normal)?.isRightToLeft == false)
         let button2 = makeUIButton()
         button2.localize()
         button2.shouldLocalizeImageDirection = false
         XCTAssertEqual(button2.title(for: .normal), "ليس مفتاحا")
-        XCTAssertEqual(button2.title(for: .disabled), "٠١,١٠ مفتاح")
+        XCTAssertEqual(button2.title(for: .disabled), "٠١٫١٠ مفتاح")
         XCTAssertTrue(button2.image(for: .normal)?.isRightToLeft == false)
     }
 

@@ -16,7 +16,8 @@ class LocalizedUtilitiesTests: XCTestCase {
         Language.mainBundle = Bundle.test ?? Bundle(for: type(of: self))
         storage = MockStorage()
         languageManager.storage = storage
-        languageManager.defaultLanguage = .en
+        languageManager.isConfigured = false
+        languageManager.configureWith(defaultLanguage: .en)
     }
 
     func testIntLocalized() {
@@ -32,7 +33,7 @@ class LocalizedUtilitiesTests: XCTestCase {
         let double = 12.2
         XCTAssertEqual(double.localized, "12.2")
         languageManager.setLanguage(language: .ar)
-        XCTAssertEqual(double.localized, "١٢,٢")
+        XCTAssertEqual(double.localized, "١٢٫٢")
         XCTAssertEqual(double.localized(in: .en), "12.2")
         XCTAssertEqual(double.localized(in: Language.en.locale) ?? "", "12.2")
     }
@@ -41,7 +42,7 @@ class LocalizedUtilitiesTests: XCTestCase {
         let nsDouble = NSNumber(value: 12.2)
         XCTAssertEqual(nsDouble.localized, "12.2")
         languageManager.setLanguage(language: .ar)
-        XCTAssertEqual(nsDouble.localized, "١٢,٢")
+        XCTAssertEqual(nsDouble.localized, "١٢٫٢")
         XCTAssertEqual(nsDouble.localized(in: .en), "12.2")
         XCTAssertEqual(nsDouble.localized(in: Language.en.locale) ?? "", "12.2")
     }

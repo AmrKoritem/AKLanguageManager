@@ -12,7 +12,7 @@ class AKLanguageManagerTests: XCTestCase {
     let languageManager = AKLanguageManager.shared
     let window = UIWindow(frame: UIScreen.main.bounds)
     let windowTitle = "test"
-    var defaultWindowsAndTitles: [AKLanguageManager.WindowAndTitle] {
+    var defaultWindowsAndTitles: [WindowAndTitle] {
         [(window, windowTitle)]
     }
 
@@ -22,17 +22,18 @@ class AKLanguageManagerTests: XCTestCase {
         Language.mainBundle = Bundle.test ?? Bundle(for: type(of: self))
         storage = MockStorage()
         languageManager.storage = storage
+        languageManager.isConfigured = false
     }
 
     func testSelectedLanguageNotSet() {
-        languageManager.defaultLanguage = .en
+        languageManager.configureWith(defaultLanguage: .en)
         XCTAssertEqual(languageManager.defaultLanguage, .en)
         XCTAssertEqual(languageManager.selectedLanguage, .en)
         selectedLanguageEqualDefaultLanguageTests()
     }
 
     func testSelectedLanguageSet() {
-        languageManager.defaultLanguage = .en
+        languageManager.configureWith(defaultLanguage: .en)
 
         languageManager.setLanguage(language: .ar)
         XCTAssertEqual(languageManager.defaultLanguage, .en)
@@ -43,13 +44,13 @@ class AKLanguageManagerTests: XCTestCase {
         XCTAssertEqual(languageManager.selectedLanguage, .en)
         selectedLanguageEqualDefaultLanguageTests()
 
-        languageManager.defaultLanguage = .ar
+        languageManager.configureWith(defaultLanguage: .ar)
         XCTAssertNotEqual(languageManager.defaultLanguage, .ar)
         XCTAssertEqual(languageManager.selectedLanguage, .en)
     }
 
     func testUsingDeviceLanguageAsDefaultLanguage() {
-        languageManager.defaultLanguage = .deviceLanguage
+        languageManager.configureWith(defaultLanguage: .deviceLanguage)
         XCTAssertEqual(languageManager.defaultLanguage, languageManager.deviceLanguage)
     }
 
@@ -61,8 +62,8 @@ class AKLanguageManagerTests: XCTestCase {
         try setLanguageMethodTests(for: defaultWindowsAndTitles)
     }
 
-    func setLanguageMethodTests(for windows: [AKLanguageManager.WindowAndTitle]? = nil) throws {
-        languageManager.defaultLanguage = .en
+    func setLanguageMethodTests(for windows: [WindowAndTitle]? = nil) throws {
+        languageManager.configureWith(defaultLanguage: .en)
         if windows == nil {
             languageManager.defaultWindowsAndTitles = defaultWindowsAndTitles
         }
