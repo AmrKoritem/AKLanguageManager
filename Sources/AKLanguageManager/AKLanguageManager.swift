@@ -34,8 +34,8 @@ public typealias Animation = (UIView) -> Void
 public typealias LocalizationCompletionHandler = () -> Void
 
 // MARK: - AKLanguageManagerProtocol
-/// Protocol that can be used in your app for unit testing purposes.
-public protocol AKLanguageManagerProtocol {
+/// Protocol used for unit testing purposes.
+protocol AKLanguageManagerProtocol {
     var shouldLocalizeNumbers: Bool { get set }
     var observedLocalizer: ObservedLocalizer? { get }
     var selectedLanguage: Language { get }
@@ -61,11 +61,7 @@ extension AKLanguageManagerProtocol {
 }
 
 // MARK: - AKLanguageManager
-/// First of all, remember to add the `Localizable.strings` to your project, after adding the `Localizable.strings` file, select it then go to file inspector and below localization press localize, after that go to `PROJECT > Localisation` then add the languages you want to support (Arabic for example), dialog will appear to ask you which resource file you want to localize, select the `Localizable.strings` file and any other files you wish to localize.
-/// For a UIKit project: set your default language before your rootViewController is set. For example, you can set it in the `AppDelegate.application(_:didFinishLaunchingWithOptions:)` method.
-/// For a UIKit project: if the default language wasn't set, you will encounter errors.
-/// The default language is the language your app will be localized in when it runs first time.
-/// This Manager supports swifui via through its `observedLocalizer`.
+/// Language manager that can change the app language without restarting the app.
 public final class AKLanguageManager: AKLanguageManagerProtocol {
     // MARK: - Properties
     /// The singleton LanguageManager instance.
