@@ -12,7 +12,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var fixedImageView: UIImageView!
     // Change Language and set rootViewController to the initial view controller
     @IBAction func changeLanguage() {
-        // Choosing a language
+        // Swap between anglish and arabic languages
         let newLanguage = AKLanguageManager.shared.selectedLanguage == .en ? Language.ar : Language.en
         AKLanguageManager.shared.setLanguage(
             language: newLanguage,
@@ -30,7 +30,7 @@ class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Make the image direction fixed even when localization is right to left
+        // Make the image direction fixed even when localization direction change
         fixedImageView.shouldLocalizeDirection = false
     }
 }
