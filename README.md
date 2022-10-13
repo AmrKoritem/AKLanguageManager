@@ -8,9 +8,12 @@ A Language manager to handle changing app localization without restarting the ap
 
 ## Installation
 
-LanguageManager-iOS is not yet available through [CocoaPods](https://cocoapods.org).
+AKLanguageManager can be installed using [CocoaPods](https://cocoapods.org). Add the following lines to your Podfile:
+```ruby
+pod 'AKLanguageManager'
+```
 
-For now, you can use [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app).
+You can also install it using [swift package manager](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) as well.
 
 ## Setup
 
