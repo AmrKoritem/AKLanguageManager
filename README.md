@@ -125,28 +125,47 @@ struct LangaugeView: View {
         .directionLocalized()
 ```
 
+5 - String, Int, and Double can be localized using the property `localized`.
+```swift
+    // where selected language is .ar
+    print("01.10 key".localized)
+    // prints ٠١٫١٠ مفتاح
+    print(01.10.localized)
+    // prints ٠١٫١٠
+    print(01.localized)
+    // prints ٠١
+```
+
+6 - Numbers are localized by default, you can stop numbers localization by setting the property `shouldLocalizeNumbers` to `false`.
+```swift
+    // where selected language is .ar
+    AKLanguageManager.shared.shouldLocalizeNumbers = false
+    print("01.10 key".localized)
+    // prints 01.10 مفتاح
+```
+
 Please check the example project in this repo to see how it works. You can check a full set of examples [here](https://github.com/AmrKoritem/AKLibrariesExamples) as well.
 
 ## Contribution
 
-All contributions are welcome. Please check the [Known issues] and [Future plans] sections if you don't know where to start. And of course feel free to raise your own issues and create PRs for them!
+All contributions are welcome. Please check the [Known issues](https://github.com/AmrKoritem/AKLanguageManager#known-issues) and [Future plans](https://github.com/AmrKoritem/AKLanguageManager#future-plans) sections if you don't know where to start. And of course feel free to raise your own issues and create PRs for them!
 
 ## Known issues
 
-1 - Strings shown in launch screen are not localized. [#6](https://github.com/AmrKoritem/AKLanguageManager/issues/6)
+1 - Strings shown in launch screen are not localized. [#6](https://github.com/AmrKoritem/AKLanguageManager/issues/6)<br>
     Unfortunately, this is intended by apple as stated [here](https://developer.apple.com/design/human-interface-guidelines/patterns/launching/#:~:text=Avoid%20including%20text%20on%20your%20launch%20screen.).
 
-2 - Localized version of an image asset doesn't show when changing app language. [#7](https://github.com/AmrKoritem/AKLanguageManager/issues/7)
+2 - Localized version of an image asset doesn't show when changing app language. [#7](https://github.com/AmrKoritem/AKLanguageManager/issues/7)<br>
     We are currently looking into this issue. The current workaround is to use different names for each image localization, and get them using localized strings.
     
-3 - SF Symbol images size is reduced when their direction change. [#8](https://github.com/AmrKoritem/AKLanguageManager/issues/8)
+3 - SF Symbol images size is reduced when their direction change. [#8](https://github.com/AmrKoritem/AKLanguageManager/issues/8)<br>
 
 ## Future plans
 
-1 - Get localized strings with comments. [#9](https://github.com/AmrKoritem/AKLanguageManager/issues/9)
-2 - Localizing plurals. [#10](https://github.com/AmrKoritem/AKLanguageManager/issues/10)
-3 - Carthage support. [#11](https://github.com/AmrKoritem/AKLanguageManager/issues/11)
-4 - Check text language. [#12](https://github.com/AmrKoritem/AKLanguageManager/issues/12)
+1 - Get localized strings with comments. [#9](https://github.com/AmrKoritem/AKLanguageManager/issues/9)<br>
+2 - Localizing plurals. [#10](https://github.com/AmrKoritem/AKLanguageManager/issues/10)<br>
+3 - Carthage support. [#11](https://github.com/AmrKoritem/AKLanguageManager/issues/11)<br>
+4 - Check text language. [#12](https://github.com/AmrKoritem/AKLanguageManager/issues/12)<br>
 
 ## Credit
 
