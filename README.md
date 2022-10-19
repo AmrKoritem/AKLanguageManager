@@ -182,7 +182,7 @@ All contributions are welcome. Please check the [Known issues](https://github.co
 
 This library was inspired by [Abedalkareem's LanguageManager-iOS](https://github.com/Abedalkareem/LanguageManager-iOS) library. Please check his work and give him the credit he deserves 🚀
 
-## Follow me
+## Find me
 
 [LinkedIn](https://www.linkedin.com/in/amr-koritem-976bb0125/)
 
