@@ -155,13 +155,16 @@ struct LangaugeView: View {
     // prints 01.10 مفتاح
 ```
 
-Please check the example project in this repo to see how it works. You can check a full set of examples [here](https://github.com/AmrKoritem/AKLibrariesExamples) as well.
+## Examples
 
-## Contribution
+You can check the example project here to see AKLanguageManager in action 🥳.<br>
+You can check a full set of examples [here](https://github.com/AmrKoritem/AKLibrariesExamples) as well.
 
-All contributions are welcome. Please check the [Known issues](https://github.com/AmrKoritem/AKLanguageManager#known-issues) and [Future plans](https://github.com/AmrKoritem/AKLanguageManager#future-plans) sections if you don't know where to start. And of course feel free to raise your own issues and create PRs for them!
+## Contribution 🎉
 
-## Known issues
+All contributions are welcome.Feel free to check the [Known issues](https://github.com/AmrKoritem/AKLanguageManager#known-issues) and [Future plans](https://github.com/AmrKoritem/AKLanguageManager#future-plans) sections if you don't know where to start. And of course feel free to raise your own issues and create PRs for them 💪
+
+## Known issues 🫣
 
 1 - Strings shown in launch screen are not localized. [#6](https://github.com/AmrKoritem/AKLanguageManager/issues/6)<br>
     Unfortunately, this is intended by apple as stated [here](https://developer.apple.com/design/human-interface-guidelines/patterns/launching/#:~:text=Avoid%20including%20text%20on%20your%20launch%20screen.).
@@ -171,18 +174,18 @@ All contributions are welcome. Please check the [Known issues](https://github.co
     
 3 - SF Symbol images size is reduced when their direction change. [#8](https://github.com/AmrKoritem/AKLanguageManager/issues/8)<br>
 
-## Future plans
+## Future plans 🧐
 
 1 - Get localized strings with comments. [#9](https://github.com/AmrKoritem/AKLanguageManager/issues/9)<br>
 2 - Localizing plurals. [#10](https://github.com/AmrKoritem/AKLanguageManager/issues/10)<br>
 3 - Carthage support. [#11](https://github.com/AmrKoritem/AKLanguageManager/issues/11)<br>
 4 - Check text language. [#12](https://github.com/AmrKoritem/AKLanguageManager/issues/12)<br>
 
-## Credit
+## Credit 😇
 
 This library was inspired by [Abedalkareem's LanguageManager-iOS](https://github.com/Abedalkareem/LanguageManager-iOS) library. Please check his work and give him the credit he deserves 🚀
 
-## Find me
+## Find me 🥰
 
 [LinkedIn](https://www.linkedin.com/in/amr-koritem-976bb0125/)
 
