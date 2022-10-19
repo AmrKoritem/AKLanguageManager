@@ -7,7 +7,8 @@ let package = Package(
     name: "AKLanguageManager",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v13),
+        .tvOS(.v13)
     ],
     products: [
         .library(
