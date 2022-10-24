@@ -11,7 +11,7 @@ import AKLanguageManager
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        AKLanguageManager.shared.configureWith(defaultLanguage: .en)
+        AKLanguageManager.shared.defaultLanguage = .en
         return true
     }
 }

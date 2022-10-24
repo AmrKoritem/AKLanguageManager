@@ -22,18 +22,17 @@ class AKLanguageManagerTests: XCTestCase {
         Language.mainBundle = Bundle.test ?? Bundle(for: type(of: self))
         storage = MockStorage()
         languageManager.storage = storage
-        languageManager.isConfigured = false
     }
 
     func testSelectedLanguageNotSet() {
-        languageManager.configureWith(defaultLanguage: .en)
+        languageManager.defaultLanguage = .en
         XCTAssertEqual(languageManager.defaultLanguage, .en)
         XCTAssertEqual(languageManager.selectedLanguage, .en)
         selectedLanguageEqualDefaultLanguageTests()
     }
 
     func testSelectedLanguageSet() {
-        languageManager.configureWith(defaultLanguage: .en)
+        languageManager.defaultLanguage = .en
 
         languageManager.setLanguage(language: .ar)
         XCTAssertEqual(languageManager.defaultLanguage, .en)
@@ -44,13 +43,13 @@ class AKLanguageManagerTests: XCTestCase {
         XCTAssertEqual(languageManager.selectedLanguage, .en)
         selectedLanguageEqualDefaultLanguageTests()
 
-        languageManager.configureWith(defaultLanguage: .ar)
+        languageManager.defaultLanguage = .ar
         XCTAssertNotEqual(languageManager.defaultLanguage, .ar)
         XCTAssertEqual(languageManager.selectedLanguage, .en)
     }
 
     func testUsingDeviceLanguageAsDefaultLanguage() {
-        languageManager.configureWith(defaultLanguage: .deviceLanguage)
+        languageManager.defaultLanguage = .deviceLanguage
         XCTAssertEqual(languageManager.defaultLanguage, languageManager.deviceLanguage)
     }
 
@@ -63,7 +62,7 @@ class AKLanguageManagerTests: XCTestCase {
     }
 
     func setLanguageMethodTests(for windows: [WindowAndTitle]? = nil) throws {
-        languageManager.configureWith(defaultLanguage: .en)
+        languageManager.defaultLanguage = .en
         if windows == nil {
             languageManager.defaultWindowsAndTitles = defaultWindowsAndTitles
         }

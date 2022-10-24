@@ -18,8 +18,7 @@ class LocalizedUIViewTests: XCTestCase {
         Language.mainBundle = Bundle.test ?? Bundle(for: type(of: self))
         storage = MockStorage()
         languageManager.storage = storage
-        languageManager.isConfigured = false
-        languageManager.configureWith(defaultLanguage: ltrLanguage)
+        languageManager.defaultLanguage = ltrLanguage
     }
 
     func testUIView() {
@@ -60,10 +59,8 @@ class LocalizedUIViewTests: XCTestCase {
         tabBar.localize()
         XCTAssertEqual(tabBar.items?.first?.title, "ليس مفتاحا")
         XCTAssertTrue(tabBar.items?.first?.image?.isRightToLeft == true)
-        XCTAssertTrue(tabBar.items?.first?.landscapeImagePhone?.isRightToLeft == true)
         XCTAssertEqual(tabBar.items?.last?.title, "ترجم")
         XCTAssertTrue(tabBar.items?.last?.image?.isRightToLeft == true)
-        XCTAssertTrue(tabBar.items?.last?.landscapeImagePhone?.isRightToLeft == true)
         throw XCTSkip("Test case: \"selectedImage is not localized\" is not fixed yet")
         XCTAssertTrue(tabBar.items?.first?.selectedImage?.isRightToLeft == true)
         XCTAssertTrue(tabBar.items?.last?.selectedImage?.isRightToLeft == true)
@@ -77,22 +74,18 @@ class LocalizedUIViewTests: XCTestCase {
         XCTAssertEqual(tabBar1.items?.first?.title, "ليس مفتاحا")
         XCTAssertTrue(tabBar1.items?.first?.image?.isRightToLeft == false)
         XCTAssertTrue(tabBar1.items?.first?.selectedImage?.isRightToLeft == false)
-        XCTAssertTrue(tabBar1.items?.first?.landscapeImagePhone?.isRightToLeft == false)
         XCTAssertEqual(tabBar1.items?.last?.title, "ترجم")
         XCTAssertTrue(tabBar1.items?.last?.image?.isRightToLeft == false)
         XCTAssertTrue(tabBar1.items?.last?.selectedImage?.isRightToLeft == false)
-        XCTAssertTrue(tabBar1.items?.last?.landscapeImagePhone?.isRightToLeft == false)
         let tabBar2 = makeUITabBar()
         tabBar2.localize()
         tabBar2.shouldLocalizeImagesDirection = false
         XCTAssertEqual(tabBar2.items?.first?.title, "ليس مفتاحا")
         XCTAssertTrue(tabBar2.items?.first?.image?.isRightToLeft == false)
         XCTAssertTrue(tabBar2.items?.first?.selectedImage?.isRightToLeft == false)
-        XCTAssertTrue(tabBar2.items?.first?.landscapeImagePhone?.isRightToLeft == false)
         XCTAssertEqual(tabBar2.items?.last?.title, "ترجم")
         XCTAssertTrue(tabBar2.items?.last?.image?.isRightToLeft == false)
         XCTAssertTrue(tabBar2.items?.last?.selectedImage?.isRightToLeft == false)
-        XCTAssertTrue(tabBar2.items?.last?.landscapeImagePhone?.isRightToLeft == false)
     }
 
     func testUITabBarRevertImagesHorizontalDirection() {

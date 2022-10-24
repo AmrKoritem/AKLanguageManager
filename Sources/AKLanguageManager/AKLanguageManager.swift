@@ -25,7 +25,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import UIKit
+import SwiftUI
 
 // MARK: - Type aliases
 public typealias WindowAndTitle = (UIWindow?, String?)
@@ -37,14 +37,13 @@ public typealias LocalizationCompletionHandler = () -> Void
 /// Protocol used for unit testing purposes.
 protocol AKLanguageManagerProtocol {
     var shouldLocalizeNumbers: Bool { get set }
-    var observedLocalizer: ObservedLocalizer? { get }
     var selectedLanguage: Language { get }
     var defaultLanguage: Language { get }
     var deviceLanguage: Language { get }
     var isRightToLeft: Bool { get }
     var locale: Locale { get }
     var bundle: Bundle? { get }
-    func configureWith(defaultLanguage language: Language, observedLocalizer: ObservedLocalizer?)
+    var layoutDirection: LayoutDirection { get }
     func setLanguage(
         language: Language,
         for windows: [WindowAndTitle]?,
@@ -62,13 +61,11 @@ extension AKLanguageManagerProtocol {
 
 // MARK: - AKLanguageManager
 /// Language manager that can change the app language without restarting the app.
-public final class AKLanguageManager: AKLanguageManagerProtocol {
-    // MARK: - Properties
+public final class AKLanguageManager: ObservableObject, AKLanguageManagerProtocol {
     /// The singleton LanguageManager instance.
     public static let shared = AKLanguageManager()
     /// Determines if numbers should be localized when localizing strings
     public var shouldLocalizeNumbers: Bool = true
-    public internal(set) var observedLocalizer: ObservedLocalizer?
     /// Current app language.
     /// *Note, This property just to get the current lanuage,
     /// To set the language use:
@@ -82,14 +79,13 @@ public final class AKLanguageManager: AKLanguageManagerProtocol {
             defer {
                 storage.set(newValue.rawValue, forKey: Language.Keys.selectedLanguage)
             }
-            guard let observedLocalizer = observedLocalizer,
-                  selectedLanguage != newValue else { return }
-            observedLocalizer.objectWillChange.send()
+            guard selectedLanguage != newValue else { return }
+            objectWillChange.send()
         }
     }
 
     /// The default language that the app will run with first time.
-    public private(set) var defaultLanguage: Language {
+    public var defaultLanguage: Language {
         get {
             guard let defaultLanguage = storage.string(forKey: Language.Keys.defaultLanguage),
                   let language = Language(rawValue: defaultLanguage) else {
@@ -135,9 +131,12 @@ public final class AKLanguageManager: AKLanguageManagerProtocol {
         selectedLanguage.bundle
     }
 
+    /// The layout direction of the selected language.
+    public var layoutDirection: LayoutDirection {
+        selectedLanguage.layoutDirection
+    }
+
     // MARK: - Internal Properties
-    /// Determines if the manager configure method was called.
-    var isConfigured = false
     /// Storage dependency
     var storage: StorageProtocol = Storage.shared
 
@@ -150,16 +149,6 @@ public final class AKLanguageManager: AKLanguageManagerProtocol {
     private init() {}
 
     // MARK: - Public Methods
-    /// Use this method to set your default language in UIKit apps.
-    public func configureWith(defaultLanguage language: Language, observedLocalizer: ObservedLocalizer? = nil) {
-        // Only one observedLocalizer is allowed.
-        if self.observedLocalizer == nil, let observedLocalizer = observedLocalizer {
-            self.observedLocalizer = observedLocalizer
-        }
-        guard !isConfigured else { return }
-        isConfigured = true
-        defaultLanguage = language
-    }
     /// Set the current language of the app
     /// - Parameters:
     ///   - language: The language that you need the app to run with.
