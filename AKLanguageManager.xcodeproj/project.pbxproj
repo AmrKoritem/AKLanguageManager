@@ -196,6 +196,44 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		1D7D4CFE29059D8D00085878 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				1D4074F928D01699000A1DF0 /* UIView+Localizable.swift */,
+				1D4074FF28D01B07000A1DF0 /* UILabel+Localizable.swift */,
+				1D40750128D01B63000A1DF0 /* UITextView+Localizable.swift */,
+				1D40750328D01BA9000A1DF0 /* UITextField+Localizable.swift */,
+				1D40750528D01BEF000A1DF0 /* UITabBar+Localizable.swift */,
+				1D40750728D01C53000A1DF0 /* UIButton+Localizable.swift */,
+				1D40750928D01D08000A1DF0 /* UISegmentedControl+Localizable.swift */,
+				1D2CC63028D0D5640000DFEF /* UIImageView+Localizable.swift */,
+				1D98A9B428E8C4D2007AFCD1 /* UIImage+Localized.swift */,
+				1D98A9B828E8C543007AFCD1 /* NSAttributedString+Localized.swift */,
+				1D98A9B628E8C50C007AFCD1 /* NSTextAlignment+Localized.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		1D7D4CFF29059DC600085878 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				1D2A6C8528F0FD34000EE30D /* View+Localized.swift */,
+				1D2A6C8728F0FD6E000EE30D /* Image+Localized.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		1D7D4D0129064E1600085878 /* DataTypes */ = {
+			isa = PBXGroup;
+			children = (
+				1D4074FB28D0181B000A1DF0 /* String+Localized.swift */,
+				1D98A9BA28E8C65C007AFCD1 /* Int+Localized.swift */,
+				1D98A9BC28E8CA43007AFCD1 /* Double+Localized.swift */,
+				1D98A9BE28E8CB29007AFCD1 /* NSNumber+Localized.swift */,
+			);
+			path = DataTypes;
+			sourceTree = "<group>";
+		};
 		1D87DACA28C40C7D00838580 = {
 			isa = PBXGroup;
 			children = (
@@ -262,23 +300,9 @@
 			children = (
 				1D4074FD28D01A6C000A1DF0 /* Bundle+Swizzle.swift */,
 				1DD5803428CAF0CB00DCD270 /* UIView+Swizzle.swift */,
-				1D4074F928D01699000A1DF0 /* UIView+Localizable.swift */,
-				1D4074FF28D01B07000A1DF0 /* UILabel+Localizable.swift */,
-				1D40750128D01B63000A1DF0 /* UITextView+Localizable.swift */,
-				1D40750328D01BA9000A1DF0 /* UITextField+Localizable.swift */,
-				1D40750528D01BEF000A1DF0 /* UITabBar+Localizable.swift */,
-				1D40750728D01C53000A1DF0 /* UIButton+Localizable.swift */,
-				1D40750928D01D08000A1DF0 /* UISegmentedControl+Localizable.swift */,
-				1D2CC63028D0D5640000DFEF /* UIImageView+Localizable.swift */,
-				1D4074FB28D0181B000A1DF0 /* String+Localized.swift */,
-				1D98A9BA28E8C65C007AFCD1 /* Int+Localized.swift */,
-				1D98A9BC28E8CA43007AFCD1 /* Double+Localized.swift */,
-				1D98A9B828E8C543007AFCD1 /* NSAttributedString+Localized.swift */,
-				1D98A9BE28E8CB29007AFCD1 /* NSNumber+Localized.swift */,
-				1D98A9B428E8C4D2007AFCD1 /* UIImage+Localized.swift */,
-				1D98A9B628E8C50C007AFCD1 /* NSTextAlignment+Localized.swift */,
-				1D2A6C8528F0FD34000EE30D /* View+Localized.swift */,
-				1D2A6C8728F0FD6E000EE30D /* Image+Localized.swift */,
+				1D7D4D0129064E1600085878 /* DataTypes */,
+				1D7D4CFF29059DC600085878 /* SwiftUI */,
+				1D7D4CFE29059D8D00085878 /* UIKit */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";

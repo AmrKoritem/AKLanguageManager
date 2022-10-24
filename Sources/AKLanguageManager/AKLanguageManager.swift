@@ -79,9 +79,12 @@ public final class AKLanguageManager: AKLanguageManagerProtocol {
             return Language(rawValue: selectedLanguage) ?? defaultLanguage
         }
         set {
-            storage.set(newValue.rawValue, forKey: Language.Keys.selectedLanguage)
-            guard observedLocalizer?.selectedLanguage != newValue else { return }
-            observedLocalizer?.selectedLanguage = newValue
+            defer {
+                storage.set(newValue.rawValue, forKey: Language.Keys.selectedLanguage)
+            }
+            guard let observedLocalizer = observedLocalizer,
+                  selectedLanguage != newValue else { return }
+            observedLocalizer.objectWillChange.send()
         }
     }
 

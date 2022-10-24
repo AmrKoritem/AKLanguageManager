@@ -77,18 +77,22 @@ public extension String {
     /// - Returns:
     ///   - The string with all its numbers localized in the designated language.
     func numbersLocalized(in language: Language, style numberStyle: NumberFormatter.Style = .decimal) -> String {
-        let allLanguagesDoubleRegex = Set<String>(Language.all.enumerated().compactMap { index, language in
-            guard let numberRegex = language.numberRegex() else { return "" }
-            return "\(numberRegex)|"
-        }).joined().dropLast() // Remove the last `|`.
+        let allLanguagesDoubleRegex = Language.all.enumerated()
+            .compactMap { index, language in
+                guard let numberRegex = language.numberRegex() else { return "" }
+                return "\(numberRegex)|"
+            }
+            .uniqued() // Remove duplicates
+            .joined() // Create a string
+            .dropLast() // Remove the last `|`
         var localizedString = doublesPreparedForLocalization(in: language)
-        let formatter = NumberFormatter()
-        formatter.numberStyle = numberStyle
-        formatter.locale = language.locale
+        let numFormatter = NumberFormatter()
+        numFormatter.numberStyle = numberStyle
+        numFormatter.locale = language.locale
         let matches = matchesForRegex(String(allLanguagesDoubleRegex)).uniqued()
         matches.forEach { match in
-            guard let nsNumberMatch = formatter.number(from: match),
-                  let localizedMatch = formatter.string(from: nsNumberMatch) else { return }
+            guard let nsNumberMatch = numFormatter.number(from: match),
+                  let localizedMatch = numFormatter.string(from: nsNumberMatch) else { return }
             localizedString = localizedString.replacingOccurrences(of: match, with: localizedMatch)
         }
         return localizedString
