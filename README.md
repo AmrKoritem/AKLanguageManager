@@ -31,11 +31,11 @@ Note: If you've already configured your app to be localizable, then skip to step
 
 2 - Add a `.strings` file to your project resources to localise your string literals (preferabley named `Localizable.strings`), then go to file inspector and below localization press localize.
 
-3 - For a UIKit, your default language must be set before your rootViewController is set using `configureWith(defaultLanguage:observedLocalizer:)`. For example, you can set it in the `AppDelegate.application(_:didFinishLaunchingWithOptions:)` method. If the default language wasn't set in your UIKit app, you will encounter errors.
+3 - For a UIKit project, your default language must be set before your rootViewController is set using `configureWith(defaultLanguage:observedLocalizer:)`. For example, you can set it in the `AppDelegate.application(_:didFinishLaunchingWithOptions:)` method. If the default language wasn't set in your UIKit app, you will encounter errors.
 ```swift
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // you can use .deviceLanguage to keep the device default language.
-        AKLanguageManager.shared.configureWith(defaultLanguage: .en)
+        AKLanguageManager.shared.defaultLanguage = .en
         return true
     }
 ```
@@ -49,22 +49,23 @@ Note: If you've already configured your app to be localizable, then skip to step
     }
 ```
 
-5 - Note that you will have to call `localized()` on views that will be presented.
+5 - Note that you will have to call `localized()` on presented views.
 ```swift
     VStack {
         ...
     }
-    .popover(isPresented: $isPresented) {
+    .popover(isPresented: $isPresented) { // same goes for other presentation styles.
         AnotherView()
             .localized()
     }
 ```
 
-6 - The default language is the language your app will be localized in when it runs first time.
+Note: The default language is the language your app will be localized in when it runs first time.
 
 ## Usage
 
-1 - If you want to change the language in a UIKit, use the `setLanguage(language:)` method by passing to it the new language.
+1 - If you want to change the language, use the `setLanguage(language:)` method by passing to it the new language.<br>
+In a UIKit project, at least the parameter `viewControllerFactory` must be provided in addition to the language:<br>
 ```swift
     // Change Language and set rootViewController to the initial view controller
     @IBAction func changeLanguage() {
@@ -84,6 +85,37 @@ Note: If you've already configured your app to be localizable, then skip to step
         )
     }
 ```
+<br>
+In a SwiftUI project only the language is needed:<br>
+```swift
+import SwiftUI
+import AKLanguageManager
+
+struct LangaugeView: View {
+    var body: some View {
+        VStack {
+            Text("Select a language".localized)
+                .fontWeight(.bold)
+                .padding()
+            HStack {
+                Button("العربية") {
+                    withAnimation {
+                        AKLanguageManager.shared.setLanguage(language: .ar)
+                    }
+                }
+                .padding()
+                Spacer()
+                Button("English") {
+                    withAnimation {
+                        AKLanguageManager.shared.setLanguage(language: .en)
+                    }
+                }
+                .padding()
+            }
+        }
+    }
+}
+```
 
 2 - Note that images change direction by default in UIKit UI elements according to the language direction. If you want a UI element (for example: UIImageView) not to change its direction, you can set its `shouldLocalizeDirection` property to `false`.
 ```swift
@@ -96,47 +128,13 @@ Note: If you've already configured your app to be localizable, then skip to step
     }
 ```
 
-3 - If you want to change the language in a SwiftUI set the `selectedLanguage` property in the environment object with the new language.
-```swift
-import SwiftUI
-import AKLanguageManager
-
-struct LangaugeView: View {
-    @EnvironmentObject
-    var localizer: ObservedLocalizer
-
-    var body: some View {
-        VStack {
-            Text("Select a language".localized)
-                .fontWeight(.bold)
-                .padding()
-            HStack {
-                Button("العربية") {
-                    withAnimation {
-                        localizer.selectedLanguage = .ar
-                    }
-                }
-                .padding()
-                Spacer()
-                Button("English") {
-                    withAnimation {
-                        localizer.selectedLanguage = .en
-                    }
-                }
-                .padding()
-            }
-        }
-    }
-}
-```
-
-4 - Note that images are fixed by default in SwiftUI views. If you want to change an image's direction according to the selected language direction, use the method `directionLocalized()`.
+3 - Note that images are fixed by default in SwiftUI views. If you want to change an image's direction according to the selected language direction, use the method `directionLocalized()`.
 ```swift
     Image("image")
         .directionLocalized()
 ```
 
-5 - String, Int, and Double can be localized using the property `localized`.
+4 - String, Int, and Double can be localized using the property `localized`.
 ```swift
     // where selected language is .ar
     print("01.10 key".localized)
@@ -147,7 +145,7 @@ struct LangaugeView: View {
     // prints ٠١
 ```
 
-6 - Numbers are localized by default, you can stop numbers localization by setting the property `shouldLocalizeNumbers` to `false`.
+5 - Numbers are localized by default, you can stop numbers localization by setting the property `shouldLocalizeNumbers` to `false`.
 ```swift
     // where selected language is .ar
     AKLanguageManager.shared.shouldLocalizeNumbers = false

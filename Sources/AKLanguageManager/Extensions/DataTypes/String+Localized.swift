@@ -77,7 +77,7 @@ public extension String {
     /// - Returns:
     ///   - The string with all its numbers localized in the designated language.
     func numbersLocalized(in language: Language, style numberStyle: NumberFormatter.Style = .decimal) -> String {
-        let allLanguagesDoubleRegex = Language.all.enumerated()
+        let allLanguagesDoubleRegex = Language.allCases.enumerated()
             .compactMap { index, language in
                 guard let numberRegex = language.numberRegex() else { return "" }
                 return "\(numberRegex)|"

@@ -22,7 +22,6 @@ public enum Language: String, CaseIterable, Equatable {
     case zhHK = "zh-HK"
     case es419 = "es-419"
     case ptPT = "pt-PT"
-    case deviceLanguage
 
     public init?(locale: Locale) {
         self.init(rawValue: locale.identifier)
@@ -35,18 +34,21 @@ extension Language {
 }
 
 public extension Language {
+    /// The device language is deffrent than the app language, to get the app language use `selectedLanguage`.
+    static var deviceLanguage: Language {
+        Language(rawValue: Language.mainBundle.preferredLocalizations.first ?? "") ?? .en
+    }
+
     /// Array containing all left to right languages excluding `Languages.deviceLanguage`.
     static var allLeftToRight: [Language] {
-        all.filter { $0.direction == .leftToRight }
+        allCases.filter { $0.direction == .leftToRight }
     }
+
     /// Array containing all right to left languages excluding `Languages.deviceLanguage`.
     static var allRightToLeft: [Language] {
-        all.filter { $0.direction == .rightToLeft }
+        allCases.filter { $0.direction == .rightToLeft }
     }
-    /// Array containing all supported languages excluding `Languages.deviceLanguage`.
-    static var all: [Language] {
-        allCases.filter { $0 != .deviceLanguage }
-    }
+
     /// Language bundle.
     var bundle: Bundle? {
         let bundlePath = Language.mainBundle.path(forResource: rawValue, ofType: "lproj") ?? ""
@@ -78,7 +80,7 @@ public extension Language {
 
     /// Array containing all other languages excluding `Languages.deviceLanguage`.
     var otherLanguages: [Language] {
-        Language.all.filter { $0 != self }
+        Language.allCases.filter { $0 != self }
     }
 
     /// Double numbers decimal separator used in the language. For example: `.` is used in English as in 12.5.

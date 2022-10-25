@@ -50,7 +50,7 @@ class AKLanguageManagerTests: XCTestCase {
 
     func testUsingDeviceLanguageAsDefaultLanguage() {
         languageManager.defaultLanguage = .deviceLanguage
-        XCTAssertEqual(languageManager.defaultLanguage, languageManager.deviceLanguage)
+        XCTAssertEqual(languageManager.defaultLanguage, Language.deviceLanguage)
     }
 
     func testSetLanguageMethodWithDefaultWindows() throws {
