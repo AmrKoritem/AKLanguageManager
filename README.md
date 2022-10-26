@@ -73,7 +73,7 @@ In a UIKit project, at least the parameter `viewControllerFactory` must be provi
         let newLanguage = AKLanguageManager.shared.selectedLanguage == .en ? Language.ar : Language.en
         AKLanguageManager.shared.setLanguage(
             language: newLanguage,
-            viewControllerFactory: { _ in
+            viewControllerFactory: { windowTitle in
                 // The view controller that you want to show after changing the language
                 let settingsVC = Storyboard.Main.instantiate(viewController: SettingsViewController.self)
                 return Storyboard.Main.initialViewController ?? settingsVC

@@ -16,9 +16,9 @@ public struct LocalizedView<Content: View>: View {
     /// - Parameters:
     ///   - defaultLanguage: The default language when the app starts for the first time.
     ///   - content: Your app view.
-    public init(_ defaultLanguage: Language = .deviceLanguage, content: () -> Content) {
+    public init(_ defaultLanguage: Language?, content: () -> Content) {
         self.content = content()
-        languageManager.defaultLanguage = defaultLanguage
+        languageManager.defaultLanguage = defaultLanguage ?? LanguageWrapper.deviceLanguage
     }
 
     public var body: some View {
