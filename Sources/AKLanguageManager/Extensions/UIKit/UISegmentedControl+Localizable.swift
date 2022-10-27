@@ -31,32 +31,38 @@ extension UISegmentedControl {
         }
     }
 
+    @objc
     open override func localize() {
         (0 ..< numberOfSegments).forEach { localizeSegmant(at: $0) }
     }
 
+    @objc
     public func localizeSegmant(at index: Int) {
         localizeTitle(at: index)
         localizeImage(at: index)
     }
 
+    @objc
     public func localizeTitle(at index: Int) {
         guard let title = titleForSegment(at: index) else { return }
         setTitle(title.localized, forSegmentAt: index)
     }
 
+    @objc
     public func localizeImage(at index: Int) {
         guard let image = imageForSegment(at: index), shouldLocalizeImagesDirection else { return }
         setImage(image.directionLocalized, forSegmentAt: index)
     }
 
     /// Reverts the image direction of the item at the specified index.
+    @objc
     public func revertImageHorizontalDirection(at index: Int) {
         guard let image = imageForSegment(at: index) else { return }
         setImage(image.horizontalDirectionReverted, forSegmentAt: index)
     }
 
     /// Reverts the images direction.
+    @objc
     public func revertImagesHorizontalDirection() {
         (0 ..< numberOfSegments).forEach { [weak self] in
             guard let image = self?.imageForSegment(at: $0) else { return }
@@ -65,6 +71,7 @@ extension UISegmentedControl {
     }
 
     /// Resets the images direction.
+    @objc
     public func resetImagesHorizontalDirection() {
         (0 ..< numberOfSegments).forEach { [weak self] in
             guard let image = self?.imageForSegment(at: $0) else { return }

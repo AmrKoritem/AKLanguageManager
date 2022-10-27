@@ -13,7 +13,7 @@ class AKLanguageManagerTests: XCTestCase {
     let window = UIWindow(frame: UIScreen.main.bounds)
     let windowTitle = "test"
     var defaultWindowsAndTitles: [WindowAndTitle] {
-        [(window, windowTitle)]
+        [WindowAndTitle(window: window, title: windowTitle)]
     }
 
     var storage: StorageProtocol!
@@ -22,18 +22,17 @@ class AKLanguageManagerTests: XCTestCase {
         Language.mainBundle = Bundle.test ?? Bundle(for: type(of: self))
         storage = MockStorage()
         languageManager.storage = storage
-        languageManager.isConfigured = false
     }
 
     func testSelectedLanguageNotSet() {
-        languageManager.configureWith(defaultLanguage: .en)
+        languageManager.defaultLanguage = .en
         XCTAssertEqual(languageManager.defaultLanguage, .en)
         XCTAssertEqual(languageManager.selectedLanguage, .en)
         selectedLanguageEqualDefaultLanguageTests()
     }
 
     func testSelectedLanguageSet() {
-        languageManager.configureWith(defaultLanguage: .en)
+        languageManager.defaultLanguage = .en
 
         languageManager.setLanguage(language: .ar)
         XCTAssertEqual(languageManager.defaultLanguage, .en)
@@ -44,14 +43,14 @@ class AKLanguageManagerTests: XCTestCase {
         XCTAssertEqual(languageManager.selectedLanguage, .en)
         selectedLanguageEqualDefaultLanguageTests()
 
-        languageManager.configureWith(defaultLanguage: .ar)
+        languageManager.defaultLanguage = .ar
         XCTAssertNotEqual(languageManager.defaultLanguage, .ar)
         XCTAssertEqual(languageManager.selectedLanguage, .en)
     }
 
     func testUsingDeviceLanguageAsDefaultLanguage() {
-        languageManager.configureWith(defaultLanguage: .deviceLanguage)
-        XCTAssertEqual(languageManager.defaultLanguage, languageManager.deviceLanguage)
+        languageManager.defaultLanguage = LanguageWrapper.deviceLanguage
+        XCTAssertEqual(languageManager.defaultLanguage, LanguageWrapper.deviceLanguage)
     }
 
     func testSetLanguageMethodWithDefaultWindows() throws {
@@ -63,7 +62,7 @@ class AKLanguageManagerTests: XCTestCase {
     }
 
     func setLanguageMethodTests(for windows: [WindowAndTitle]? = nil) throws {
-        languageManager.configureWith(defaultLanguage: .en)
+        languageManager.defaultLanguage = .en
         if windows == nil {
             languageManager.defaultWindowsAndTitles = defaultWindowsAndTitles
         }
@@ -104,15 +103,17 @@ class AKLanguageManagerTests: XCTestCase {
 
     func selectedLanguageNotEqualDefaultLanguageTests() {
         XCTAssertNotEqual(languageManager.selectedLanguage, languageManager.defaultLanguage)
-        XCTAssertNotEqual(languageManager.isRightToLeft, languageManager.defaultLanguage.isRightToLeft)
-        XCTAssertNotEqual(languageManager.locale, languageManager.defaultLanguage.locale)
-        XCTAssertNotEqual(languageManager.bundle, languageManager.defaultLanguage.bundle)
+        XCTAssertNotEqual(languageManager.isRightToLeft, languageManager.defaultLanguage.get.isRightToLeft)
+        XCTAssertNotEqual(languageManager.locale, languageManager.defaultLanguage.get.locale)
+        XCTAssertNotEqual(languageManager.bundle, languageManager.defaultLanguage.get.bundle)
+        XCTAssertNotEqual(languageManager.layoutDirection, languageManager.defaultLanguage.get.layoutDirection)
     }
 
     func selectedLanguageEqualDefaultLanguageTests() {
         XCTAssertEqual(languageManager.selectedLanguage, languageManager.defaultLanguage)
-        XCTAssertEqual(languageManager.isRightToLeft, languageManager.defaultLanguage.isRightToLeft)
-        XCTAssertEqual(languageManager.locale, languageManager.defaultLanguage.locale)
-        XCTAssertEqual(languageManager.bundle, languageManager.defaultLanguage.bundle)
+        XCTAssertEqual(languageManager.isRightToLeft, languageManager.defaultLanguage.get.isRightToLeft)
+        XCTAssertEqual(languageManager.locale, languageManager.defaultLanguage.get.locale)
+        XCTAssertEqual(languageManager.bundle, languageManager.defaultLanguage.get.bundle)
+        XCTAssertEqual(languageManager.layoutDirection, languageManager.defaultLanguage.get.layoutDirection)
     }
 }

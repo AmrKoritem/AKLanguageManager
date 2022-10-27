@@ -31,12 +31,14 @@ extension UIImageView {
         }
     }
 
+    @objc
     open override func localize() {
         guard shouldLocalizeDirection else { return }
         image = image?.directionLocalized
     }
 
     /// Reverts the image direction.
+    @objc
     public func revertImageHorizontalDirection() {
         image = image?.horizontalDirectionReverted
     }

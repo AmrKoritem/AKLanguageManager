@@ -8,24 +8,64 @@
 import SwiftUI
 
 /// Supported languages.
-public enum Language: String, CaseIterable, Equatable {
+@objc
+public enum Language: Int {
     case ar, en, nl, ja, ko, vi, ru, sv, fr, es, pt, it, de, da, fi, nb, tr, el, id, ms, th, hi, hu, pl, cs, sk, uk, hr, ca, ro, he, ur, fa, ku, arc, sl, ml, am
-    case enGB = "en-GB"
-    case enAU = "en-AU"
-    case enCA = "en-CA"
-    case enIN = "en-IN"
-    case frCA = "fr-CA"
-    case esMX = "es-MX"
-    case ptBR = "pt-BR"
-    case zhHans = "zh-Hans"
-    case zhHant = "zh-Hant"
-    case zhHK = "zh-HK"
-    case es419 = "es-419"
-    case ptPT = "pt-PT"
-    case deviceLanguage
+    case enGB
+    case enAU
+    case enCA
+    case enIN
+    case frCA
+    case esMX
+    case ptBR
+    case zhHans
+    case zhHant
+    case zhHK
+    case es419
+    case ptPT
+
+    /// `LanguageWrapper` object that provides helper APIs for the language.
+    public var get: LanguageWrapper {
+        LanguageWrapper(language: self)
+    }
+
+    var swift: _Language {
+        _Language.allCases[rawValue]
+    }
+
+    public init?(identifier: String) {
+        guard let languageIndex = _Language(rawValue: identifier)?.index else { return nil }
+        self.init(rawValue: languageIndex)
+    }
 
     public init?(locale: Locale) {
-        self.init(rawValue: locale.identifier)
+        guard let languageIndex = _Language(rawValue: locale.identifier)?.index else { return nil }
+        self.init(rawValue: languageIndex)
+    }
+}
+
+enum _Language: String, CaseIterable, Equatable {
+    case ar, en, nl, ja, ko, vi, ru, sv, fr, es, pt, it, de, da, fi, nb, tr, el, id, ms, th, hi, hu, pl, cs, sk, uk, hr, ca, ro, he, ur, fa, ku, arc, sl, ml, am
+    case enGB = "en_GB"
+    case enAU = "en_AU"
+    case enCA = "en_CA"
+    case enIN = "en_IN"
+    case frCA = "fr_CA"
+    case esMX = "es_MX"
+    case ptBR = "pt_BR"
+    case zhHans = "zh_Hans"
+    case zhHant = "zh_Hant"
+    case zhHK = "zh_HK"
+    case es419 = "es_419"
+    case ptPT = "pt_PT"
+
+    var index: Int? {
+        _Language.allCases.firstIndex(of: self)
+    }
+
+    var objc: Language? {
+        guard let index = index else { return nil }
+        return Language(rawValue: index)
     }
 }
 
@@ -34,67 +74,102 @@ extension Language {
     static var mainBundle = Bundle.main
 }
 
-public extension Language {
-    /// Array containing all left to right languages excluding `Languages.deviceLanguage`.
-    static var allLeftToRight: [Language] {
-        all.filter { $0.direction == .leftToRight }
+/// Wrapper class with helper APIs for `Language` enum.
+@objc
+public class LanguageWrapper: NSObject {
+    /// Note that the device language is deffrent than the app language.
+    @objc
+    public static var deviceLanguage: Language {
+        let language = _Language(rawValue: Language.mainBundle.preferredLocalizations.first ?? "")
+        return language?.objc ?? .en
     }
-    /// Array containing all right to left languages excluding `Languages.deviceLanguage`.
-    static var allRightToLeft: [Language] {
-        all.filter { $0.direction == .rightToLeft }
+
+    /// Array containing all left to right languages.
+    public static var allLeftToRight: [Language] {
+        _Language.allCases.filter { LanguageWrapper(language: $0)?.direction == .leftToRight }.compactMap { $0.objc }
     }
-    /// Array containing all supported languages excluding `Languages.deviceLanguage`.
-    static var all: [Language] {
-        allCases.filter { $0 != .deviceLanguage }
+
+    /// Array containing all right to left languages..
+    public static var allRightToLeft: [Language] {
+        _Language.allCases.filter { LanguageWrapper(language: $0)?.direction == .rightToLeft }.compactMap { $0.objc }
     }
+
+    /// Language identifier.
+    @objc
+    public var identifier: String {
+        language.swift.rawValue
+    }
+
     /// Language bundle.
-    var bundle: Bundle? {
-        let bundlePath = Language.mainBundle.path(forResource: rawValue, ofType: "lproj") ?? ""
+    @objc
+    public var bundle: Bundle? {
+        let bundlePath = Language.mainBundle.path(forResource: identifier, ofType: "lproj") ?? ""
         return Bundle(path: bundlePath)
     }
+
     /// The direction of the language.
-    var direction: Locale.LanguageDirection {
-        Locale.characterDirection(forLanguage: rawValue)
+    @objc
+    public var direction: Locale.LanguageDirection {
+        Locale.characterDirection(forLanguage: identifier)
     }
+
     /// The layout direction of the language.
-    var layoutDirection: LayoutDirection {
+    public var layoutDirection: LayoutDirection {
         direction == .rightToLeft ? .rightToLeft : .leftToRight
     }
 
     /// The locale object associated to the language. Can be used in dates and currency.
-    var locale: Locale {
-        Locale(identifier: rawValue)
+    @objc
+    public var locale: Locale {
+        Locale(identifier: identifier)
+    }
+
+    /// The text alignment of the language.
+    @objc
+    public var textAlignment: NSTextAlignment {
+        language.get.isRightToLeft ? .right : .left
+    }
+
+    /// The text alignment of the language.
+    @objc
+    public var ctTextAlignment: CTTextAlignment {
+        language.get.isRightToLeft ? .right : .left
     }
 
     /// Indicates if the language is right to left.
-    var isRightToLeft: Bool {
+    @objc
+    public var isRightToLeft: Bool {
         direction == .rightToLeft
     }
 
     /// The semantic attribute of the language.
-    var semanticContentAttribute: UISemanticContentAttribute {
+    @objc
+    public var semanticContentAttribute: UISemanticContentAttribute {
         isRightToLeft ? .forceRightToLeft : .forceLeftToRight
     }
 
-    /// Array containing all other languages excluding `Languages.deviceLanguage`.
-    var otherLanguages: [Language] {
-        Language.all.filter { $0 != self }
+    /// Array containing all other supported languages.
+    public var otherLanguages: [Language] {
+        _Language.allCases.filter { $0 != language.swift }.compactMap { $0.objc }
     }
 
     /// Double numbers decimal separator used in the language. For example: `.` is used in English as in 12.5.
-    var decimalSeparator: String? {
+    @objc
+    public var decimalSeparator: String? {
         locale.decimalSeparator
     }
 
     /// Double numbers regex.
-    var doubleRegex: String? {
+    @objc
+    public var doubleRegex: String? {
         guard let decimalSeparator = decimalSeparator,
-              let numberRegex = numberRegex(minNumberOfDigits: 0) else { return nil }
+              let numberRegex = numberRegex(minDigitsNumber: 0) else { return nil }
         return "\(numberRegex)\(decimalSeparator)\(numberRegex)"
     }
 
     /// Single digit regex.
-    var singleDigitRegex: String? {
+    @objc
+    public var singleDigitRegex: String? {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.locale = locale
@@ -105,7 +180,22 @@ public extension Language {
         return "[\(zero)-\(nine)]"
     }
 
-    /// Number regex.
+    @objc
+    public var language: Language
+
+    @objc
+    public init(language: Language) {
+        self.language = language
+        super.init()
+    }
+
+    convenience init?(language: _Language) {
+        guard let language = language.objc else { return nil }
+        self.init(language: language)
+    }
+
+    /// An objective-c exposed version of `numberRegex(minDigitsNumber:maxDigitsNumber:)`.
+    /// If you are writing a swift code, we recommend using `numberRegex(minDigitsNumber:maxDigitsNumber:)` instead.
     /// - Parameters:
     ///   - minNumberOfDigits: The minimum amount of digits.
     ///   - maxNumberOfDigits: The maximum amount of digits.
@@ -113,7 +203,21 @@ public extension Language {
     ///     The number regex of the language.
     ///     If `maxNumberOfDigits` is zero, then the regex returned will allow maximum possible number of digits.
     ///     If the regex can't be retrieved, then nil is returned.
-    func numberRegex(minNumberOfDigits min: Int = 1, maxNumberOfDigits max: Int? = nil) -> String? {
+    @objc
+    func numberRegex(minNumberOfDigits min: Int, maxNumberOfDigits max: Int) -> String? {
+        numberRegex(minDigitsNumber: min, maxDigitsNumber: max)
+    }
+
+    /// Number regex.
+    /// - Parameters:
+    ///   - minDigitsNumber: The minimum amount of digits.
+    ///   - maxDigitsNumber: The maximum amount of digits.
+    /// - Returns:
+    ///     The number regex of the language.
+    ///     If `maxDigitsNumber` is zero, then the regex returned will allow maximum possible number of digits.
+    ///     If `maxDigitsNumber` is nil, then the regex returned will allow a number of digits equal to the `minDigitsNumber`.
+    ///     If the regex can't be retrieved, then nil is returned.
+    func numberRegex(minDigitsNumber min: Int = 1, maxDigitsNumber max: Int? = nil) -> String? {
         guard let singleDigitRegex = singleDigitRegex else { return nil }
         guard max != .zero else { return "\(singleDigitRegex){\(min),}" }
         let maxString = max != nil ? ",\(max!)" : ""

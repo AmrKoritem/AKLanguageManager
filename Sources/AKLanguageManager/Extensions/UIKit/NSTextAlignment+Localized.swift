@@ -21,6 +21,6 @@ public extension NSTextAlignment {
 
     /// Returns an `NSTextAlignment` enum suitable for the designated language.
     static func localized(in language: Language) -> NSTextAlignment {
-        language.isRightToLeft ? .right : .left
+        language.get.textAlignment
     }
 }

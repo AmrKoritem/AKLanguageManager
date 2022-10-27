@@ -50,7 +50,7 @@ public extension String {
     /// - Returns:
     ///    - If the `.strings` file doesn't exist, this method returns nil. Otherwise it returns the value found.
     func expressionLocalized(in language: Language, tableName: String = "Localizable") -> String? {
-        guard let bundle = language.bundle,
+        guard let bundle = language.get.bundle,
               let url = bundle.url(forResource: tableName, withExtension: "strings"),
               let stringsDictionary = NSDictionary(contentsOf: url) as? [String: String] else { return nil }
         let mainBundleString = NSLocalizedString(self, tableName: tableName, bundle: bundle, comment: "")
@@ -60,7 +60,7 @@ public extension String {
     /// Gets all localizations for the string in all localization files existing in the designated language bundle.
     func allExpressionLocalizes(in language: Language) -> [String: String] {
         var localizedString: [String: String] = [:]
-        guard let bundle = language.bundle,
+        guard let bundle = language.get.bundle,
               let filesURL = bundle.urls(forResourcesWithExtension: "strings", subdirectory: nil) else { return localizedString }
         filesURL.forEach { url in
             guard let stringsDict = NSDictionary(contentsOf: url) as? [String: String] else { return }
@@ -77,9 +77,9 @@ public extension String {
     /// - Returns:
     ///   - The string with all its numbers localized in the designated language.
     func numbersLocalized(in language: Language, style numberStyle: NumberFormatter.Style = .decimal) -> String {
-        let allLanguagesDoubleRegex = Language.all.enumerated()
+        let allLanguagesDoubleRegex = _Language.allCases.compactMap { $0.objc }.enumerated()
             .compactMap { index, language in
-                guard let numberRegex = language.numberRegex() else { return "" }
+                guard let numberRegex = language.get.numberRegex() else { return "" }
                 return "\(numberRegex)|"
             }
             .uniqued() // Remove duplicates
@@ -88,7 +88,7 @@ public extension String {
         var localizedString = doublesPreparedForLocalization(in: language)
         let numFormatter = NumberFormatter()
         numFormatter.numberStyle = numberStyle
-        numFormatter.locale = language.locale
+        numFormatter.locale = language.get.locale
         let matches = matchesForRegex(String(allLanguagesDoubleRegex)).uniqued()
         matches.forEach { match in
             guard let nsNumberMatch = numFormatter.number(from: match),
@@ -100,9 +100,9 @@ public extension String {
 
     private func doublesPreparedForLocalization(in language: Language) -> String {
         // TODO: - Should work on double numbers representation in other languages as well.
-        guard let regex = language != .ar ? Language.ar.doubleRegex : Language.en.doubleRegex,
-              let occurrence = language != .ar ? Language.ar.decimalSeparator : Language.en.decimalSeparator,
-              let replacement = language.decimalSeparator else { return self }
+        guard let regex = language != .ar ? Language.ar.get.doubleRegex : Language.en.get.doubleRegex,
+              let occurrence = language != .ar ? Language.ar.get.decimalSeparator : Language.en.get.decimalSeparator,
+              let replacement = language.get.decimalSeparator else { return self }
         var preparedString = self
         matchesForRegex(regex).uniqued().forEach { match in
             let modifiedMatch = match.replacingOccurrences(of: occurrence, with: replacement)

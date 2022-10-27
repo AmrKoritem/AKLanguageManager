@@ -14,16 +14,13 @@ class LocalizedViewTests: XCTestCase {
 
     override func setUp() {
         storage = MockStorage()
-        languageManager.observedLocalizer = ObservedLocalizer()
         languageManager.storage = storage
-        languageManager.isConfigured = false
     }
 
     func testDefaultLanguage() {
         let localizedView = makeLocalizedView(defaultLanguage: .en)
         XCTAssertEqual(languageManager.defaultLanguage, .en)
-        XCTAssertTrue(languageManager.isConfigured)
-        XCTAssertEqual(languageManager.observedLocalizer?.selectedLanguage, .en)
-        XCTAssertEqual(localizedView.localizer.selectedLanguage, languageManager.observedLocalizer?.selectedLanguage)
+        XCTAssertEqual(languageManager.selectedLanguage, .en)
+        XCTAssertEqual(localizedView.languageManager.selectedLanguage, languageManager.selectedLanguage)
     }
 }

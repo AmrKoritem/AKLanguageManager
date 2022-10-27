@@ -8,25 +8,22 @@
 import SwiftUI
 
 public struct LocalizedView<Content: View>: View {
-    @ObservedObject internal var localizer: ObservedLocalizer
+    @ObservedObject
+    var languageManager = AKLanguageManager.shared
 
     private let content: Content
-
-    var languageManager: AKLanguageManagerProtocol = AKLanguageManager.shared
 
     /// - Parameters:
     ///   - defaultLanguage: The default language when the app starts for the first time.
     ///   - content: Your app view.
-    public init(_ defaultLanguage: Language, content: () -> Content) {
-        let observedLocalizer = languageManager.observedLocalizer ?? ObservedLocalizer()
-        languageManager.configureWith(defaultLanguage: defaultLanguage, observedLocalizer: observedLocalizer)
+    public init(_ defaultLanguage: Language?, content: () -> Content) {
         self.content = content()
-        self.localizer = observedLocalizer
+        languageManager.defaultLanguage = defaultLanguage ?? LanguageWrapper.deviceLanguage
     }
 
     public var body: some View {
         content
             .localized()
-            .environmentObject(localizer)
+            .environmentObject(languageManager)
     }
 }

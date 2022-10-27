@@ -30,21 +30,25 @@ extension UIImage {
     }
 
     /// The current image direction.
+    @objc
     public var horizontalDirection: Direction {
         isRightToLeft ? .rightToLeft : .leftToRight
     }
 
     /// Returns a version of the image that's flipped in the opposite direction.
+    @objc
     public var horizontalDirectionReverted: UIImage? {
         horizontalDirectionChanged(to: horizontalDirection.opposite)
     }
 
     /// Returns a version of the image that's flipped in right to left direction or left to right direction depending on the current language.
+    @objc
     public var directionLocalized: UIImage? {
         directionLocalized(in: AKLanguageManager.shared.selectedLanguage)
     }
 
     /// Determines if the current `imageOrientation` is mirrored.
+    @objc
     public var isOrientationMirrored: Bool {
         imageOrientation.rawValue > 3
     }
@@ -59,11 +63,13 @@ extension UIImage {
     }
 
     /// Returns a version of the image that's flipped in right to left direction or left to right direction depending on the designated language.
+    @objc
     public func directionLocalized(in language: Language) -> UIImage? {
-        horizontalDirectionChanged(to: language.isRightToLeft ? .rightToLeft : .leftToRight)
+        horizontalDirectionChanged(to: language.get.isRightToLeft ? .rightToLeft : .leftToRight)
     }
 
     /// Returns a version of the image that's flipped in the direction specified.
+    @objc
     public func horizontalDirectionChanged(to direction: Direction) -> UIImage? {
         let shouldChangeDirection = horizontalDirection != direction
         guard shouldChangeDirection else { return self }
@@ -72,7 +78,8 @@ extension UIImage {
         return image
     }
 
-    public enum Direction {
+    @objc
+    public enum Direction: Int {
         case rightToLeft
         case leftToRight
 

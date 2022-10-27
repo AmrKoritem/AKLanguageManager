@@ -25,29 +25,40 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import UIKit
+import SwiftUI
 
 // MARK: - Type aliases
-public typealias WindowAndTitle = (UIWindow?, String?)
 public typealias ViewControllerFactory = (String?) -> UIViewController
 public typealias Animation = (UIView) -> Void
 public typealias LocalizationCompletionHandler = () -> Void
+
+// MARK: - WindowAndTitle
+/// Helper class to bundle both scene window and scen title in one place.
+@objc
+public class WindowAndTitle: NSObject {
+    let window: UIWindow?
+    let title: String?
+
+    public init(window: UIWindow?, title: String?) {
+        self.window = window
+        self.title = title
+        super.init()
+    }
+}
 
 // MARK: - AKLanguageManagerProtocol
 /// Protocol used for unit testing purposes.
 protocol AKLanguageManagerProtocol {
     var shouldLocalizeNumbers: Bool { get set }
-    var observedLocalizer: ObservedLocalizer? { get }
     var selectedLanguage: Language { get }
     var defaultLanguage: Language { get }
-    var deviceLanguage: Language { get }
     var isRightToLeft: Bool { get }
     var locale: Locale { get }
     var bundle: Bundle? { get }
-    func configureWith(defaultLanguage language: Language, observedLocalizer: ObservedLocalizer?)
+    var layoutDirection: LayoutDirection { get }
     func setLanguage(
         language: Language,
-        for windows: [WindowAndTitle]?,
+        for windowsAndTitles: [WindowAndTitle]?,
         viewControllerFactory: ViewControllerFactory?,
         animation: Animation?,
         completionHandler: LocalizationCompletionHandler?
@@ -62,110 +73,102 @@ extension AKLanguageManagerProtocol {
 
 // MARK: - AKLanguageManager
 /// Language manager that can change the app language without restarting the app.
-public final class AKLanguageManager: AKLanguageManagerProtocol {
-    // MARK: - Properties
+@objc
+public final class AKLanguageManager: NSObject, ObservableObject, AKLanguageManagerProtocol {
     /// The singleton LanguageManager instance.
+    @objc
     public static let shared = AKLanguageManager()
     /// Determines if numbers should be localized when localizing strings
+    @objc
     public var shouldLocalizeNumbers: Bool = true
-    public internal(set) var observedLocalizer: ObservedLocalizer?
     /// Current app language.
     /// *Note, This property just to get the current lanuage,
     /// To set the language use:
     /// `setLanguage(language:, for:, viewControllerFactory:, animation:)`*
+    @objc
     public private(set) var selectedLanguage: Language {
         get {
-            let selectedLanguage = storage.string(forKey: Language.Keys.selectedLanguage) ?? ""
-            return Language(rawValue: selectedLanguage) ?? defaultLanguage
+            let selectedLanguage = storage.string(forKey: .selectedLanguage) ?? ""
+            return Language(identifier: selectedLanguage) ?? defaultLanguage
         }
         set {
-            defer {
-                storage.set(newValue.rawValue, forKey: Language.Keys.selectedLanguage)
-            }
-            guard let observedLocalizer = observedLocalizer,
-                  selectedLanguage != newValue else { return }
-            observedLocalizer.objectWillChange.send()
+            guard selectedLanguage != newValue else { return }
+            storage.set(newValue.get.identifier, forKey: .selectedLanguage)
+            objectWillChange.send()
         }
     }
 
     /// The default language that the app will run with first time.
-    public private(set) var defaultLanguage: Language {
+    @objc
+    public var defaultLanguage: Language {
         get {
-            guard let defaultLanguage = storage.string(forKey: Language.Keys.defaultLanguage),
-                  let language = Language(rawValue: defaultLanguage) else {
+            guard let defaultLanguage = storage.string(forKey: .defaultLanguage),
+                  let language = Language(identifier: defaultLanguage) else {
                 fatalError("Default language was not set.")
             }
             return language
         }
         set {
-            let defaultLanguage = storage.string(forKey: Language.Keys.defaultLanguage)
-            Bundle.localize()
-            UIView.localize()
-            guard defaultLanguage?.isEmpty != false else {
-                // If the default language has been set before,
-                // that means that the user opened the app before and maybe
-                // he changed the language so here the `selectedLanguage` is being set.
-                setLanguage(language: selectedLanguage)
+            swizzleUIKit()
+            guard !isDefaultLanguageSet else {
+                changeUIKitSemanticAttribute(to: selectedLanguage)
                 return
             }
-            let language = newValue == .deviceLanguage ? deviceLanguage : newValue
-            storage.set(language.rawValue, forKey: Language.Keys.defaultLanguage)
-            storage.set(language.rawValue, forKey: Language.Keys.selectedLanguage)
-            setLanguage(language: language)
+            storage.set(newValue.get.identifier, forKey: .defaultLanguage)
+            selectedLanguage = newValue
+            changeUIKitSemanticAttribute(to: newValue)
         }
-    }
-
-    /// The device language is deffrent than the app language, to get the app language use `selectedLanguage`.
-    public var deviceLanguage: Language {
-        Language(rawValue: Language.mainBundle.preferredLocalizations.first ?? "") ?? .en
     }
 
     /// The direction of the selected language.
+    @objc
     public var isRightToLeft: Bool {
-        selectedLanguage.isRightToLeft
+        selectedLanguage.get.isRightToLeft
     }
 
     /// The app locale to use it in dates and currency.
+    @objc
     public var locale: Locale {
-        selectedLanguage.locale
+        selectedLanguage.get.locale
     }
 
     /// The app bundle.
+    @objc
     public var bundle: Bundle? {
-        selectedLanguage.bundle
+        selectedLanguage.get.bundle
+    }
+
+    /// The layout direction of the selected language.
+    public var layoutDirection: LayoutDirection {
+        selectedLanguage.get.layoutDirection
     }
 
     // MARK: - Internal Properties
-    /// Determines if the manager configure method was called.
-    var isConfigured = false
-    /// Storage dependency
     var storage: StorageProtocol = Storage.shared
 
-    /// Default windows and titles
+    var isDefaultLanguageSet: Bool {
+        let defaultLanguage = storage.string(forKey: .defaultLanguage)
+        return defaultLanguage?.isEmpty == false
+    }
+
+    var isUIKitSwizzled = false
+
     lazy var defaultWindowsAndTitles: [WindowAndTitle] = UIApplication.shared.connectedScenes
-        .compactMap({ $0 as? UIWindowScene })
-        .compactMap({ ($0.windows.first, $0.title) })
+        .compactMap { $0 as? UIWindowScene }
+        .compactMap { WindowAndTitle(window: $0.windows.first, title: $0.title) }
 
     // MARK: - Initializer
-    private init() {}
+    private override init() {
+        super.init()
+    }
 
     // MARK: - Public Methods
-    /// Use this method to set your default language in UIKit apps.
-    public func configureWith(defaultLanguage language: Language, observedLocalizer: ObservedLocalizer? = nil) {
-        // Only one observedLocalizer is allowed.
-        if self.observedLocalizer == nil, let observedLocalizer = observedLocalizer {
-            self.observedLocalizer = observedLocalizer
-        }
-        guard !isConfigured else { return }
-        isConfigured = true
-        defaultLanguage = language
-    }
-    /// Set the current language of the app
+    /// Set the current language of the app.
     /// - Parameters:
     ///   - language: The language that you need the app to run with.
-    ///   - windows: The windows you want to change the `rootViewController` for. if you didn't
-    ///              set it, it will change the `rootViewController` for all the windows in the
-    ///              scenes.
+    ///   - windowsAndTitles: The windows you want to change the `rootViewController` for. if you didn't
+    ///                       set it, it will change the `rootViewController` for all the windows in the
+    ///                       scenes.
     ///   - viewControllerFactory: A closure to make the `ViewController` for a specific `scene`,
     ///                            you can know for which `scene` you need to make the controller you can check
     ///                            the `title` sent to this clouser, this title is the `title` of the `scene`,
@@ -175,35 +178,80 @@ public final class AKLanguageManager: AKLanguageManagerProtocol {
     ///                so you need to animate the view, move it out of the screen, change the alpha,
     ///                or scale it down to zero.
     ///   - completionHandler: A closure to be called when localization is done.
+    @objc
     public func setLanguage(
         language: Language,
-        for windows: [WindowAndTitle]? = nil,
+        for windowsAndTitles: [WindowAndTitle]?,
         viewControllerFactory: ViewControllerFactory? = nil,
         animation: Animation? = nil,
         completionHandler: LocalizationCompletionHandler? = nil
     ) {
-        changeCurrentLanguageTo(language)
+        selectedLanguage = language
         guard let viewControllerFactory = viewControllerFactory else { return }
-        getWindowsToChangeFrom(windows)?.forEach { windowAndTitle in
-            let (window, title) = windowAndTitle
-            let viewController = viewControllerFactory(title)
+        changeUIKitSemanticAttribute(to: language)
+        reloadUIKit(
+            windowsAndTitles: windowsAndTitles,
+            viewControllerFactory: viewControllerFactory,
+            animation: animation,
+            completionHandler: completionHandler
+        )
+    }
+
+    /// Set the current language of the app.
+    /// This function uses the default window scenes of the app.
+    /// - Parameters:
+    ///   - language: The language that you need the app to run with.
+    ///   - viewControllerFactory: A closure to make the `ViewController` for a specific `scene`,
+    ///                            you can know for which `scene` you need to make the controller you can check
+    ///                            the `title` sent to this clouser, this title is the `title` of the `scene`,
+    ///                            so if there is 5 scenes this closure will get called 5 times
+    ///                            for each scene window.
+    ///   - animation: A closure with the current view to animate to the new view controller,
+    ///                so you need to animate the view, move it out of the screen, change the alpha,
+    ///                or scale it down to zero.
+    ///   - completionHandler: A closure to be called when localization is done.
+    @objc
+    public func setLanguage(
+        language: Language,
+        viewControllerFactory: ViewControllerFactory? = nil,
+        animation: Animation? = nil,
+        completionHandler: LocalizationCompletionHandler? = nil
+    ) {
+        setLanguage(
+            language: language,
+            for: defaultWindowsAndTitles,
+            viewControllerFactory: viewControllerFactory,
+            animation: animation,
+            completionHandler: completionHandler)
+    }
+    
+    // MARK: - Private Methods
+    private func swizzleUIKit() {
+        guard !isUIKitSwizzled else { return }
+        isUIKitSwizzled = true
+        Bundle.localize()
+        UIView.localize()
+    }
+
+    private func changeUIKitSemanticAttribute(to language: Language) {
+        UIView.appearance().semanticContentAttribute = language.get.semanticContentAttribute
+    }
+
+    private func reloadUIKit(
+        windowsAndTitles: [WindowAndTitle]? = nil,
+        viewControllerFactory: ViewControllerFactory,
+        animation: Animation? = nil,
+        completionHandler: LocalizationCompletionHandler? = nil
+    ) {
+        let windowsAndTitles = windowsAndTitles ?? defaultWindowsAndTitles
+        windowsAndTitles.forEach { windowAndTitle in
+            let viewController = viewControllerFactory(windowAndTitle.title)
             changeViewController(
-                for: window,
+                for: windowAndTitle.window,
                 rootViewController: viewController,
                 animation: animation,
                 completionHandler: completionHandler)
         }
-    }
-    
-    // MARK: - Private Methods
-    private func changeCurrentLanguageTo(_ language: Language) {
-        UIView.appearance().semanticContentAttribute = language.semanticContentAttribute
-        selectedLanguage = language
-    }
-
-    private func getWindowsToChangeFrom(_ windows: [WindowAndTitle]?) -> [WindowAndTitle]? {
-        guard windows == nil else { return windows }
-        return defaultWindowsAndTitles
     }
 
     private func changeViewController(
@@ -212,15 +260,20 @@ public final class AKLanguageManager: AKLanguageManagerProtocol {
         animation: Animation? = nil,
         completionHandler: LocalizationCompletionHandler? = nil
     ) {
-        guard let snapshot = window?.snapshotView(afterScreenUpdates: true) else { return }
+        guard let snapshot = window?.snapshotView(afterScreenUpdates: true) else {
+            completionHandler?()
+            return
+        }
         rootViewController.view.addSubview(snapshot)
         window?.rootViewController = rootViewController
 
-        UIView.animate(withDuration: 0.5, animations: {
-            animation?(snapshot)
-        }) { _ in
-            snapshot.removeFromSuperview()
-            completionHandler?()
-        }
+        UIView.animate(
+            withDuration: 0.5,
+            animations: {
+                animation?(snapshot)
+            }) { _ in
+                snapshot.removeFromSuperview()
+                completionHandler?()
+            }
     }
 }
