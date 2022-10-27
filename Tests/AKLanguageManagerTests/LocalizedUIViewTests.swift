@@ -109,6 +109,16 @@ class LocalizedUIViewTests: XCTestCase {
         XCTAssertEqual(button.title(for: .normal), "ليس مفتاحا")
         XCTAssertEqual(button.title(for: .disabled), "٠١٫١٠ مفتاح")
         XCTAssertTrue(button.image(for: .normal)?.isRightToLeft == true)
+        let button1 = makeUIButton()
+        button1.localizeTitles()
+        XCTAssertEqual(button1.title(for: .normal), "ليس مفتاحا")
+        XCTAssertEqual(button1.title(for: .disabled), "٠١٫١٠ مفتاح")
+        XCTAssertFalse(button1.image(for: .normal)?.isRightToLeft == true)
+        let button2 = makeUIButton()
+        button2.localizeImages()
+        XCTAssertNotEqual(button2.title(for: .normal), "ليس مفتاحا")
+        XCTAssertNotEqual(button2.title(for: .disabled), "٠١٫١٠ مفتاح")
+        XCTAssertTrue(button2.image(for: .normal)?.isRightToLeft == true)
     }
 
     func testUIButtonShouldLocalizeImageDirection() {
