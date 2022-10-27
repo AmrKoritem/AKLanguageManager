@@ -163,7 +163,7 @@ public final class AKLanguageManager: NSObject, ObservableObject, AKLanguageMana
     }
 
     // MARK: - Public Methods
-    /// Set the current language of the app
+    /// Set the current language of the app.
     /// - Parameters:
     ///   - language: The language that you need the app to run with.
     ///   - windowsAndTitles: The windows you want to change the `rootViewController` for. if you didn't
@@ -181,7 +181,7 @@ public final class AKLanguageManager: NSObject, ObservableObject, AKLanguageMana
     @objc
     public func setLanguage(
         language: Language,
-        for windowsAndTitles: [WindowAndTitle]? = nil,
+        for windowsAndTitles: [WindowAndTitle]?,
         viewControllerFactory: ViewControllerFactory? = nil,
         animation: Animation? = nil,
         completionHandler: LocalizationCompletionHandler? = nil
@@ -195,6 +195,34 @@ public final class AKLanguageManager: NSObject, ObservableObject, AKLanguageMana
             animation: animation,
             completionHandler: completionHandler
         )
+    }
+
+    /// Set the current language of the app.
+    /// This function uses the default window scenes of the app.
+    /// - Parameters:
+    ///   - language: The language that you need the app to run with.
+    ///   - viewControllerFactory: A closure to make the `ViewController` for a specific `scene`,
+    ///                            you can know for which `scene` you need to make the controller you can check
+    ///                            the `title` sent to this clouser, this title is the `title` of the `scene`,
+    ///                            so if there is 5 scenes this closure will get called 5 times
+    ///                            for each scene window.
+    ///   - animation: A closure with the current view to animate to the new view controller,
+    ///                so you need to animate the view, move it out of the screen, change the alpha,
+    ///                or scale it down to zero.
+    ///   - completionHandler: A closure to be called when localization is done.
+    @objc
+    public func setLanguage(
+        language: Language,
+        viewControllerFactory: ViewControllerFactory? = nil,
+        animation: Animation? = nil,
+        completionHandler: LocalizationCompletionHandler? = nil
+    ) {
+        setLanguage(
+            language: language,
+            for: defaultWindowsAndTitles,
+            viewControllerFactory: viewControllerFactory,
+            animation: animation,
+            completionHandler: completionHandler)
     }
     
     // MARK: - Private Methods
@@ -232,7 +260,10 @@ public final class AKLanguageManager: NSObject, ObservableObject, AKLanguageMana
         animation: Animation? = nil,
         completionHandler: LocalizationCompletionHandler? = nil
     ) {
-        guard let snapshot = window?.snapshotView(afterScreenUpdates: true) else { return }
+        guard let snapshot = window?.snapshotView(afterScreenUpdates: true) else {
+            completionHandler?()
+            return
+        }
         rootViewController.view.addSubview(snapshot)
         window?.rootViewController = rootViewController
 
