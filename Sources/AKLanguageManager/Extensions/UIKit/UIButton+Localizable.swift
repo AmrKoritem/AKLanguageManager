@@ -31,33 +31,39 @@ extension UIButton {
         }
     }
 
+    @objc
     open override func localize() {
         UIControl.State.allCases.forEach { [weak self] state in
             self?.localize(for: state)
         }
     }
 
+    @objc
     public func localize(for state: UIControl.State) {
         localizeTitle(for: state)
         localizeImage(for: state)
     }
 
+    @objc
     public func localizeTitle(for state: UIControl.State) {
         setTitle(title(for: state)?.localized, for: state)
         setAttributedTitle(attributedTitle(for: state)?.localized, for: state)
     }
 
+    @objc
     public func localizeImage(for state: UIControl.State) {
         guard shouldLocalizeImageDirection else { return }
         setImage(image(for: state)?.directionLocalized, for: state)
     }
 
     /// Reverts the image direction for the given state.
+    @objc
     public func revertImageHorizontalDirection(for state: UIControl.State) {
         setImage(image(for: state)?.horizontalDirectionReverted, for: state)
     }
 
     /// Reverts the images direction for all states.
+    @objc
     public func revertImagesHorizontalDirection() {
         UIControl.State.allCases.forEach { [weak self] state in
             self?.setImage(self?.image(for: state)?.horizontalDirectionReverted, for: state)
@@ -65,6 +71,7 @@ extension UIButton {
     }
 
     /// Resets the images direction for all states.
+    @objc
     public func resetImagesHorizontalDirection() {
         UIControl.State.allCases.forEach { [weak self] state in
             self?.setImage(self?.image(for: state)?.horizontalDirectionChanged(to: .leftToRight), for: state)

@@ -107,8 +107,55 @@ class LocalizedStringTests: XCTestCase {
             attributedString.localized(in: .en).forgroundColorAttribute,
             attributes[NSAttributedString.Key.foregroundColor] as? UIColor)
     }
+
+    func testNSStringLocalized() {
+        XCTAssertEqual("key".nsString.localized, "not key")
+
+        languageManager.setLanguage(language: .ar)
+        XCTAssertEqual("key".nsString.localized, "ليس مفتاحا")
+        XCTAssertEqual("latin-number-key".nsString.localized, "٠١٫١٠ مفتاح")
+        XCTAssertEqual("latin-number-key".nsString.localized(in: .en), "01.10 key")
+
+        languageManager.shouldLocalizeNumbers = false
+        XCTAssertEqual("latin-number-key".nsString.localized, "01.10 مفتاح")
+        XCTAssertEqual("latin-number-key".nsString.localized(in: .en), "01.10 key")
+        XCTAssertEqual("latin-number-key".nsString.expressionLocalized, "latin-number-key".localized)
+    }
+
+    func testNSStringExpressionLocalized() {
+        languageManager.setLanguage(language: .ar)
+        XCTAssertEqual("latin-number-key".nsString.expressionLocalized, "01.10 مفتاح")
+        XCTAssertEqual("latin-number-key".nsString.expressionLocalized(in: .en), "01.10 key")
+
+        XCTAssertEqual("latin-number-key".nsString.allExpressionLocalizes(in: .ar)?.count, 2)
+        XCTAssertEqual(
+            "latin-number-key".nsString.allExpressionLocalizes(in: .ar)?.object(forKey: "Localizable") as? String,
+            "01.10 مفتاح")
+        XCTAssertEqual(
+            "latin-number-key".nsString.allExpressionLocalizes(in: .ar)?.object(forKey: "OtherLocalizables") as? String,
+            "02.20 مفتاح")
+
+        XCTAssertEqual("latin-number-key".nsString.allExpressionLocalizes(in: .en)?.count, 2)
+        XCTAssertEqual(
+            "latin-number-key".nsString.allExpressionLocalizes(in: .en)?.object(forKey: "Localizable") as? String,
+            "01.10 key")
+        XCTAssertEqual(
+            "latin-number-key".nsString.allExpressionLocalizes(in: .en)?.object(forKey: "OtherLocalizables") as? String,
+            "02.20 key")
+    }
+
+    func testNSStringNumbersLocalized() {
+        languageManager.setLanguage(language: .ar)
+        XCTAssertNotEqual("latin-number-key".nsString.numbersLocalized, "٠١,١٠ key")
+        XCTAssertEqual("latin-number-key".nsString.numbersLocalized, "latin-number-key")
+        XCTAssertEqual("01.10 key".nsString.numbersLocalized, "٠١٫١٠ key")
+        XCTAssertEqual("٠١٫١٠ key 01.10".nsString.numbersLocalized, "٠١٫١٠ key ٠١٫١٠")
+        XCTAssertEqual("٠١٫١٠ key".nsString.numbersLocalized(in: .en), "01.10 key")
+        XCTAssertEqual("٠١٫١٠ key 01.10".nsString.numbersLocalized(in: .en), "01.10 key 01.10")
+    }
 }
 
+// MARK: - Helper apis
 private extension NSAttributedString {
     var attributes: [NSAttributedString.Key: Any] {
         attributes(at: 0, effectiveRange: nil)

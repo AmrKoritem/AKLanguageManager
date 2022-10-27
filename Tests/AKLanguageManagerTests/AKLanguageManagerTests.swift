@@ -13,7 +13,7 @@ class AKLanguageManagerTests: XCTestCase {
     let window = UIWindow(frame: UIScreen.main.bounds)
     let windowTitle = "test"
     var defaultWindowsAndTitles: [WindowAndTitle] {
-        [(window, windowTitle)]
+        [WindowAndTitle(window: window, title: windowTitle)]
     }
 
     var storage: StorageProtocol!
@@ -49,8 +49,8 @@ class AKLanguageManagerTests: XCTestCase {
     }
 
     func testUsingDeviceLanguageAsDefaultLanguage() {
-        languageManager.defaultLanguage = .deviceLanguage
-        XCTAssertEqual(languageManager.defaultLanguage, Language.deviceLanguage)
+        languageManager.defaultLanguage = LanguageWrapper.deviceLanguage
+        XCTAssertEqual(languageManager.defaultLanguage, LanguageWrapper.deviceLanguage)
     }
 
     func testSetLanguageMethodWithDefaultWindows() throws {
@@ -103,15 +103,17 @@ class AKLanguageManagerTests: XCTestCase {
 
     func selectedLanguageNotEqualDefaultLanguageTests() {
         XCTAssertNotEqual(languageManager.selectedLanguage, languageManager.defaultLanguage)
-        XCTAssertNotEqual(languageManager.isRightToLeft, languageManager.defaultLanguage.isRightToLeft)
-        XCTAssertNotEqual(languageManager.locale, languageManager.defaultLanguage.locale)
-        XCTAssertNotEqual(languageManager.bundle, languageManager.defaultLanguage.bundle)
+        XCTAssertNotEqual(languageManager.isRightToLeft, languageManager.defaultLanguage.get.isRightToLeft)
+        XCTAssertNotEqual(languageManager.locale, languageManager.defaultLanguage.get.locale)
+        XCTAssertNotEqual(languageManager.bundle, languageManager.defaultLanguage.get.bundle)
+        XCTAssertNotEqual(languageManager.layoutDirection, languageManager.defaultLanguage.get.layoutDirection)
     }
 
     func selectedLanguageEqualDefaultLanguageTests() {
         XCTAssertEqual(languageManager.selectedLanguage, languageManager.defaultLanguage)
-        XCTAssertEqual(languageManager.isRightToLeft, languageManager.defaultLanguage.isRightToLeft)
-        XCTAssertEqual(languageManager.locale, languageManager.defaultLanguage.locale)
-        XCTAssertEqual(languageManager.bundle, languageManager.defaultLanguage.bundle)
+        XCTAssertEqual(languageManager.isRightToLeft, languageManager.defaultLanguage.get.isRightToLeft)
+        XCTAssertEqual(languageManager.locale, languageManager.defaultLanguage.get.locale)
+        XCTAssertEqual(languageManager.bundle, languageManager.defaultLanguage.get.bundle)
+        XCTAssertEqual(languageManager.layoutDirection, languageManager.defaultLanguage.get.layoutDirection)
     }
 }

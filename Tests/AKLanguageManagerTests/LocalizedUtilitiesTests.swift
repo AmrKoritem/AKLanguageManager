@@ -25,7 +25,7 @@ class LocalizedUtilitiesTests: XCTestCase {
         languageManager.setLanguage(language: .ar)
         XCTAssertEqual(int.localized, "١٢")
         XCTAssertEqual(int.localized(in: .en), "12")
-        XCTAssertEqual(int.localized(in: Language.en.locale) ?? "", "12")
+        XCTAssertEqual(int.localized(in: Language.en.get.locale) ?? "", "12")
     }
 
     func testDoubleLocalized() {
@@ -34,7 +34,7 @@ class LocalizedUtilitiesTests: XCTestCase {
         languageManager.setLanguage(language: .ar)
         XCTAssertEqual(double.localized, "١٢٫٢")
         XCTAssertEqual(double.localized(in: .en), "12.2")
-        XCTAssertEqual(double.localized(in: Language.en.locale) ?? "", "12.2")
+        XCTAssertEqual(double.localized(in: Language.en.get.locale) ?? "", "12.2")
     }
 
     func testNSNumberDoubleLocalized() {
@@ -43,7 +43,7 @@ class LocalizedUtilitiesTests: XCTestCase {
         languageManager.setLanguage(language: .ar)
         XCTAssertEqual(nsDouble.localized, "١٢٫٢")
         XCTAssertEqual(nsDouble.localized(in: .en), "12.2")
-        XCTAssertEqual(nsDouble.localized(in: Language.en.locale) ?? "", "12.2")
+        XCTAssertEqual(nsDouble.localized(in: Language.en.get.locale) ?? "", "12.2")
     }
 
     func testNSNumberLocalized() {
@@ -52,7 +52,7 @@ class LocalizedUtilitiesTests: XCTestCase {
         languageManager.setLanguage(language: .ar)
         XCTAssertEqual(nsInt.localized, "١٢")
         XCTAssertEqual(nsInt.localized(in: .en), "12")
-        XCTAssertEqual(nsInt.localized(in: Language.en.locale) ?? "", "12")
+        XCTAssertEqual(nsInt.localized(in: Language.en.get.locale) ?? "", "12")
     }
 
     func testUIImageLocalized() {

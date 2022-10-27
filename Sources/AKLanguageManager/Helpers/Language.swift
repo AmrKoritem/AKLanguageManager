@@ -124,6 +124,12 @@ public class LanguageWrapper: NSObject {
         Locale(identifier: identifier)
     }
 
+    /// The text alignment of the language.
+    @objc
+    public var textAlignment: NSTextAlignment {
+        language.get.isRightToLeft ? .right : .left
+    }
+
     /// Indicates if the language is right to left.
     @objc
     public var isRightToLeft: Bool {

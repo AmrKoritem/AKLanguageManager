@@ -17,37 +17,44 @@ class LanguagesTests: XCTestCase {
     }
 
     func testBundle() {
-        XCTAssertNotEqual(rtlLanguage.bundle, ltrLanguage.bundle)
+        XCTAssertNotEqual(rtlLanguage.get.bundle, ltrLanguage.get.bundle)
     }
 
     func testDirection() {
-        XCTAssertNotEqual(rtlLanguage.direction, ltrLanguage.direction)
+        XCTAssertNotEqual(rtlLanguage.get.direction, ltrLanguage.get.direction)
+        XCTAssertNotEqual(rtlLanguage.get.layoutDirection, ltrLanguage.get.layoutDirection)
     }
 
     func testLocale() {
-        XCTAssertNotEqual(rtlLanguage.locale, ltrLanguage.locale)
+        XCTAssertNotEqual(rtlLanguage.get.locale, ltrLanguage.get.locale)
     }
 
     func testIsRightToLeft() {
-        XCTAssertTrue(rtlLanguage.isRightToLeft)
-        XCTAssertFalse(ltrLanguage.isRightToLeft)
+        XCTAssertTrue(rtlLanguage.get.isRightToLeft)
+        XCTAssertFalse(ltrLanguage.get.isRightToLeft)
     }
 
     func testSemanticContentAttribute() {
-        XCTAssertNotEqual(rtlLanguage.semanticContentAttribute, ltrLanguage.semanticContentAttribute)
+        XCTAssertNotEqual(rtlLanguage.get.semanticContentAttribute, ltrLanguage.get.semanticContentAttribute)
     }
 
     func testOtherLanguages() {
-        XCTAssertNotEqual(rtlLanguage.otherLanguages, ltrLanguage.otherLanguages)
-        XCTAssertFalse(rtlLanguage.otherLanguages.contains(rtlLanguage))
-        XCTAssertFalse(ltrLanguage.otherLanguages.contains(ltrLanguage))
+        XCTAssertNotEqual(rtlLanguage.get.otherLanguages, ltrLanguage.get.otherLanguages)
+        XCTAssertFalse(rtlLanguage.get.otherLanguages.contains(rtlLanguage))
+        XCTAssertFalse(ltrLanguage.get.otherLanguages.contains(ltrLanguage))
     }
 
     func testRTLLanguages() {
-        XCTAssertTrue(Language.allRightToLeft.contains(rtlLanguage))
+        XCTAssertTrue(LanguageWrapper.allRightToLeft.contains(rtlLanguage))
     }
 
     func testLTRLanguages() {
-        XCTAssertTrue(Language.allLeftToRight.contains(ltrLanguage))
+        XCTAssertTrue(LanguageWrapper.allLeftToRight.contains(ltrLanguage))
+    }
+
+    func testNumberRegex() {
+        XCTAssertEqual(
+            rtlLanguage.get.numberRegex(minNumberOfDigits: 1, maxNumberOfDigits: 2),
+            rtlLanguage.get.numberRegex(minDigitsNumber: 1, maxDigitsNumber: 2))
     }
 }

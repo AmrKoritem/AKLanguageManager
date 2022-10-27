@@ -30,6 +30,7 @@ extension UITabBar {
         }
     }
 
+    @objc
     open override func localize() {
         items?.forEach { [weak self] in
             $0.shouldLocalizeImageDirection = self?.shouldLocalizeImagesDirection ?? true
@@ -38,11 +39,13 @@ extension UITabBar {
     }
 
     /// Reverts the image direction of the item at the specified index.
+    @objc
     public func revertImageHorizontalDirection(at index: Int) {
         items?[safe: index]?.revertImageHorizontalDirection()
     }
 
     /// Reverts the images direction.
+    @objc
     public func revertImagesHorizontalDirection() {
         items?.forEach { $0.revertImageHorizontalDirection() }
     }
@@ -72,15 +75,18 @@ extension UITabBarItem: Localizable {
         }
     }
 
+    @objc
     public func localize() {
         localizeText()
         localizeImage()
     }
 
+    @objc
     public func localizeText() {
         title = title?.localized
     }
 
+    @objc
     public func localizeImage() {
         guard shouldLocalizeImageDirection else { return }
         image = image?.directionLocalized
@@ -88,12 +94,14 @@ extension UITabBarItem: Localizable {
     }
 
     /// Reverts the image direction.
+    @objc
     public func revertImageHorizontalDirection() {
         image = image?.horizontalDirectionReverted
         selectedImage = selectedImage?.horizontalDirectionReverted
     }
 
     /// Resets the image direction.
+    @objc
     public func resetImageHorizontalDirection() {
         image = image?.horizontalDirectionChanged(to: .leftToRight)
         selectedImage = selectedImage?.horizontalDirectionChanged(to: .leftToRight)

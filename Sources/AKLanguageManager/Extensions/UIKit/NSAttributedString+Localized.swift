@@ -9,11 +9,13 @@ import Foundation
 
 public extension NSAttributedString {
     /// Localize the entire string while keeping its attributes.
+    @objc
     var localized: NSAttributedString {
         localized(in: AKLanguageManager.shared.selectedLanguage)
     }
 
     /// Localize the entire string to the designated language while keeping its attributes.
+    @objc
     func localized(in language: Language) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(attributedString: self)
         attributedString.mutableString.setString(string.localized(in: language))

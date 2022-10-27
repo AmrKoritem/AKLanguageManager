@@ -9,6 +9,6 @@ import SwiftUI
 
 public extension Image {
     func directionLocalized(in language: Language = AKLanguageManager.shared.selectedLanguage) -> some View {
-        flipsForRightToLeftLayoutDirection(language.isRightToLeft)
+        flipsForRightToLeftLayoutDirection(language.get.isRightToLeft)
     }
 }
