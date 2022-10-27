@@ -130,6 +130,12 @@ public class LanguageWrapper: NSObject {
         language.get.isRightToLeft ? .right : .left
     }
 
+    /// The text alignment of the language.
+    @objc
+    public var ctTextAlignment: CTTextAlignment {
+        language.get.isRightToLeft ? .right : .left
+    }
+
     /// Indicates if the language is right to left.
     @objc
     public var isRightToLeft: Bool {

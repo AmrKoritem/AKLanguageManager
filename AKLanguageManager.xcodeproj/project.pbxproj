@@ -26,6 +26,7 @@
 		1D43EC8028EA741E000259A3 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D43EC7F28EA741E000259A3 /* Bundle.swift */; };
 		1D4EE68A28ECF2B800EC3885 /* LocalizedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4EE68928ECF2B800EC3885 /* LocalizedView.swift */; };
 		1D7D4D03290A0C0D00085878 /* NSString+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7D4D02290A0C0D00085878 /* NSString+Localized.swift */; };
+		1D7D4D05290A210900085878 /* CTTextAlignment+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7D4D04290A210900085878 /* CTTextAlignment+Localized.swift */; };
 		1D87DAD928C40C7E00838580 /* AKLanguageManager.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DAD828C40C7E00838580 /* AKLanguageManager.docc */; };
 		1D87DADF28C40C7E00838580 /* AKLanguageManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D87DAD428C40C7E00838580 /* AKLanguageManager.framework */; };
 		1D87DAE428C40C7E00838580 /* AKLanguageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DAE328C40C7E00838580 /* AKLanguageManagerTests.swift */; };
@@ -85,6 +86,7 @@
 		1D43EC7F28EA741E000259A3 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		1D4EE68928ECF2B800EC3885 /* LocalizedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedView.swift; sourceTree = "<group>"; };
 		1D7D4D02290A0C0D00085878 /* NSString+Localized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Localized.swift"; sourceTree = "<group>"; };
+		1D7D4D04290A210900085878 /* CTTextAlignment+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CTTextAlignment+Localized.swift"; sourceTree = "<group>"; };
 		1D87DAD428C40C7E00838580 /* AKLanguageManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AKLanguageManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D87DAD728C40C7E00838580 /* AKLanguageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKLanguageManager.h; sourceTree = "<group>"; };
 		1D87DAD828C40C7E00838580 /* AKLanguageManager.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = AKLanguageManager.docc; sourceTree = "<group>"; };
@@ -205,8 +207,8 @@
 				1D40750928D01D08000A1DF0 /* UISegmentedControl+Localizable.swift */,
 				1D2CC63028D0D5640000DFEF /* UIImageView+Localizable.swift */,
 				1D98A9B428E8C4D2007AFCD1 /* UIImage+Localized.swift */,
-				1D98A9B828E8C543007AFCD1 /* NSAttributedString+Localized.swift */,
 				1D98A9B628E8C50C007AFCD1 /* NSTextAlignment+Localized.swift */,
+				1D7D4D04290A210900085878 /* CTTextAlignment+Localized.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -226,8 +228,9 @@
 				1D4074FB28D0181B000A1DF0 /* String+Localized.swift */,
 				1D98A9BA28E8C65C007AFCD1 /* Int+Localized.swift */,
 				1D98A9BC28E8CA43007AFCD1 /* Double+Localized.swift */,
-				1D98A9BE28E8CB29007AFCD1 /* NSNumber+Localized.swift */,
 				1D7D4D02290A0C0D00085878 /* NSString+Localized.swift */,
+				1D98A9B828E8C543007AFCD1 /* NSAttributedString+Localized.swift */,
+				1D98A9BE28E8CB29007AFCD1 /* NSNumber+Localized.swift */,
 			);
 			path = DataTypes;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				1D4074F828D0153B000A1DF0 /* Localizable.swift in Sources */,
 				1D2A6C8628F0FD34000EE30D /* View+Localized.swift in Sources */,
 				1D98A9BB28E8C65C007AFCD1 /* Int+Localized.swift in Sources */,
+				1D7D4D05290A210900085878 /* CTTextAlignment+Localized.swift in Sources */,
 				1D40750228D01B63000A1DF0 /* UITextView+Localizable.swift in Sources */,
 				1D40750028D01B07000A1DF0 /* UILabel+Localizable.swift in Sources */,
 				1D4074FC28D0181B000A1DF0 /* String+Localized.swift in Sources */,
