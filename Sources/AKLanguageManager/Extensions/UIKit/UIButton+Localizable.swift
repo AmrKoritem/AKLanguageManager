@@ -36,11 +36,11 @@ extension UIButton {
         UIControl.State.allCases.forEach { [weak self] state in
             self?.localize(for: state)
         }
-        guard #available(iOS 15.0, *) else { return }
+        guard #available(iOS 15.0, tvOS 15.0, *) else { return }
         localizeConfiguration()
     }
 
-    @available(iOS 15.0, *)
+    @available(iOS 15.0, tvOS 15.0, *)
     @objc
     public func localizeConfiguration() {
         localizeConfigurationTitle()
@@ -49,19 +49,19 @@ extension UIButton {
         localizeConfigurationImage()
     }
 
-    @available(iOS 15.0, *)
+    @available(iOS 15.0, tvOS 15.0, *)
     @objc
     public func localizeConfigurationTitle() {
         configuration?.title = configuration?.title?.localized
     }
 
-    @available(iOS 15.0, *)
+    @available(iOS 15.0, tvOS 15.0, *)
     @objc
     public func localizeConfigurationSubtitle() {
         configuration?.subtitle = configuration?.subtitle?.localized
     }
 
-    @available(iOS 15.0, *)
+    @available(iOS 15.0, tvOS 15.0, *)
     @objc
     public func localizeConfigurationImage() {
         configuration?.image = configuration?.image?.directionLocalized
@@ -81,7 +81,7 @@ extension UIButton {
             self?.localizeTitle(for: state)
             self?.localizeAttributedTitle(for: state)
         }
-        guard #available(iOS 15.0, *) else { return }
+        guard #available(iOS 15.0, tvOS 15.0, *) else { return }
         localizeConfigurationTitle()
         localizeConfigurationSubtitle()
     }
@@ -101,7 +101,7 @@ extension UIButton {
         UIControl.State.allCases.forEach { [weak self] state in
             self?.localizeImage(for: state)
         }
-        guard #available(iOS 15.0, *) else { return }
+        guard #available(iOS 15.0, tvOS 15.0, *) else { return }
         localizeConfigurationImage()
     }
 
@@ -122,7 +122,7 @@ extension UIButton {
         UIControl.State.allCases.forEach { [weak self] state in
             self?.revertImageHorizontalDirection(for: state)
         }
-        guard #available(iOS 15.0, *) else { return }
+        guard #available(iOS 15.0, tvOS 15.0, *) else { return }
         configuration?.image = configuration?.image?.horizontalDirectionReverted
     }
 
@@ -138,7 +138,7 @@ extension UIButton {
         UIControl.State.allCases.forEach { [weak self] state in
             self?.resetImageHorizontalDirection(for: state)
         }
-        guard #available(iOS 15.0, *) else { return }
+        guard #available(iOS 15.0, tvOS 15.0, *) else { return }
         configuration?.image = configuration?.image?.horizontalDirectionChanged(to: .leftToRight)
     }
 }
