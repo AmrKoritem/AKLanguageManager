@@ -70,7 +70,7 @@ Note: The default language is the language your app will be localized in when it
 ## Usage
 
 1 - If you want to change the language, use the `setLanguage(language:)` method by passing to it the new language.<br>
-In a UIKit project, at least the parameter `viewControllerFactory` must be provided in addition to the language:<br>
+In a UIKit project, at least the parameter `viewControllerFactory` must be provided in addition to the language:
 ```swift
     // Change Language and set rootViewController to the initial view controller
     @IBAction func changeLanguage() {
@@ -90,8 +90,8 @@ In a UIKit project, at least the parameter `viewControllerFactory` must be provi
         )
     }
 ```
-<br>
-In a SwiftUI project only the language is needed:<br>
+
+In a SwiftUI project only the language is needed:
 ```swift
 import SwiftUI
 import AKLanguageManager
