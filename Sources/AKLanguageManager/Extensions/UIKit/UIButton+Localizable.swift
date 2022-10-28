@@ -40,8 +40,8 @@ extension UIButton {
         localizeConfiguration()
     }
 
-    @available(iOS 15.0, tvOS 15.0, *)
     @objc
+    @available(iOS 15.0, tvOS 15.0, *)
     public func localizeConfiguration() {
         localizeConfigurationTitle()
         localizeConfigurationSubtitle()
@@ -49,20 +49,20 @@ extension UIButton {
         localizeConfigurationImage()
     }
 
-    @available(iOS 15.0, tvOS 15.0, *)
     @objc
+    @available(iOS 15.0, tvOS 15.0, *)
     public func localizeConfigurationTitle() {
         configuration?.title = configuration?.title?.localized
     }
 
-    @available(iOS 15.0, tvOS 15.0, *)
     @objc
+    @available(iOS 15.0, tvOS 15.0, *)
     public func localizeConfigurationSubtitle() {
         configuration?.subtitle = configuration?.subtitle?.localized
     }
 
-    @available(iOS 15.0, tvOS 15.0, *)
     @objc
+    @available(iOS 15.0, tvOS 15.0, *)
     public func localizeConfigurationImage() {
         configuration?.image = configuration?.image?.directionLocalized
     }
