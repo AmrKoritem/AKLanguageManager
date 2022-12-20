@@ -71,7 +71,17 @@ enum _Language: String, CaseIterable, Equatable {
 
 // Capturing the dependency for testing purposes.
 extension Language {
-    static var mainBundle = Bundle.main
+    static var mainBundle = Bundle.app
+}
+
+extension Bundle {
+    static var app: Bundle {
+#if SWIFT_PACKAGE
+        return module
+#else
+        return main
+#endif
+    }
 }
 
 /// Wrapper class with helper APIs for `Language` enum.
@@ -89,7 +99,7 @@ public class LanguageWrapper: NSObject {
         _Language.allCases.filter { LanguageWrapper(language: $0)?.direction == .leftToRight }.compactMap { $0.objc }
     }
 
-    /// Array containing all right to left languages..
+    /// Array containing all right to left languages.
     public static var allRightToLeft: [Language] {
         _Language.allCases.filter { LanguageWrapper(language: $0)?.direction == .rightToLeft }.compactMap { $0.objc }
     }
@@ -98,6 +108,12 @@ public class LanguageWrapper: NSObject {
     @objc
     public var identifier: String {
         language.swift.rawValue
+    }
+
+    /// Language name.
+    @objc
+    public var name: String? {
+        locale.localizedString(forLanguageCode: identifier)
     }
 
     /// Language bundle.
@@ -194,6 +210,12 @@ public class LanguageWrapper: NSObject {
         self.init(language: language)
     }
 
+    /// Language name localized in the specified language.
+    @objc
+    public func nameLocalized(in language: Language) -> String? {
+        language.get.locale.localizedString(forLanguageCode: identifier)
+    }
+
     /// An objective-c exposed version of `numberRegex(minDigitsNumber:maxDigitsNumber:)`.
     /// If you are writing a swift code, we recommend using `numberRegex(minDigitsNumber:maxDigitsNumber:)` instead.
     /// - Parameters:
@@ -204,7 +226,7 @@ public class LanguageWrapper: NSObject {
     ///     If `maxNumberOfDigits` is zero, then the regex returned will allow maximum possible number of digits.
     ///     If the regex can't be retrieved, then nil is returned.
     @objc
-    func numberRegex(minNumberOfDigits min: Int, maxNumberOfDigits max: Int) -> String? {
+    public func numberRegex(minNumberOfDigits min: Int, maxNumberOfDigits max: Int) -> String? {
         numberRegex(minDigitsNumber: min, maxDigitsNumber: max)
     }
 

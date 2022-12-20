@@ -13,3 +13,18 @@ extension UIView: Localizable {
         subviews.forEach { $0.localize() }
     }
 }
+
+extension UIView {
+    /// Changes the semantic attribute of the view and _optionally_ for its subviews in a recursive manner.
+    /// - Parameters:
+    ///   - language: The language for the desired semantic attribute.
+    ///   - isRecursive: Determines if will change the semantic attribute for the subviews recursively.
+    @objc
+    public func changeSemanticAttribute(to language: Language, isRecursive: Bool = false) {
+        semanticContentAttribute = language.get.semanticContentAttribute
+        guard isRecursive else { return }
+        subviews.forEach {
+            $0.changeSemanticAttribute(to: language, isRecursive: isRecursive)
+        }
+    }
+}
