@@ -85,4 +85,19 @@ class LocalizedUtilitiesTests: XCTestCase {
         XCTAssertEqual(NSTextAlignment.localized(in: .en), .left)
         XCTAssertEqual(NSTextAlignment.localized(in: .ar), .right)
     }
+
+    func testCTTextAlignmentLocalized() {
+        XCTAssertEqual(CTTextAlignment.localized, .left)
+        XCTAssertEqual(CTTextAlignment.natural.localized, .left)
+        XCTAssertNotEqual(CTTextAlignment.center.localized, .left)
+        languageManager.setLanguage(language: .ar)
+        XCTAssertEqual(CTTextAlignment.localized, .right)
+        XCTAssertEqual(CTTextAlignment.natural.localized, .right)
+        XCTAssertNotEqual(CTTextAlignment.center.localized, .right)
+    }
+
+    func testCTTextAlignmentLocalizedIn() {
+        XCTAssertEqual(CTTextAlignment.localized(in: .en), .left)
+        XCTAssertEqual(CTTextAlignment.localized(in: .ar), .right)
+    }
 }

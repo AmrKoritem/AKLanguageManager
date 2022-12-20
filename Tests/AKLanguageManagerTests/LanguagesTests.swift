@@ -52,6 +52,13 @@ class LanguagesTests: XCTestCase {
         XCTAssertTrue(LanguageWrapper.allLeftToRight.contains(ltrLanguage))
     }
 
+    func testName() {
+        XCTAssertEqual(Language.en.get.name, "English")
+        XCTAssertEqual(Language.ar.get.name, "العربية")
+        XCTAssertEqual(Language.en.get.nameLocalized(in: .ar), "الإنجليزية")
+        XCTAssertEqual(Language.ar.get.nameLocalized(in: .en), "Arabic")
+    }
+
     func testNumberRegex() {
         XCTAssertEqual(
             rtlLanguage.get.numberRegex(minNumberOfDigits: 1, maxNumberOfDigits: 2),
