@@ -71,17 +71,7 @@ enum _Language: String, CaseIterable, Equatable {
 
 // Capturing the dependency for testing purposes.
 extension Language {
-    static var mainBundle = Bundle.app
-}
-
-extension Bundle {
-    static var app: Bundle {
-#if SWIFT_PACKAGE
-        return module
-#else
-        return main
-#endif
-    }
+    static var mainBundle = Bundle.main
 }
 
 /// Wrapper class with helper APIs for `Language` enum.
